@@ -2,3 +2,6 @@ Documentation/uml/diagramme-classe.mdj
 Documentation/uml/diagramme-use-case.mdj
 Documentation/uml/cours.png
 src/lib/*
+src/view/*.class
+src/model/*.class
+src/controller/*.class
