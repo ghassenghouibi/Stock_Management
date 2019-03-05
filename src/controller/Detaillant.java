@@ -1,4 +1,4 @@
-package gestiondestock;
+package controller;
 
 import java.util.*;
 
@@ -14,8 +14,8 @@ public class Detaillant {
     }
 
     /**
-     * 
-     */
+    * 
+    */
     public String nom;
 
 
@@ -27,36 +27,36 @@ public class Detaillant {
     }
 
     /**
-     * 
-     */
+    * 
+    */
     public void listerTousLesArticles() {
         
     }
 
     /**
-     * 
-     */
+    * 
+    */
     public void listerTousLesFournisseurs() {
         
     }
 
     /**
-     * 
-     */
+    * 
+    */
     public void imprimerLaliste() {
         
     }
 
     /**
-     * 
-     */
+    * 
+    */
     public void modifierLesInformationsConcernantLesArticles() {
         
     }
 
     /**
-     * 
-     */
+    * 
+    */
     public void modifierLesInformationsConcernantLesFournisseurs() {
         
     }

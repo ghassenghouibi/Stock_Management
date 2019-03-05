@@ -1,6 +1,7 @@
-package gestiondestock;
+package controller;
 
 import java.util.*;
+
 /**
 * 
 */
@@ -23,7 +24,7 @@ public class Article {
         this.prixDevente=prixDevente;
         this.typeDeVente=typeDeVente;
     }
-
+    
     /*---------------------GETTER-----------------*/
     public String   getNom(){
         return this.nom;
@@ -56,10 +57,10 @@ public class Article {
     public void     setSeuilDeReassortiment(int seuilDeReassortiment){
         this.seuilDeReassortiment=seuilDeReassortiment;
     }
-    public void     getPrixDeVente(int prixDevente){
+    public void     setPrixDeVente(int prixDevente){
         this.prixDevente=prixDevente;
     }
-    public void     getTypeDeVente(boolean typeDeVente){
+    public void     setTypeDeVente(boolean typeDeVente){
         this.typeDeVente=typeDeVente;
     }
 
@@ -71,7 +72,5 @@ public class Article {
                 "Prix De Vente: "+          this.prixDevente+"\n"+
                 "Type De Vente: "+          this.typeDeVente+"\n";
     }
-
-        
 
 }

@@ -1,4 +1,4 @@
-package gestiondestock;
+package controller;
 
 import java.util.*;
 
