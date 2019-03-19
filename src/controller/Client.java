@@ -1,31 +1,37 @@
 package controller;
+import java.util.ArrayList;
 
 /**
  * 
  */
 public class Client {
-
+    public double solde;
+    public String identifiant;
+    public ArrayList<Article> panier;
     /**
      * Default constructor
      */
-    public Client() {
+    public Client(String identifiant,double solde) {
+        this.identifiant=identifiant;
+        this.solde=solde;
+        this.panier = new ArrayList<Article>();
     }
     /**
      * 
      */
-    public void acheterUnarticle() {
+    public void acheterUnarticle(Article article){
+        panier.add(article);
     }
-
-    /**
+    /** 
      * 
-     */
-    public void retournerUnarticle() {
+    */
+    public void retournerUnarticle(Article article) {
+        panier.remove(article);
     }
-
     /**
-     * 
-     */
-    public void paiement() {
+    * 
+    */
+    public void paiement(double total) {
+        this.solde-=total;
     }
-
 }

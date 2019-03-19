@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.*;
-
 /**
 * 
 */
@@ -69,7 +67,7 @@ public class Article {
                 "Code Barre: "+             this.codeBarre+"\n"+
                 "Quantite En Stock: "+      this.quantiteEnStock+"\n"+
                 "Seuil De Reassortiment: "+ this.seuilDeReassortiment+"\n"+
-                "Prix De Vente: "+          this.prixDevente+"\n"+
+                "Prix De Vente: "+          this.prixDevente+"€\n"+
                 "Type De Vente: "+          this.typeDeVente+"\n";
     }
 

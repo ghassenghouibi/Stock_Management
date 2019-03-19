@@ -35,5 +35,6 @@ public class BaseDeDonnes {
     public void chargerlesinformations(){
         //Charger Les Articles,Les Fournisseur,Détaillant et les derniers actions
     }
+    
 
 }
