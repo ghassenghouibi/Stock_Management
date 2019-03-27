@@ -1,39 +1,56 @@
 package controller;
 
 import java.util.*;
-
+import java.util.HashMap;
 
 /**
- * 
- */
+* 
+*/
 public class Caisse {
 
-    private ArrayList<Double>   historiqueDeCaisse    ;
-    private ArrayList<Article>  ticketDeCaisse        ;
+    private ArrayList<Double>   		historiqueDeCaisse;
+    private HashMap<String,Article>  	ticketDeCaisse;
+    private ArrayList<Integer>  	  	cleIds;
     
     /**
     * Default constructor
     */
     
     public Caisse(){
-        this.ticketDeCaisse=new ArrayList<Article>();
-        this.historiqueDeCaisse=new ArrayList<Double>();
+        this.ticketDeCaisse	    =new HashMap<String,Article>();
+        this.historiqueDeCaisse =new ArrayList<Double>();
     }
+    
     /**
     * 
     */
-    protected void solder() {
-        this.historiqueDeCaisse=new ArrayList<Double>();
+    
+    protected void solder(Double montant) {
+        Double somme = 0.0;
+    	for(Double x:historiqueDeCaisse) {
+        	somme+=x;
+        }
+    	if(montant == somme) {
+    		this.historiqueDeCaisse=new ArrayList<Double>();
+    	}
+    	else {
+    		System.out.println("The amount did'nt match please checkout ");
+    	}
+    	
     }
     /**
      * 
      */
-    protected void connexion(int cleId){
-        //cleId existe dans la base de données
+    protected boolean connexion(int cleId){
+    	for(int x : cleIds) {
+    		if(x==cleId)
+    			return true;
+    	}
+    	return false;
     }
 
-    public void passageDarticle(Article article){
-       ticketDeCaisse.add(article);
+    public void passageDarticle(String cleId,Article article){
+       ticketDeCaisse.put(cleId,article);
     }
     /**
     * 
@@ -48,9 +65,9 @@ public class Caisse {
      */
     public double calculerLeTotal() {
         double total=0.0;
-        for(Article i:ticketDeCaisse){
-            total+=i.getPrixDeVente();
-        }
+        //for(Article i:ticketDeCaisse){
+        //    total+=i.getPrixDeVente();
+        //}
         System.out.println("Total de :"+total);
         return total;
     }
@@ -62,14 +79,14 @@ public class Caisse {
         if( montant>encaisser){
             historiqueDeCaisse.add(encaisser);
             miseAjourDuStock();
-
         }
         return (montant-encaisser);
     }
     protected void miseAjourDuStock() {
-        for(Article i:ticketDeCaisse){
-            //Connexion à la base de données
-        }
+        //for(Article i:ticketDeCaisse){
+            //TODO vérif modifier quantite En Stock
+        //    i.quantiteEnStock--;
+        //}
     }
 
 }

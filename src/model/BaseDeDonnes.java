@@ -4,7 +4,6 @@ import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-
 /**
 * 
 */
@@ -28,13 +27,12 @@ public class BaseDeDonnes {
             conn.close();
         }
         catch(Exception e){
-        System.out.print("Do not connect to DB - Error:"+e);
+            System.out.print("Do not connect to DB - Error:"+e);
         }
     }
 
     public void chargerlesinformations(){
         //Charger Les Articles,Les Fournisseur,Détaillant et les derniers actions
-    }
     
-
+    }
 }
