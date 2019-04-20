@@ -6,20 +6,27 @@ import java.util.*;
 */
 public class Detaillant {
 	
-	public String 			   	nom;
-	public String 			   	nomDeMagasin;
-	public ArrayList <Article>  listOfArticle;
-    public ArrayList <Fournisseur>  listOfFournisseurs;
+	private String nom;
+	private String nomDeMagasin;
+	private ArrayList <Article>  listOfArticle;
+    private ArrayList <Fournisseur>  listOfFournisseurs;
     /**
     * Default constructor
     */
     public Detaillant(String nom,String nomDeMagasin) {
     	this.nom=nom;
-        this.nomDeMagasin=nomDeMagasin;
+        this.setNomDeMagasin(nomDeMagasin);
         this.listOfArticle=new ArrayList<Article>();
+        this.listOfFournisseurs = new ArrayList<Fournisseur>();
     }
 
-    /**
+    public Detaillant() {
+        this.listOfArticle=new ArrayList<Article>();
+        this.listOfFournisseurs = new ArrayList<Fournisseur>();
+    }
+
+
+	/**
     * 
     */
     public void listerLesElementsEnDessousDuSeuil() {
@@ -57,9 +64,10 @@ public class Detaillant {
     /**
     * 
     */
-    public void modifierLesInformationsConcernantLesArticles(String name,int prixDevente,int quantiteEnStock,int seuilDeReassortiment) {
+    public void modifierLesInformationsConcernantLesArticles(String name, String newName, int prixDevente,int quantiteEnStock,int seuilDeReassortiment) {
             for(Article x : listOfArticle){
                 if(x.getNom()==name){
+                	x.setNom(newName);
                     x.setPrixDeVente(prixDevente);
                     x.setQuantiteEnStock(quantiteEnStock);
                     x.setSeuilDeReassortiment(seuilDeReassortiment);
@@ -69,10 +77,10 @@ public class Detaillant {
     /**
     * 
     */
-    public void modifierLesInformationsConcernantLesFournisseurs(String nom,int numeroDeTelephone,int codePostal,String adresse) {
+    public void modifierLesInformationsConcernantLesFournisseurs(String nom, String newName, int numeroDeTelephone,int codePostal,String adresse) {
         for(Fournisseur x : listOfFournisseurs){
             if(nom == x.getNomFournisseur()){
-                x.setNomFournisseur(nom);
+                x.setNomFournisseur(newName);
                 x.setNumeroDeTelephone(numeroDeTelephone);
                 x.setCodePostal(codePostal);
                 x.setAdresse(adresse);
@@ -106,9 +114,9 @@ public class Detaillant {
     /**
      * 
      */
-    public void supprimerUnFournisseur() {
+    public void supprimerUnFournisseur(String nom) {
         for(Fournisseur x : listOfFournisseurs){
-            if(nom==x.getNomFournisseur()){
+            if(nom == x.getNomFournisseur()){
                 listOfFournisseurs.remove(x);
             }
         } 
@@ -127,5 +135,37 @@ public class Detaillant {
     public void passerUneCommande() {
         //TODO
     }
+
+	public String getNomDeMagasin() {
+		return nomDeMagasin;
+	}
+
+	public void setNomDeMagasin(String nomDeMagasin) {
+		this.nomDeMagasin = nomDeMagasin;
+	}
+	
+    public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public ArrayList<Article> getListOfArticle() {
+		return listOfArticle;
+	}
+
+	public void setListOfArticle(ArrayList<Article> listOfArticle) {
+		this.listOfArticle = listOfArticle;
+	}
+
+	public ArrayList<Fournisseur> getListOfFournisseurs() {
+		return listOfFournisseurs;
+	}
+
+	public void setListOfFournisseurs(ArrayList<Fournisseur> listOfFournisseurs) {
+		this.listOfFournisseurs = listOfFournisseurs;
+	}
 
 }

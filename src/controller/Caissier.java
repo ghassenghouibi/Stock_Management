@@ -12,11 +12,19 @@ public class Caissier {
     public Caissier(int cleId){
         this.cleId=cleId;
     }
-
-    public int getKey(){
-        return this.cleId;
+    
+    public Caissier(){
     }
-    //Use thread to secure access to data
+    
+    public int getCleId() {
+		return cleId;
+	}
+
+	public void setCleId(int cleId) {
+		this.cleId = cleId;
+	}
+
+	//Use thread to secure access to data
     /**
     * 
     */

@@ -23,6 +23,9 @@ public class Article {
         this.typeDeVente=typeDeVente;
     }
     
+    public Article() {
+    }
+    
     /*---------------------GETTER-----------------*/
     public String   getNom(){
         return this.nom;

@@ -29,6 +29,11 @@ public class Fournisseur {
         this.codePostal         =codePostal;
         this.commande           =new ArrayList <Article>();
     }
+    
+    public Fournisseur(){
+        this.commande           =new ArrayList <Article>();
+    }
+    
     public void receptionDuneCommande(Article article,int quantite,String fournisseur,String adresse){
         commande.add(article);
         this.quantite=quantite;
