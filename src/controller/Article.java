@@ -14,13 +14,13 @@ public class Article {
     /**
     * Default constructor
     */
-    public Article(String nom,int codeBarre,int quantiteEnStock,int seuilDeReassortiment,int prixDevente,boolean typeDeVente) {
-        this.nom=nom;
-        this.codeBarre=codeBarre;
-        this.quantiteEnStock=quantiteEnStock;
-        this.seuilDeReassortiment=seuilDeReassortiment;
-        this.prixDevente=prixDevente;
-        this.typeDeVente=typeDeVente;
+    public Article(String nom, int codeBarre, int quantiteEnStock, int seuilDeReassortiment, int prixDevente, boolean typeDeVente) {
+        this.nom = nom;
+        this.codeBarre = codeBarre;
+        this.quantiteEnStock = quantiteEnStock;
+        this.seuilDeReassortiment = seuilDeReassortiment;
+        this.prixDevente = prixDevente;
+        this.typeDeVente = typeDeVente;
     }
     
     public Article() {
@@ -47,22 +47,22 @@ public class Article {
     }
     /*---------------------SETTER-----------------*/
     public void     setNom(String nom){
-        this.nom=nom;
+        this.nom = nom;
     }
     public void     setCodeBarre(int codeBarre){
-        this.codeBarre=codeBarre;
+        this.codeBarre = codeBarre;
     }
     public void     setQuantiteEnStock(int quantiteEnStock){
-        this.quantiteEnStock=quantiteEnStock;
+        this.quantiteEnStock = quantiteEnStock;
     }
     public void     setSeuilDeReassortiment(int seuilDeReassortiment){
-        this.seuilDeReassortiment=seuilDeReassortiment;
+        this.seuilDeReassortiment = seuilDeReassortiment;
     }
     public void     setPrixDeVente(int prixDevente){
-        this.prixDevente=prixDevente;
+        this.prixDevente = prixDevente;
     }
     public void     setTypeDeVente(boolean typeDeVente){
-        this.typeDeVente=typeDeVente;
+        this.typeDeVente = typeDeVente;
     }
 
     public String   informationArticle(){

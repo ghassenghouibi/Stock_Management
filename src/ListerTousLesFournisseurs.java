@@ -24,6 +24,7 @@ public class ListerTousLesFournisseurs extends Lister {
 		retour.setBounds(30, 30, 30, 30);
 		retour.addActionListener(this);
 		
+		log.setBounds(100, 100, 600, 400);
 		listScroller.setBounds(100, 100, 600, 400);
 		
 		this.gui.println(this.gui.getEngine().getDetaillant().listerTousLesFournisseurs(), this.log);
