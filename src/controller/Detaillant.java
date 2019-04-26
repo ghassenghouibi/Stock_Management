@@ -29,30 +29,39 @@ public class Detaillant {
 	/**
     * 
     */
-    public void listerLesElementsEnDessousDuSeuil() {
+    public String listerLesElementsEnDessousDuSeuil() {
+    	String lister = "";
         for(Article x : listOfArticle){
-            if( x.getQuantiteEnStock()<=x.getSeuilDeReassortiment() ){
+            if( x.getQuantiteEnStock() <= x.getSeuilDeReassortiment() ){
                 System.out.println((x).informationArticle());
+                lister += x.informationArticle() + "\n";
             }
         }
+        return lister;
     }
 
     /**
     * 
     */
-    public void listerTousLesArticles() {
+    public String listerTousLesArticles() {
+    	String lister = "";
         for(Article x : listOfArticle){
         	System.out.println(x.informationArticle());
+        	lister += x.informationArticle() + "\n";
         }
+        return lister;
     }
 
     /**
     * 
     */
-    public void listerTousLesFournisseurs() {
+    public String listerTousLesFournisseurs() {
+    	String lister = "";
         for(Fournisseur x : listOfFournisseurs){
             System.out.println(x);
+            lister += x + "\n";
         }
+        return lister;
     }
     /**
     * 

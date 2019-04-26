@@ -4,20 +4,16 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class ConnexionDetaillant extends JPanel implements ActionListener {
 
 	private UserInterface gui;
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -2335823708556556315L;
 	
 	private JTextField id;
 	private JTextField pass;
@@ -64,7 +60,7 @@ public class ConnexionDetaillant extends JPanel implements ActionListener {
 		connexion.addActionListener(this);
 
 		
-		retour.setBounds(30, 65, 50, 50);
+		retour.setBounds(30, 30, 30, 30);
 		retour.addActionListener(this);
 		
 		this.add(idLabel);

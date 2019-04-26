@@ -12,14 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class ConnexionCaissier extends JPanel implements ActionListener {
 
 	private UserInterface gui;
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5799173283213972883L;
 	
 	
 	private JFormattedTextField  id;
@@ -65,7 +61,7 @@ public class ConnexionCaissier extends JPanel implements ActionListener {
 		
 		connexion.setBounds(370, 330, 150, 30);
 		
-		retour.setBounds(30, 65, 50, 50);
+		retour.setBounds(30, 30, 30, 30);
 		retour.addActionListener(this);
 		
 		

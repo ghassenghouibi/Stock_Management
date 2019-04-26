@@ -3,21 +3,14 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class MenuDetaillant extends JPanel implements ActionListener {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 6550327962245546674L;
 
 	private UserInterface gui;
 
@@ -63,8 +56,6 @@ public class MenuDetaillant extends JPanel implements ActionListener {
 	
 	public void paintComponent(Graphics g) {
 		
-//		this.setLayout(null);
-		
 		g.setColor(Color.lightGray);
 	    g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		
@@ -75,33 +66,46 @@ public class MenuDetaillant extends JPanel implements ActionListener {
 		
 		
 		deconnexion.setBounds(450, 460, 150, 30);
+		deconnexion.addActionListener(this);
 		
-		retour.setBounds(30, 30, 50, 50);
+		retour.setBounds(30, 30, 30, 30);
 		retour.addActionListener(this);
 		
 		listerLesElementsEnDessousDuSeuil.setBounds(150, 100, 200, 50);
+		listerLesElementsEnDessousDuSeuil.addActionListener(this);
 		
 		listerTousLesArticles.setBounds(450, 100, 200, 50);
+		listerTousLesArticles.addActionListener(this);
 		
 		listerTousLesFournisseurs.setBounds(150, 160, 200, 50);
+		listerTousLesFournisseurs.addActionListener(this);
 		
 		imprimerLaliste.setBounds(450, 160, 200, 50);
+		imprimerLaliste.addActionListener(this);
 		
 		modifierLesInformationsConcernantLesArticles.setBounds(150, 220, 200, 50);
+		modifierLesInformationsConcernantLesArticles.addActionListener(this);
 		
 		modifierLesInformationsConcernantLesFournisseurs.setBounds(450, 220, 200, 50);
+		modifierLesInformationsConcernantLesFournisseurs.addActionListener(this);
 		
 		ajouterUnNouveauArticle.setBounds(150, 280, 200, 50);
+		ajouterUnNouveauArticle.addActionListener(this);
 		
 		ajouterUnNouveauFournisseur.setBounds(450, 280, 200, 50);
+		ajouterUnNouveauFournisseur.addActionListener(this);
 		
 		supprimerUnArticle.setBounds(150, 340, 200, 50);
+		supprimerUnArticle.addActionListener(this);
 		
 		supprimerUnFournisseur.setBounds(450, 340, 200, 50);
+		supprimerUnFournisseur.addActionListener(this);
 		
 		annulerLaCommande.setBounds(150, 400, 200, 50);
+		annulerLaCommande.addActionListener(this);
 		
 		passerUneCommande.setBounds(450, 400, 200, 50);
+		passerUneCommande.addActionListener(this);
 		
 		
 		this.add(listerLesElementsEnDessousDuSeuil);
@@ -131,12 +135,26 @@ public class MenuDetaillant extends JPanel implements ActionListener {
 			this.gui.getMyFrame().repaint();
 			this.gui.getMyFrame().setContentPane(new FirstMenu(this.gui));
 			this.gui.getMyFrame().revalidate();
-		}
-		if(source == this.deconnexion) {
+		}else if(source == this.listerLesElementsEnDessousDuSeuil) {
+			this.gui.getMyFrame().repaint();
+			this.gui.getMyFrame().setContentPane(new ListerLesElementsEnDessousDuSeuil(this.gui));
+			this.gui.getMyFrame().revalidate();
+		}else if(source == this.listerTousLesArticles) {
+			this.gui.getMyFrame().repaint();
+			this.gui.getMyFrame().setContentPane(new ListerTousLesArticles(this.gui));
+			this.gui.getMyFrame().revalidate();
+		}else if(source == this.listerTousLesFournisseurs) {
+			this.gui.getMyFrame().repaint();
+			this.gui.getMyFrame().setContentPane(new ListerTousLesFournisseurs(this.gui));
+			this.gui.getMyFrame().revalidate();
+		}else if(source == this.ajouterUnNouveauArticle) {
+			this.gui.getMyFrame().repaint();
+			this.gui.getMyFrame().setContentPane(new AjouterUnNouveauArticle(this.gui));
+			this.gui.getMyFrame().revalidate();
+		}else if(source == this.deconnexion) {
 			this.gui.getMyFrame().repaint();
 //			this.gui.getMyFrame().setContentPane(new ConnexionCaissier());
 			this.gui.getMyFrame().revalidate();
-			
 		}
 	}
 }

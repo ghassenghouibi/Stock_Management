@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 
 
 public class UserInterface implements ActionListener {
@@ -50,6 +51,15 @@ public class UserInterface implements ActionListener {
         
 //        this.myFrame.setVisible(true);
 	}
+	
+	/**
+     * Print out some text into the text area, followed by a line break.
+     */
+    public void println(String text, JTextArea log)
+    {
+        log.append(text + "\n");
+        log.setCaretPosition(log.getDocument().getLength());
+    }
 	
 //	
 //	public class FirstMenu extends JPanel {

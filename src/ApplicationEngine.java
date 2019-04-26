@@ -1,11 +1,12 @@
-
+import controller.*;
 
 public class ApplicationEngine {
 
     private UserInterface gui;
+    private Detaillant detaillant;
 	
 	public ApplicationEngine() {
-		
+		this.detaillant = new Detaillant();
 	}
 	
 	
@@ -27,6 +28,16 @@ public class ApplicationEngine {
 
 	public void setGui(UserInterface gui) {
 		this.gui = gui;
+	}
+
+
+	public Detaillant getDetaillant() {
+		return detaillant;
+	}
+
+
+	public void setDetaillant(Detaillant detaillant) {
+		this.detaillant = detaillant;
 	}
 	
 }
