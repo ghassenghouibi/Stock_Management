@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
@@ -132,9 +133,13 @@ public class MenuDetaillant extends JPanel implements ActionListener {
 		// TODO Auto-generated method stub
 		Object  source = e.getSource();
 		if(source == retour) {
-			this.gui.getMyFrame().repaint();
-			this.gui.getMyFrame().setContentPane(new FirstMenu(this.gui));
-			this.gui.getMyFrame().revalidate();
+			int option = JOptionPane.showConfirmDialog(null, "Vous aller vous déconnecté, voulez-vous continuer ?", "Déconnection", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			
+			if(option == JOptionPane.OK_OPTION){
+				this.gui.getMyFrame().repaint();
+				this.gui.getMyFrame().setContentPane(new MenuDetaillant(this.gui));
+				this.gui.getMyFrame().revalidate();		
+			}
 		}else if(source == this.listerLesElementsEnDessousDuSeuil) {
 			this.gui.getMyFrame().repaint();
 			this.gui.getMyFrame().setContentPane(new ListerLesElementsEnDessousDuSeuil(this.gui));
