@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.NumberFormat;
-import java.text.ParseException;
+import java.util.HashMap;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -16,7 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-import controller.Article;
 
 @SuppressWarnings("serial")
 public class AjouterUnNouveauArticle extends JPanel implements ActionListener {
@@ -27,7 +26,6 @@ public class AjouterUnNouveauArticle extends JPanel implements ActionListener {
 	private JFormattedTextField codeBarre;
 	private JFormattedTextField quantiteEnStock;
 	private JFormattedTextField seuilDeReassortiment;
-	private JFormattedTextField codeprixDeventeBarre;
 	private JFormattedTextField prixDeVente;
 	
 	private ButtonGroup radio;
@@ -43,8 +41,6 @@ public class AjouterUnNouveauArticle extends JPanel implements ActionListener {
 	
 	private JButton ajouter;
 	private JButton retour;
-	
-	JOptionPane erreur;
 	
 	
 	public AjouterUnNouveauArticle(UserInterface gui) {
@@ -71,7 +67,6 @@ public class AjouterUnNouveauArticle extends JPanel implements ActionListener {
 		this.ajouter = new JButton("Ajouter");
 		this.retour = new JButton(new ImageIcon("src/retour1.png"));
 		
-		this.erreur = new JOptionPane();
 	}
 	
 	
@@ -184,9 +179,17 @@ public class AjouterUnNouveauArticle extends JPanel implements ActionListener {
 								prixDeVente = 0;
 							}
 							if(prixDeVente > 0) {
+								HashMap<String, Object> param = new HashMap<String, Object>();
+								param.put("nom", nom);
+								param.put("codeBarre", codeBarre);
+								param.put("quantiteEnStock", quantiteEnStock);
+								param.put("seuilDeReassortiment", seuilDeReassortiment);
+								param.put("prixDeVente", prixDeVente);
 								if(vrai.isSelected()) {
-									Article article = new Article(nom, codeBarre, quantiteEnStock, seuilDeReassortiment, prixDeVente, true);
-									this.gui.getEngine().getDetaillant().ajouterUnNouveauArticle(article);
+//									Article article = new Article(nom, codeBarre, quantiteEnStock, seuilDeReassortiment, prixDeVente, true);
+									param.put("typeDeVente", true);
+//									this.gui.getEngine().getDetaillant().ajouterUnNouveauArticle(article);
+									this.gui.getEngine().AjouterUnNouveauArticle(param);
 									
 									JOptionPane.showMessageDialog(null, "L'article " + nom + " a était ajouté avec succé", "Information", JOptionPane.INFORMATION_MESSAGE);
 
@@ -194,8 +197,11 @@ public class AjouterUnNouveauArticle extends JPanel implements ActionListener {
 									this.gui.getMyFrame().setContentPane(new AjouterUnNouveauArticle(this.gui));
 									this.gui.getMyFrame().revalidate();
 								}else if(faux.isSelected()) {
-									Article article = new Article(nom, codeBarre, quantiteEnStock, seuilDeReassortiment, prixDeVente, false);
-									this.gui.getEngine().getDetaillant().ajouterUnNouveauArticle(article);
+//									Article article = new Article(nom, codeBarre, quantiteEnStock, seuilDeReassortiment, prixDeVente, false);
+//									this.gui.getEngine().getDetaillant().ajouterUnNouveauArticle(article);
+									
+									param.put("typeDeVente", false);
+									this.gui.getEngine().AjouterUnNouveauArticle(param);
 									
 									JOptionPane.showMessageDialog(null, "L'article " + nom + " a était ajouté avec succé", "Information", JOptionPane.INFORMATION_MESSAGE);
 

@@ -151,9 +151,9 @@ public class MenuDetaillant extends JPanel implements ActionListener {
 			this.gui.getMyFrame().repaint();
 			this.gui.getMyFrame().setContentPane(new AjouterUnNouveauArticle(this.gui));
 			this.gui.getMyFrame().revalidate();
-		}else if(source == this.deconnexion) {
+		}else if(source == this.ajouterUnNouveauFournisseur) {
 			this.gui.getMyFrame().repaint();
-//			this.gui.getMyFrame().setContentPane(new ConnexionCaissier());
+			this.gui.getMyFrame().setContentPane(new AjouterUnNouveauFournisseur(this.gui));
 			this.gui.getMyFrame().revalidate();
 		}
 	}
