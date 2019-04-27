@@ -11,6 +11,7 @@ import java.awt.GridBagLayout;
 import javax.swing.*;
 
 public class ViewEngine extends JFrame{
+
     private JPanel panel = new JPanel();
     private JButton button = new JButton("Mon bouton");
 
@@ -34,12 +35,12 @@ public class ViewEngine extends JFrame{
         tableau.setPreferredSize(new Dimension(800,620));
         
         JButton btnNewButton = new JButton("");
-        String iconfilePath = this.getClass().getClassLoader().getResource("../images/add.png").getFile();
+        /*String iconfilePath = this.getClass().getClassLoader().getResource("../images/add.png").getFile();
         btnNewButton.setIcon(new ImageIcon(iconfilePath));
         btnNewButton.setBounds(10, 438, 39, 31);
         btnNewButton.setBorder(BorderFactory.createEmptyBorder());
         btnNewButton.setContentAreaFilled(false);
-        btnNewButton.setFocusable(false);
+        btnNewButton.setFocusable(false);*/
 
         panel.setLayout(new GridBagLayout());
 
@@ -47,7 +48,6 @@ public class ViewEngine extends JFrame{
     
 
         panel.add(new JScrollPane(tableau), gbc);
-        panel.add(btnNewButton);
         
         
         this.setContentPane(panel);
