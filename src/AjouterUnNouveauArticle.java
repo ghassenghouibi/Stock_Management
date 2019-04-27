@@ -147,41 +147,74 @@ public class AjouterUnNouveauArticle extends JPanel implements ActionListener {
 			this.gui.getMyFrame().revalidate();
 		}else if(source == this.ajouter) {
 			String nom = this.nom.getText();
-			System.out.println(nom);
-			if(nom != null) {
+			if(!nom.equals("")) {
 				int codeBarre;
-				codeBarre = Integer.parseInt(this.codeBarre.getText());
+				try {
+					codeBarre = Integer.parseInt(this.codeBarre.getText());
+				} catch (NumberFormatException e2) {
+					// TODO: handle exception
+					JOptionPane.showMessageDialog(null, "Vous devez saisir un code barre correct", "Attention", JOptionPane.WARNING_MESSAGE);
+					codeBarre = 0;
+				}
 
 				if(codeBarre > 0) {
-					int quantiteEnStock = Integer.parseInt(this.quantiteEnStock.getText());
-					if(quantiteEnStock > 0) {
-						int seuilDeReassortiment = Integer.parseInt(this.seuilDeReassortiment.getText());
+					int quantiteEnStock;
+					try {
+						quantiteEnStock = Integer.parseInt(this.quantiteEnStock.getText());
+					} catch (NumberFormatException e2) {
+						// TODO: handle exception
+						JOptionPane.showMessageDialog(null, "Vous devez saisir une quantite de stock correct", "Attention", JOptionPane.WARNING_MESSAGE);
+						quantiteEnStock = -1;
+					}
+					
+					if(quantiteEnStock >= 0) {
+						int seuilDeReassortiment;
+						try {
+							seuilDeReassortiment = Integer.parseInt(this.seuilDeReassortiment.getText());
+						} catch (NumberFormatException e2) {
+							// TODO: handle exception
+							seuilDeReassortiment = 0;
+						}
 						if(seuilDeReassortiment > 0) {
-							int prixDeVente = Integer.parseInt(this.prixDeVente.getText());
+							int prixDeVente;
+							try {
+								prixDeVente = Integer.parseInt(this.prixDeVente.getText());
+							} catch (NumberFormatException e2) {
+								// TODO: handle exception
+								prixDeVente = 0;
+							}
 							if(prixDeVente > 0) {
 								if(vrai.isSelected()) {
 									Article article = new Article(nom, codeBarre, quantiteEnStock, seuilDeReassortiment, prixDeVente, true);
 									this.gui.getEngine().getDetaillant().ajouterUnNouveauArticle(article);
+									
+									JOptionPane.showMessageDialog(null, "L'article " + nom + " a était ajouté avec succé", "Information", JOptionPane.INFORMATION_MESSAGE);
+
+									this.gui.getMyFrame().repaint();
+									this.gui.getMyFrame().setContentPane(new AjouterUnNouveauArticle(this.gui));
+									this.gui.getMyFrame().revalidate();
 								}else if(faux.isSelected()) {
 									Article article = new Article(nom, codeBarre, quantiteEnStock, seuilDeReassortiment, prixDeVente, false);
 									this.gui.getEngine().getDetaillant().ajouterUnNouveauArticle(article);
+									
+									JOptionPane.showMessageDialog(null, "L'article " + nom + " a était ajouté avec succé", "Information", JOptionPane.INFORMATION_MESSAGE);
+
+									this.gui.getMyFrame().repaint();
+									this.gui.getMyFrame().setContentPane(new AjouterUnNouveauArticle(this.gui));
+									this.gui.getMyFrame().revalidate();
 								}else {
-									JOptionPane.showMessageDialog(null, "Vous devez selectionner si l'article c'est vendable ou pas!!", "Information", JOptionPane.INFORMATION_MESSAGE);
+									JOptionPane.showMessageDialog(null, "Vous devez selectionner si l'article c'est vendable ou pas!!", "Attention", JOptionPane.WARNING_MESSAGE);
 								}
 							}else {
-								JOptionPane.showMessageDialog(null, "Vous devez saisir un prix de vente correct", "Information", JOptionPane.INFORMATION_MESSAGE);
+								JOptionPane.showMessageDialog(null, "Vous devez saisir un prix de vente correct et > à 0", "Attention", JOptionPane.WARNING_MESSAGE);
 							}
 						}else {
-							JOptionPane.showMessageDialog(null, "Vous devez saisir un seuil de reassortiment correct", "Information", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Vous devez saisir un seuil de reassortiment correct et > à 0", "Attention", JOptionPane.WARNING_MESSAGE);
 						}
-					}else {
-						JOptionPane.showMessageDialog(null, "Vous devez saisir une quantite de stock correct", "Information", JOptionPane.INFORMATION_MESSAGE);
 					}
-				}else {
-					JOptionPane.showMessageDialog(null, "Vous devez saisir un code barre correct", "Information", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}else {
-				JOptionPane.showMessageDialog(null, "Vous devez saisir un nom correct", "Information", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Vous devez saisir un nom correct", "Attention", JOptionPane.WARNING_MESSAGE);
 			}
 		}
 	}
