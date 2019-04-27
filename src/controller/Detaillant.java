@@ -135,14 +135,12 @@ public class Detaillant {
      * 
      */
     public void annulerLaCommande(){
-        //TODO   
     }
 
     /**
      * 
      */
     public void passerUneCommande() {
-        //TODO
     }
 
 	public String getNomDeMagasin() {

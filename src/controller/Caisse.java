@@ -84,7 +84,6 @@ public class Caisse {
     }
     protected void miseAjourDuStock() {
         //for(Article i:ticketDeCaisse){
-            //TODO vérif modifier quantite En Stock
         //    i.quantiteEnStock--;
         //}
     }
