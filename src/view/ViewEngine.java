@@ -1,172 +1,123 @@
+
 package view;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionListener;
-
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
-public class ViewEngine extends JFrame{
+public class ViewEngine implements ActionListener{
 
-    private JPanel panel = new JPanel();
-    private JButton button = new JButton("Mon bouton");
+    private JFrame myFrame;
+	private JTextField identity;
+    private JPasswordField password;
+    private JLabel identityLabel,passwordLabel;
+    private JRadioButton choiceRetailer,choiceCashier;
+    private JButton login,signin;
+    private JPanel panel;
 
-      private JPanel monPanel = new JPanel();
-      private GridBagConstraints gbc = new GridBagConstraints();
-   
-   
-     //Déclaration des JLabel
-     //private JLabel label_bienvenue = new JLabel ("BIENVENUE SUR xxxxxx, Lxxxxx de xxxx xxxx xxxx !");
-   
-   
-      //Déclaration des JButton
-      private JButton bouton_ajout = new JButton ("Ajouter...");
-      private JButton bouton_modif = new JButton ("Modifier...");
-      private JButton bouton_supp = new JButton ("Supprimer...");
-      private JButton bouton_rech = new JButton ("Rechercher...");
-   
-   
-     // private JScrollPane maScrollPanefilm;
-   
-     // private JTable table_liste_film;
-   
-   
-     //**************************************************************************
-     //Création de la Barre du Menu de la fenetre principale
-     JMenuBar br=new JMenuBar();
-   
-   
-     //Les Onglets du Menu
-     JMenu P=new JMenu("Fichier");
-     JMenu V=new JMenu("Affichage");
-     JMenu R=new JMenu("Recherche");
-     JMenu A=new JMenu("Aide");
-   
-   
-     //Sous Onglets de l'onglet Fichier
-     JMenuItem Ajout=new JMenuItem("Nouveau");
-     JMenuItem Modif=new JMenuItem("Modifier...");
-     JMenuItem Supp=new JMenuItem("Supprimer...");
-     JMenuItem Quitter=new JMenuItem("Quitter");
-   
-   
-     //Sous Onglets de l'onglet Affichage
-     JMenuItem Actu=new JMenuItem("Actualiser la liste des films");
-   
-   
-     //Sous Onglets de l'onglet Recherche
-     JMenuItem Rec_titre=new JMenuItem("Recherche par Titre");
-     JMenuItem Rec_realisateur=new JMenuItem("Recherche par Réalisateur");
-     JMenuItem Rec_acteur=new JMenuItem("Recherche par Acteur");
-   
-   
-     //Sous Onglets de l'onglet Aide
-     JMenuItem About=new JMenuItem("A propos de xxxxx");
-   
-   
-   
-      public ViewEngine(){
-          super();   
-          build();
-          this.setVisible(true);
-      }
-      //**************************************************************************
-   
-   
-      //******************************************************************************
-      private void build(){
-   
-   
-          setTitle("Gestion De Stock");
-          setSize(1000,768);
-          setLocationRelativeTo(null);
-          setResizable(false);
-          setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-   
-   
-          //On définit le Grid
-          monPanel.setLayout (new GridBagLayout());
-   
-   
-          //On place les label
-          gbc.fill = GridBagConstraints.BOTH;
-         // gbc.insets = new Insets (10,10,10,10);
-   
-         // gbc.gridx = 3;
-          //gbc.gridy = 0;
-          //monPanel.add(label_bienvenue,gbc);
-   
-   
-   
-          //On place les boutons
-          gbc.gridx = 0;
-          gbc.gridy = 0;
-          gbc.gridwidth = 2;
-          gbc.fill = GridBagConstraints.NONE;
-          monPanel.add(bouton_ajout,gbc); //bouton ajouter
-   
-          gbc.gridx = 2;
-          gbc.gridy = 0;
-          gbc.gridwidth = 2;
-          gbc.fill = GridBagConstraints.NONE;
-          monPanel.add(bouton_modif,gbc); //bouton modifier
-   
-          gbc.gridx = 4;
-          gbc.gridy = 0;
-          gbc.gridwidth = 2;
-          gbc.fill = GridBagConstraints.NONE;
-          monPanel.add(bouton_supp,gbc); //bouton supprimer
-   
-          gbc.gridx = 6;
-          gbc.gridy = 0;
-          gbc.gridwidth = 2;
-          gbc.fill = GridBagConstraints.NONE;
-          monPanel.add(bouton_rech,gbc); //bouton recherche
-   
-          //On place le JTable
-         // gbc.gridx = 0;
-          //gbc.gridy = 1;
-          //gbc.gridwidth = 8;
-          //gbc.weightx=100;
-          //gbc.weighty=100;
-         // monPanel.add(maScrollPanefilm,gbc);
-   
-   
-   
-          //On attache monPanel
-          this.getContentPane().add(monPanel);
-   
-   
-          //On integre Les Onglets dans le Menu
-          br.add(P);
-          br.add(V);
-          br.add(R);
-          br.add(A);
-   
-   
-          //On ajoute Les Sous-onglets dans leur onglets respectives ds barre de menu "Fichier"
-          P.add(Ajout);
-          P.add(Modif);
-          P.add(Supp);
-          P.add(Quitter);
-          V.add(Actu);
-          R.add(Rec_titre);
-          R.add(Rec_realisateur);
-          R.add(Rec_acteur);
-          A.add(About);
-   
-          this.setJMenuBar(br);
-        //panel.add(new JScrollPane(tableau), gbc);
-        
-        
-        this.setContentPane(panel);
-        this.setVisible(true);
-      
+    public ViewEngine(){
+        createGUI();
     }
-         
+
+
+    public void createGUI(){
+		myFrame = new JFrame("Connexion");
+        //myFrame.setPreferredSize(new Dimension(800,620));
+        panel = new JPanel();
+        identity=new JTextField(10);
+        password=new JPasswordField();
+        identityLabel=new JLabel("login    ");
+        passwordLabel=new JLabel("password ");
+        choiceRetailer=new JRadioButton("Login as retailer");
+        choiceCashier=new JRadioButton("Login as cashier");
+
+        panel.setLayout(null);
+        identity.setBounds(350,250,150,25);
+        password.setBounds(350,290,150,25);
+        identityLabel.setBounds(260,250,120,25);
+        passwordLabel.setBounds(260,290,120,25);
+
+        choiceRetailer.setBounds(250,340,150,20);
+        choiceCashier.setBounds(420,340,200,20);
+
+        login = new JButton("");
+
+        String iconfilePath = this.getClass().getClassLoader().getResource("images/signin.png").getFile();
+        login.setIcon(new ImageIcon(iconfilePath));
+        login.setBounds(300, 0, 250, 250);
+        login.setBorder(BorderFactory.createEmptyBorder());
+        login.setContentAreaFilled(false);
+        login.setFocusable(false);
+
+        signin=new JButton("Sign in");
+        signin.setBounds(350,450,140,20);
+        signin.addActionListener(this);
+        choiceCashier.addActionListener(this);
+        choiceRetailer.addActionListener(this);
+
+        panel.add(identity);
+        panel.add(password);
+        panel.add(identityLabel);
+        panel.add(passwordLabel);
+        panel.add(choiceRetailer);
+        panel.add(choiceCashier);
+        panel.add(login);
+        panel.add(signin);
+
+        myFrame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+        myFrame.add(panel);
+        myFrame.setDefaultCloseOperation(3);
+        myFrame.setSize(800,620);
+        myFrame.setVisible(true);
+    }
+
+    public String getPassword(){
+        return password.getText();
+    }
+    public String getLogin(){
+        return identity.getText();
+    }
+    private void msgbox(){
+        JOptionPane optionPane = new JOptionPane("Please fill all fields",JOptionPane.WARNING_MESSAGE);
+        JDialog dialog = optionPane.createDialog("Warning!");
+        dialog.setAlwaysOnTop(true); // to show top of all other application
+        dialog.setVisible(true); // to visible the dialog
+
+     }
+
+    public void actionPerformed(ActionEvent e) {
+        Object source = e.getSource();
+        if(source==choiceCashier){
+            choiceRetailer.setSelected(false);
+        }
+        if(source==choiceRetailer){
+            choiceCashier.setSelected(false);
+        }
+        if(source == signin){
+            if(getPassword()!="" && getLogin()!="" && (choiceCashier.isSelected()|| choiceRetailer.isSelected())){
+                System.out.println("Wait for check please");
+                new ViewRetailer();
+
+            }
+            else{
+                msgbox();
+            }
+        }
+
+
+    }
+
+
+
+
+
+
+
 }
