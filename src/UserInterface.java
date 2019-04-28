@@ -1,14 +1,17 @@
 
 import java.awt.Dimension;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import javax.swing.JTextArea;
 
 
-public class UserInterface implements ActionListener {
+@SuppressWarnings("serial")
+public class UserInterface extends JFrame implements ActionListener {
 
     private JFrame myFrame;
     private JPanel panel;
@@ -16,9 +19,12 @@ public class UserInterface implements ActionListener {
 	
     public UserInterface(ApplicationEngine engine) {
 		// TODO Auto-generated constructor stub
-
+    	super();
     	this.setEngine(engine);
     	openWindow();
+    	
+//    	createGui();
+    	
 	}
     
     
@@ -34,18 +40,43 @@ public class UserInterface implements ActionListener {
 //		}
 	}
 	
+	public void createGui() {
+//		this.myFrame = new JFrame("Stock Management");
+		this.setTitle("Stock Management");
+        this.setSize(new Dimension(1200, 900));
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        this.panel = new JPanel();
+        this.setContentPane(panel);
+        
+        
+
+        
+        
+
+              
+              this.setContentPane(panel);
+        
+        
+        
+        
+        this.setVisible(true);
+	}
+	
 	
 	public void openWindow() {
     	this.myFrame = new JFrame("Stock Management");
-		this.myFrame.setTitle("Stock Management");
-        this.myFrame.setSize(new Dimension(800, 600));
+//		this.myFrame.setTitle("Stock Management");
+        this.myFrame.setSize(new Dimension(1000, 700));
         this.myFrame.setLocationRelativeTo(null);
+        this.myFrame.setResizable(false);
         this.myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.panel = new FirstMenu(this);
         this.myFrame.setContentPane(panel);               
 
         
-//        this.myFrame.setVisible(true);
+        this.myFrame.setVisible(true);
 	}
 	
 	/**

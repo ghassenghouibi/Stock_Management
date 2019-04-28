@@ -28,22 +28,22 @@ public class FirstMenu extends JPanel implements ActionListener {
 	
 	public void paintComponent(Graphics g) {
 		
-		g.setColor(Color.lightGray);
-	    g.fillRect(0, 0, this.getWidth(), this.getHeight());
+//		g.setColor(Color.lightGray);
+//	    g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		
 		Font font = new Font("Courier", Font.BOLD, 40);
 	    g.setFont(font);
 	    g.setColor(Color.black);
-		g.drawString("Stock Management", this.getWidth() / 2 - 175, this.getHeight() / 8);
+		g.drawString("Stock Management", 300, 120);
 		
-		font = new Font("Courier", Font.BOLD, 22);
-		g.setFont(font);
-		g.drawString("Vous êtes :", 90, this.getHeight() * 3 / 8 + 20);
+//		font = new Font("Courier", Font.BOLD, 22);
+//		g.setFont(font);
+//		g.drawString("Vous êtes :", 90, this.getHeight() * 3 / 8 + 20);
 		
-		detaillant.setBounds(this.getWidth() * 2 / 5, this.getHeight() * 3 / 8, this.getHeight() / 3, 50);
+		detaillant.setBounds(250, 270, 200, 200);
 		detaillant.addActionListener(this);
 		
-		caissier.setBounds(this.getWidth() * 2 / 5, this.getHeight() * 4 / 8, this.getHeight() / 3, 50);
+		caissier.setBounds(550, 270, 200, 200);
 		caissier.addActionListener(this);
 		
 		this.add(detaillant);
