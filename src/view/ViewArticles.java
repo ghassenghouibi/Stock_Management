@@ -11,14 +11,11 @@ import controller.BarChart;
 
 public class ViewArticles{
 
-
-
     public ViewArticles(){
         createGUI();
     }
 
     public void createGUI(){
-       System.out.println("Try'in");
         JFrame frame = new JFrame("Bar Chart");
         BarChart chart = new BarChart();
         chart.addBar(Color.red, 100);

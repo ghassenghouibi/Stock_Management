@@ -3,6 +3,9 @@ package view;
 import javax.swing.*;
 import java.awt.event.*;
 
+/**
+* Add Article is a small Frame allow the user to add new articles 
+*/
 
 public class AddArticles implements ActionListener{
 
@@ -11,7 +14,6 @@ public class AddArticles implements ActionListener{
     private JButton save,cancel;
     private JPanel panel;
     private JFrame myFrame;
-
 
     public AddArticles(){
         createGUI();
@@ -88,11 +90,5 @@ public class AddArticles implements ActionListener{
         if(source == save){
             System.out.println("Save ..");
         }
-        
     }
-
-
-
-
-
 }

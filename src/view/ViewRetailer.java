@@ -17,9 +17,11 @@ public class ViewRetailer implements ActionListener{
     private JMenuItem saveAs;
     private JMenuItem close;
 
-    private JMenu homeView;
-    private JMenuItem openHomeView;
-    private JMenuItem openHomeViewhere;
+    private JMenu home;
+    private JMenuItem homeView;
+    private JMenuItem addCashier;
+    private JMenuItem checkDocument;
+    private JMenuItem checkAlert;
     
     private JMenu articleView;
     private JMenuItem openArticleView;
@@ -41,63 +43,15 @@ public class ViewRetailer implements ActionListener{
         createGUI(frame);
     }
 
+    
     public void createGUI(JFrame myFrame){
         myFrame.getContentPane().removeAll();
         myFrame.getContentPane().repaint();    
         
         panel = new JPanel();
-
+        createMenu(myFrame);
         panel.setLayout(null);
         
-        
-        menuBar=new JMenuBar();
-
-        file=new JMenu("file");
-        open=new JMenuItem("open");
-        print=new JMenuItem("print");
-        saveAs=new JMenuItem("save as");
-        close=new JMenuItem("close");
-
-        file.add(open);
-        file.add(print);
-        file.add(saveAs);
-        file.add(close);
-        
-        homeView=new JMenu("home view");
-        openHomeView=new JMenuItem("open home view");
-        openHomeViewhere=new JMenuItem("open home view here");
-        homeView.add(openHomeView);
-        homeView.add(openHomeViewhere);
-        
-        articleView=new JMenu("article view");
-        openArticleView=new JMenuItem("open article view");
-        listAllArticles=new JMenuItem("list of all articles ");
-        openArticleViewhere=new JMenuItem("open article view here");
-        openArticleView.addActionListener(this);
-        articleView.add(openArticleView);
-        articleView.add(openArticleViewhere);
-        articleView.add(listAllArticles);
-          
-        providerView=new JMenu("provider view");
-        openProviderView=new JMenuItem("open provider view");
-        openProviderViewhere=new JMenuItem("open provider view here");
-        openProviderView.addActionListener(this);
-        openProviderViewhere.addActionListener(this);
-        providerView.add(openProviderView);
-        providerView.add(openProviderViewhere);
-
-        about=new JMenu("about");
-        aboutus=new JMenuItem("about us");
-        about.add(aboutus);
-
-        menuBar.add(file);
-        menuBar.add(homeView);
-        menuBar.add(articleView);
-        menuBar.add(providerView);
-        menuBar.add(about);
-
-        myFrame.setJMenuBar(menuBar);
-
         solde= new JLabel("Solde 10000$");
         solde.setBounds(75,220,100,100);
         panel.add(solde);
@@ -163,7 +117,58 @@ public class ViewRetailer implements ActionListener{
 		});
     }
 
+    public void createMenu(JFrame myFrame){
+        menuBar=new JMenuBar();
 
+        file=new JMenu("file");
+        open=new JMenuItem("open");
+        print=new JMenuItem("print");
+        saveAs=new JMenuItem("save as");
+        close=new JMenuItem("close");
+
+        file.add(open);
+        file.add(print);
+        file.add(saveAs);
+        file.add(close);
+
+        home=new JMenu("home");
+        homeView=new JMenuItem("home view");
+        addCashier=new JMenuItem("add cashier");
+        checkDocument=new JMenuItem("check document");
+        checkAlert=new JMenuItem("check alert");
+
+        home.add(homeView);
+        home.add(addCashier);
+        home.add(checkDocument);
+        home.add(checkAlert);
+
+        articleView=new JMenu("article view");
+        openArticleView=new JMenuItem("open article view");
+        listAllArticles=new JMenuItem("list of all articles ");
+        openArticleViewhere=new JMenuItem("open article view here");
+        openArticleView.addActionListener(this);
+        articleView.add(openArticleView);
+        articleView.add(openArticleViewhere);
+        articleView.add(listAllArticles);
+          
+        providerView=new JMenu("provider view");
+        openProviderView=new JMenuItem("open provider view");
+        openProviderViewhere=new JMenuItem("open provider view here");
+        openProviderView.addActionListener(this);
+        openProviderViewhere.addActionListener(this);
+        providerView.add(openProviderView);
+        providerView.add(openProviderViewhere);
+
+        about=new JMenu("about");
+        aboutus=new JMenuItem("about us");
+        about.add(aboutus);
+        menuBar.add(file);
+        menuBar.add(home);
+        menuBar.add(articleView);
+        menuBar.add(providerView);
+        menuBar.add(about);
+        myFrame.setJMenuBar(menuBar);
+    }
 
 
     public void actionPerformed(ActionEvent e) {
