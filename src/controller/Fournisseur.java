@@ -25,7 +25,7 @@ public class Fournisseur {
 
     public Fournisseur(String nom, String product, String adresse, int codePostal, int numeroDeTelephone) {
         this.nom = nom;
-        this.setProduct(product);
+        this.product=product;
         this.numeroDeTelephone = numeroDeTelephone;
         this.adresse = adresse;
         this.codePostal = codePostal;

@@ -13,11 +13,11 @@ public class ViewProvider implements ActionListener{
 
     private JButton add,edit,order,delete;
 
-    private JPanel   panel;
-    private JFrame frame;
+    private JPanel    panel;
+    private JFrame    frame;
 
-    private JMenuBar menuBar;
-    private JMenu    file;
+    private JMenuBar  menuBar;
+    private JMenu     file;
     private JTable    table;
     private JMenuItem open;
     private JMenuItem print;
@@ -48,11 +48,11 @@ public class ViewProvider implements ActionListener{
         
         myFrame.getContentPane().removeAll();
         myFrame.getContentPane().repaint();    
-         
-
+        
         panel = new JPanel();
 
         panel.setLayout(null);
+
         //TODO call controller
         BaseDeDonnes x=new BaseDeDonnes();
         ArrayList<Fournisseur> a=new ArrayList<Fournisseur>();
@@ -64,29 +64,15 @@ public class ViewProvider implements ActionListener{
             {"Banane", "Andrea", "new mexcio","9100","0784556184"},
             {"Tomate", "Pirlo", "San paulo","2074","0784517894"},
             {"Orange", "Ali", "Tunis","1001","0775315184"}
-             
         };
-        Object[][] d={};
-        int i=0;
-        for(Fournisseur t :a){
-            d[0][i]=t.getNomFournisseur();
-            d[1][i]=t.getProduct();
-            d[2][i]=t.getAdresse();
-            d[3][i]=t.getCodePostal();
-            d[4][i]=t.getNumeroDeTelephone();
-            i++;
-        }
-
+        
         //Les titres des colonnes
         String  title[] = {"Produit", "Nom", "Adresse","code postale","téléphone"};
-       
 
-        table= new JTable(d, title);
-        
+        table= new JTable(data, title);
         
 		JScrollPane listScroller = new JScrollPane(table);
 		listScroller.setBounds(0, 100, 800, 600);
-		
         
         add = new JButton("");
         String iconfilePath = this.getClass().getClassLoader().getResource("images/add.png").getFile();
