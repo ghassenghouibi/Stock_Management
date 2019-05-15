@@ -3,13 +3,14 @@ package view;
 import javax.swing.*;
 import java.awt.event.*;
 
+import java.awt.Color;
 
+import controller.BarChart;
 
-public class ViewRetailer implements ActionListener{
+public class ViewArticlesChartBar implements ActionListener {
 
-    private JPanel panel;
     private JFrame frame;
-    
+
     private JMenuBar menuBar;
     private JMenu    file;
     private JMenuItem open;
@@ -29,89 +30,43 @@ public class ViewRetailer implements ActionListener{
 
     private JMenu     provider;
     private JMenuItem providerView;
-    
-    
 
-    private JButton money,cashier,alert,document;
-    private JLabel solde,numberOfCashier,alerts,documents;
-
-
-    public ViewRetailer(JFrame frame){
+    public ViewArticlesChartBar(JFrame frame){
         createGUI(frame);
     }
 
-    
     public void createGUI(JFrame myFrame){
+
         myFrame.getContentPane().removeAll();
         myFrame.getContentPane().repaint();    
-        
-        panel = new JPanel();
-        createMenu(myFrame);
-        panel.setLayout(null);
-        
-        solde= new JLabel("Solde 10000$");
-        solde.setBounds(75,220,100,100);
-        panel.add(solde);
+         
 
-        money=new JButton("");
-        String iconfilePath = this.getClass().getClassLoader().getResource("images/money.png").getFile();
-        money.setIcon(new ImageIcon(iconfilePath));
-        money.setBounds(50, 0, 250, 250);
-        money.setBorder(BorderFactory.createEmptyBorder());
-        money.setContentAreaFilled(false);
-        money.setFocusable(false);
-        panel.add(money);
+        BarChart chart = new BarChart();
+        chart.addBar(Color.red, 100);
+        chart.addBar(Color.green, 8);
+        chart.addBar(Color.blue, 54);
+        chart.addBar(Color.white, 60);
+        chart.addBar(Color.yellow, 24);
+        chart.addBar(Color.cyan, 70);
+        chart.addBar(Color.gray, 6);
+        chart.addBar(Color.lightGray, 77);
+        chart.addBar(Color.magenta, 90);
+        chart.addBar(Color.pink, 12);
+        chart.addBar(Color.orange, 65);
 
-        numberOfCashier=new JLabel("4 cashier");
-        numberOfCashier.setBounds(75,500,100,100);
-        panel.add(numberOfCashier);
-
-        cashier=new JButton("");
-        iconfilePath = this.getClass().getClassLoader().getResource("images/cashier.png").getFile();
-        cashier.setIcon(new ImageIcon(iconfilePath));
-        cashier.setBounds(50, 300, 250, 250);
-        cashier.setBorder(BorderFactory.createEmptyBorder());
-        cashier.setContentAreaFilled(false);
-        cashier.setFocusable(false);
-        panel.add(cashier);
-
-
-
-        alerts=new JLabel("0 alerts", JLabel.LEFT);
-        alerts.setBounds(600,500,100,100);
-        panel.add(alerts);
-        alert=new JButton("");
-        iconfilePath = this.getClass().getClassLoader().getResource("images/alert.png").getFile();
-        alert.setIcon(new ImageIcon(iconfilePath));
-        alert.setBounds(500, 300, 250, 250);
-        alert.setBorder(BorderFactory.createEmptyBorder());
-        alert.setContentAreaFilled(false);
-        alert.setFocusable(false);
-        panel.add(alert);
-
-        documents=new JLabel("2 documents", JLabel.LEFT);
-        documents.setBounds(600,220,100,100);
-        panel.add(documents);
-        document=new JButton("");
-        iconfilePath = this.getClass().getClassLoader().getResource("images/document.png").getFile();
-        document.setIcon(new ImageIcon(iconfilePath));
-        document.setBounds(500, 0, 250, 250);
-        document.setBorder(BorderFactory.createEmptyBorder());
-        document.setContentAreaFilled(false);
-        document.setFocusable(false);
-        panel.add(document);
-
-        
-        myFrame.add(panel);
-        myFrame.setDefaultCloseOperation(3);
+        myFrame.getContentPane().add(chart);
+        myFrame.pack();
         myFrame.setSize(800,620);
         myFrame.setVisible(true);
+
         frame=myFrame;
+
         myFrame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-                System.out.println("Herre");
+				frame.dispose();
 			}
 		});
+
     }
 
     public void createMenu(JFrame myFrame){
@@ -168,7 +123,7 @@ public class ViewRetailer implements ActionListener{
         myFrame.setJMenuBar(menuBar);
     }
 
-
+    @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source==homeView){
@@ -189,7 +144,5 @@ public class ViewRetailer implements ActionListener{
         if(source==addCashier){
             //TODO add cashier
         }
-
     }
-
 }

@@ -7,7 +7,7 @@ import java.awt.event.*;
 * Add Article is a small Frame allow the user to add new articles 
 */
 
-public class AddArticles implements ActionListener{
+public class Articles implements ActionListener{
 
     private JTextField nom,codeBarre,quantiteEnStock,seuilDeReassortiment,prixDeVente,typeDeVente;
     private JLabel textNom,textCodeBarre,textQuantiteEnStock,textSeuilDeReassortiment,textPrixDeVente,textTypeDeVente;
@@ -15,7 +15,7 @@ public class AddArticles implements ActionListener{
     private JPanel panel;
     private JFrame myFrame;
 
-    public AddArticles(){
+    public Articles(){
         createGUI();
     }
 

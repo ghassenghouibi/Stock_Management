@@ -5,9 +5,9 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 
-public class ViewProvider implements ActionListener{
+public class ViewArticlesTable implements ActionListener{
 
-    private JButton add,edit,order,delete;
+    private JButton add,edit,delete;
 
     private JPanel   panel;
     private JFrame frame;
@@ -36,7 +36,7 @@ public class ViewProvider implements ActionListener{
     
 
 
-    public ViewProvider(JFrame Frame){
+    public ViewArticlesTable(JFrame Frame){
         createGUI(Frame);
     }
 
@@ -51,16 +51,12 @@ public class ViewProvider implements ActionListener{
         panel.setLayout(null);
         //TODO call controller
         Object[][] data = {
-            {"Apple", "Cristiano", "Madera","2045","0784745184"},
-            {"Kiwi", "Thomas", "Paris","75001","0784515184"},
-            {"Banane", "Andrea", "new mexcio","9100","0784556184"},
-            {"Tomate", "Pirlo", "San paulo","2074","0784517894"},
-            {"Orange", "Ali", "Tunis","1001","0775315184"}
-             
+            {"Apple", "0784745184", "12","150","20$","piece"},
+            {"Banane", "0784745184", "12","150","20$","piece"}
           };
-      
+
         //Les titres des colonnes
-        String  title[] = {"Produit", "Nom", "Adresse","code postale","téléphone"};
+        String  title[] = {"nom", "code à barre", "quantite en stock","seuil de reassortiment","prix de vente","type de vente"};
         table= new JTable(data, title);
         
         
@@ -97,22 +93,13 @@ public class ViewProvider implements ActionListener{
         delete.setFocusable(false);
         delete.addActionListener(this);
 
-        order = new JButton("");
-        
-        String iconfilePathorder = this.getClass().getClassLoader().getResource("images/order.png").getFile();
-        order.setIcon(new ImageIcon(iconfilePathorder));
-        order.setBounds(700, 0, 100, 50);
-        order.setBorder(BorderFactory.createEmptyBorder());
-        order.setContentAreaFilled(false);
-        order.setFocusable(false);
-        order.addActionListener(this);
+     
 
         panel.add(listScroller);
 		
         panel.add(add);
         panel.add(edit);
         panel.add(delete);
-        panel.add(order);
 
         frame=myFrame;
         myFrame.addWindowListener(new WindowAdapter() {
@@ -215,11 +202,7 @@ public class ViewProvider implements ActionListener{
                 new Provider("Modify Provider",x.get(0),x.get(1),x.get(2),x.get(3),x.get(4));
             }
         }
-        if(source == order){
-            if(table.getSelectedRow()==-1){
-                msgbox("Please select a row");
-            }
-        }
+     
 
         if (source==homeView){
             new ViewRetailer(frame);

@@ -83,14 +83,13 @@ public class ViewEngine implements ActionListener{
         frame=myFrame;
     }
 
-   
     private void msgbox(String chaine){
         JOptionPane optionPane = new JOptionPane(chaine,JOptionPane.WARNING_MESSAGE);
         JDialog dialog = optionPane.createDialog("Warning!");
         dialog.setAlwaysOnTop(true); // to show top of all other application
         dialog.setVisible(true); // to visible the dialog
 
-     }
+    }
 
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
@@ -115,14 +114,11 @@ public class ViewEngine implements ActionListener{
                 else{
                     msgbox("Login or password incorrect");
                 }
-
             }
             else{
                 msgbox("Please fill all fields");
             }
         }
-
-
     }
 
 }
