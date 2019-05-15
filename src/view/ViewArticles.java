@@ -50,6 +50,4 @@ public class ViewArticles{
         myFrame.setSize(800,620);
         myFrame.setVisible(true);
     }
-
-
 }

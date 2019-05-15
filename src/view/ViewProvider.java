@@ -17,7 +17,6 @@ public class ViewProvider implements ActionListener{
 
     private JButton add,edit,order,delete;
     private JPanel panel;
-    private JFrame myFrame;
     private JTable table ;
     
     private JMenuBar menuBar;
@@ -43,41 +42,26 @@ public class ViewProvider implements ActionListener{
     private JMenuItem aboutus;
 
 
-    public ViewProvider(){
-        createGUI();
+    public ViewProvider(JFrame Frame){
+        createGUI(Frame);
     }
 
-    public void createGUI(){
-        myFrame =new JFrame();
-        //myFrame.setPreferredSize(new Dimension(800,620));
+    public void createGUI(JFrame myFrame){
+        
+        myFrame.getContentPane().removeAll();
+        myFrame.getContentPane().repaint();    
+         
+
         panel = new JPanel();
 
         panel.setLayout(null);
         Object[][] data = {
-            {"héroine", "Booba", "USA","2045","566666666"},
-            {"cocaine", "Karis", "st denis","9300","55555"},
-            {"mary", "PNL", "terter","9100","666666"},
-            {"héroine", "Booba", "USA","2045","566666666"},
-            {"cocaine", "Karis", "st denis","9300","55555"},
-            {"mary", "PNL", "terter","9100","666666"},
-            {"héroine", "Booba", "USA","2045","566666666"},
-            {"cocaine", "Karis", "st denis","9300","55555"},
-            {"mary", "PNL", "terter","9100","666666"},
-            {"héroine", "Booba", "USA","2045","566666666"},
-            {"cocaine", "Karis", "st denis","9300","55555"},
-            {"mary", "PNL", "terter","9100","666666"},
-            {"héroine", "Booba", "USA","2045","566666666"},
-            {"cocaine", "Karis", "st denis","9300","55555"},
-            {"mary", "PNL", "terter","9100","666666"},
-            {"héroine", "Booba", "USA","2045","566666666"},
-            {"cocaine", "Karis", "st denis","9300","55555"},
-            {"mary", "PNL", "terter","9100","666666"},
-            {"héroine", "Booba", "USA","2045","566666666"},
-            {"cocaine", "Karis", "st denis","9300","55555"},
-            {"mary", "PNL", "terter","9100","666666"},
-            {"héroine", "Booba", "USA","2045","566666666"},
-            {"cocaine", "Karis", "st denis","9300","55555"},
-            {"mary", "PNL", "terter","9100","666666"}
+            {"Apple", "Cristiano", "Madera","2045","0784745184"},
+            {"Kiwi", "Thomas", "Paris","75001","0784515184"},
+            {"Banane", "Andrea", "new mexcio","9100","0784556184"},
+            {"Tomate", "Pirlo", "San paulo","2074","0784517894"},
+            {"Orange", "Ali", "Tunis","1001","0775315184"}
+             
           };
       
         //Les titres des colonnes

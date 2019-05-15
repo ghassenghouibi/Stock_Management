@@ -2,6 +2,9 @@
 package view;
 
 import javax.swing.*;
+
+import model.BaseDeDonnes;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
@@ -10,22 +13,23 @@ import java.net.URL;
 
 public class ViewEngine implements ActionListener{
 
-    private JFrame myFrame;
+    private JFrame frame;
 	private JTextField identity;
     private JPasswordField password;
     private JLabel identityLabel,passwordLabel;
     private JRadioButton choiceRetailer,choiceCashier;
-    private JButton login,signin;
+    private JButton login,signin,register;
     private JPanel panel;
 
-    public ViewEngine(){
-        createGUI();
+    public ViewEngine(JFrame myFrame){
+        createGUI(myFrame);
     }
 
 
-    public void createGUI(){
-		myFrame = new JFrame("Connexion");
-        //myFrame.setPreferredSize(new Dimension(800,620));
+    public void createGUI(JFrame myFrame){
+        myFrame.getContentPane().removeAll();
+        myFrame.getContentPane().repaint();    
+
         panel = new JPanel();
         identity=new JTextField(10);
         password=new JPasswordField();
@@ -53,8 +57,13 @@ public class ViewEngine implements ActionListener{
         login.setFocusable(false);
 
         signin=new JButton("Sign in");
-        signin.setBounds(350,450,140,20);
+        signin.setBounds(250,450,140,20);
         signin.addActionListener(this);
+
+        register=new JButton("Register");
+        register.setBounds(450,450,140,20);
+        register.addActionListener(this);
+
         choiceCashier.addActionListener(this);
         choiceRetailer.addActionListener(this);
 
@@ -66,6 +75,7 @@ public class ViewEngine implements ActionListener{
         panel.add(choiceCashier);
         panel.add(login);
         panel.add(signin);
+        panel.add(register);
 
         myFrame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -76,16 +86,12 @@ public class ViewEngine implements ActionListener{
         myFrame.setDefaultCloseOperation(3);
         myFrame.setSize(800,620);
         myFrame.setVisible(true);
+        frame=myFrame;
     }
 
-    public String getPassword(){
-        return password.getText();
-    }
-    public String getLogin(){
-        return identity.getText();
-    }
-    private void msgbox(){
-        JOptionPane optionPane = new JOptionPane("Please fill all fields",JOptionPane.WARNING_MESSAGE);
+   
+    private void msgbox(String chaine){
+        JOptionPane optionPane = new JOptionPane(chaine,JOptionPane.WARNING_MESSAGE);
         JDialog dialog = optionPane.createDialog("Warning!");
         dialog.setAlwaysOnTop(true); // to show top of all other application
         dialog.setVisible(true); // to visible the dialog
@@ -100,24 +106,29 @@ public class ViewEngine implements ActionListener{
         if(source==choiceRetailer){
             choiceCashier.setSelected(false);
         }
+        if(source == register){
+            System.out.println("Register this fuck'n user");
+            new ViewRegister(frame);
+        }
         if(source == signin){
-            if(getPassword()!="" && getLogin()!="" && (choiceCashier.isSelected()|| choiceRetailer.isSelected())){
+            if(identity.getText()!="" && password.getText()!="" && (choiceCashier.isSelected()|| choiceRetailer.isSelected())){
+                BaseDeDonnes x=new BaseDeDonnes();
+                int res=x.checkLogin(identity.getText(),password.getText());
+                if(res==1){
                 System.out.println("Wait for check please");
-                new ViewRetailer();
+                    new ViewRetailer(frame);
+                }
+                else{
+                    msgbox("Login or password incorrect");
+                }
 
             }
             else{
-                msgbox();
+                msgbox("Please fill all fields");
             }
         }
 
 
     }
-
-
-
-
-
-
 
 }

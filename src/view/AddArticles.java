@@ -86,7 +86,7 @@ public class AddArticles implements ActionListener{
 
         myFrame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				System.exit(0);
+				System.out.println("closed");
 			}
         });
         myFrame.add(panel);
@@ -104,6 +104,7 @@ public class AddArticles implements ActionListener{
         Object source = e.getSource();
         if(source == cancel){
             System.out.println("Cancel ..");
+            myFrame.setVisible(false);
         }
         if(source == save){
             System.out.println("Save ..");
