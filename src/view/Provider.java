@@ -1,7 +1,12 @@
 package view;
 
 import javax.swing.*;
+
+import controller.Fournisseur;
+import model.BaseDeDonnes;
+
 import java.awt.event.*;
+import java.util.ArrayList;
 
 
 
@@ -89,8 +94,21 @@ public class Provider implements ActionListener{
             myFrame.dispose();
         }
         if(source == save){
-            //TODO
+            Fournisseur x=new Fournisseur(nom.getText(),produit.getText(),adresse.getText(),Integer.parseInt(codePostale.getText()),Integer.parseInt(telephone.getText()));
             System.out.println("Save ..");
+            ArrayList<Fournisseur> list=new ArrayList<Fournisseur>();
+            list.add(x);
+            list.add(x);
+            list.add(x);
+            list.add(x);
+            list.add(x);
+            list.add(x);
+            
+            BaseDeDonnes a=new BaseDeDonnes();
+            a.insertProvider(list);
+            myFrame.setVisible(false);
+            myFrame.dispose();
+
         }
         
     }

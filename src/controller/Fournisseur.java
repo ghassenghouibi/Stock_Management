@@ -9,28 +9,44 @@ import java.util.*;
 public class Fournisseur {
     
     private  String 			 nom;
-    private  Integer 			 numeroDeTelephone;
-    private  String 			 adresse;
-    private  Integer 			 codePostal;
+    private  String product;
+    private Integer numeroDeTelephone;
+    private String adresse;
+    private Integer codePostal;
 
-    private  int 			     quantite;
-    private  StringBuilder       commandeReference;
-    private  String 			 adresseDetaillant;
-    private  ArrayList <Article> commande;
-    
+    private int quantite;
+    private StringBuilder commandeReference;
+    private String adresseDetaillant;
+    private ArrayList<Article> commande;
+
     /**
-    * Default constructor
-    */
-    
-    public Fournisseur(String nom,int numeroDeTelephone,String adresse,int codePostal){
-        this.nom                =nom;
-        this.numeroDeTelephone  =numeroDeTelephone;
-        this.adresse            =adresse;
-        this.codePostal         =codePostal;
-        this.commande           =new ArrayList <Article>();
+     * Default constructor
+     */
+
+    public Fournisseur(String nom, String product, String adresse, int codePostal, int numeroDeTelephone) {
+        this.nom = nom;
+        this.setProduct(product);
+        this.numeroDeTelephone = numeroDeTelephone;
+        this.adresse = adresse;
+        this.codePostal = codePostal;
+        this.commande = new ArrayList<Article>();
     }
-    
-    public Fournisseur(){
+
+    /**
+     * @return the product
+     */
+    public String getProduct() {
+        return product;
+    }
+
+    /**
+     * @param product the product to set
+     */
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public Fournisseur() {
         this.commande           =new ArrayList <Article>();
     }
     
@@ -64,6 +80,11 @@ public class Fournisseur {
     }
     public void setCodePostal(int codePostal){
         this.codePostal=codePostal;
+    }
+
+
+    public void showProvider(Fournisseur a){
+        System.out.println(a.getNomFournisseur()+" "+a.getAdresse()+" "+a.getCodePostal());
     }
     /**
     * 

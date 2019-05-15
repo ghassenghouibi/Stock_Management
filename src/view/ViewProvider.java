@@ -1,6 +1,10 @@
 package view;
 
 import javax.swing.*;
+
+import controller.Fournisseur;
+import model.BaseDeDonnes;
+
 import java.awt.event.*;
 import java.util.ArrayList;
 
@@ -50,6 +54,10 @@ public class ViewProvider implements ActionListener{
 
         panel.setLayout(null);
         //TODO call controller
+        BaseDeDonnes x=new BaseDeDonnes();
+        ArrayList<Fournisseur> a=new ArrayList<Fournisseur>();
+        a=x.loadProvider();
+        
         Object[][] data = {
             {"Apple", "Cristiano", "Madera","2045","0784745184"},
             {"Kiwi", "Thomas", "Paris","75001","0784515184"},
@@ -57,11 +65,23 @@ public class ViewProvider implements ActionListener{
             {"Tomate", "Pirlo", "San paulo","2074","0784517894"},
             {"Orange", "Ali", "Tunis","1001","0775315184"}
              
-          };
-      
+        };
+        Object[][] d={};
+        int i=0;
+        for(Fournisseur t :a){
+            d[0][i]=t.getNomFournisseur();
+            d[1][i]=t.getProduct();
+            d[2][i]=t.getAdresse();
+            d[3][i]=t.getCodePostal();
+            d[4][i]=t.getNumeroDeTelephone();
+            i++;
+        }
+
         //Les titres des colonnes
         String  title[] = {"Produit", "Nom", "Adresse","code postale","téléphone"};
-        table= new JTable(data, title);
+       
+
+        table= new JTable(d, title);
         
         
 		JScrollPane listScroller = new JScrollPane(table);
