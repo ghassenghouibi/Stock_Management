@@ -2,14 +2,8 @@
 package view;
 
 import javax.swing.*;
-
 import model.BaseDeDonnes;
-
-import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 
 public class ViewEngine implements ActionListener{
 
@@ -25,8 +19,8 @@ public class ViewEngine implements ActionListener{
         createGUI(myFrame);
     }
 
-
     public void createGUI(JFrame myFrame){
+
         myFrame.getContentPane().removeAll();
         myFrame.getContentPane().repaint();    
 
@@ -79,7 +73,7 @@ public class ViewEngine implements ActionListener{
 
         myFrame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				System.exit(0);
+                System.out.println("LALALALA");
 			}
 		});
         myFrame.add(panel);
@@ -111,9 +105,9 @@ public class ViewEngine implements ActionListener{
             new ViewRegister(frame);
         }
         if(source == signin){
-            if(identity.getText()!="" && password.getText()!="" && (choiceCashier.isSelected()|| choiceRetailer.isSelected())){
+            if(identity.getText()!="" && String.valueOf(password.getPassword())!="" && (choiceCashier.isSelected()|| choiceRetailer.isSelected())){
                 BaseDeDonnes x=new BaseDeDonnes();
-                int res=x.checkLogin(identity.getText(),password.getText());
+                int res=x.checkLogin(identity.getText(),String.valueOf(password.getPassword()));
                 if(res==1){
                 System.out.println("Wait for check please");
                     new ViewRetailer(frame);

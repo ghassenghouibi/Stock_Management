@@ -1,15 +1,8 @@
 package view;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-
-import java.awt.*;
 import java.awt.event.*;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
+
 
 
 public class Provider implements ActionListener{
@@ -27,7 +20,6 @@ public class Provider implements ActionListener{
 
     public void createGUI(String title,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone){
         myFrame =new JFrame(title);
-        //myFrame.setPreferredSize(new Dimension(800,620));
         panel = new JPanel();
         
         panel.setLayout(null);
@@ -90,24 +82,16 @@ public class Provider implements ActionListener{
         myFrame.setVisible(true);
     }
 
-
-
-
-
-
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source == cancel){
-            System.out.println("Cancel ..");
+            myFrame.setVisible(false);
+            myFrame.dispose();
         }
         if(source == save){
             System.out.println("Save ..");
         }
         
     }
-
-
-
-
 
 }

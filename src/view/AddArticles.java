@@ -1,15 +1,7 @@
 package view;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-
-import java.awt.*;
 import java.awt.event.*;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 
 
 public class AddArticles implements ActionListener{
@@ -27,7 +19,6 @@ public class AddArticles implements ActionListener{
 
     public void createGUI(){
         myFrame =new JFrame("Add Article");
-        //myFrame.setPreferredSize(new Dimension(800,620));
         panel = new JPanel();
         
         panel.setLayout(null);
@@ -83,27 +74,15 @@ public class AddArticles implements ActionListener{
         cancel.setBounds(80,250,100,20);
         cancel.addActionListener(this);
         panel.add(cancel);
-
-        myFrame.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				System.out.println("closed");
-			}
-        });
         myFrame.add(panel);
         myFrame.setDefaultCloseOperation(3);
         myFrame.setSize(400,320);
         myFrame.setVisible(true);
     }
 
-
-
-
-
-
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source == cancel){
-            System.out.println("Cancel ..");
             myFrame.setVisible(false);
         }
         if(source == save){

@@ -24,6 +24,7 @@ public class ViewRetailer implements ActionListener{
     private JMenu articleView;
     private JMenuItem openArticleView;
     private JMenuItem openArticleViewhere;
+    private JMenuItem listAllArticles;
 
     private JMenu providerView;
     private JMenuItem openProviderView;
@@ -70,14 +71,17 @@ public class ViewRetailer implements ActionListener{
         
         articleView=new JMenu("article view");
         openArticleView=new JMenuItem("open article view");
+        listAllArticles=new JMenuItem("list of all articles ");
         openArticleViewhere=new JMenuItem("open article view here");
+        openArticleView.addActionListener(this);
         articleView.add(openArticleView);
         articleView.add(openArticleViewhere);
+        articleView.add(listAllArticles);
           
         providerView=new JMenu("provider view");
         openProviderView=new JMenuItem("open provider view");
-        openProviderView.addActionListener(this);
         openProviderViewhere=new JMenuItem("open provider view here");
+        openProviderView.addActionListener(this);
         openProviderViewhere.addActionListener(this);
         providerView.add(openProviderView);
         providerView.add(openProviderViewhere);
@@ -154,7 +158,7 @@ public class ViewRetailer implements ActionListener{
         frame=myFrame;
         myFrame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				System.exit(0);
+                System.out.println("Herre");
 			}
 		});
     }
@@ -166,6 +170,10 @@ public class ViewRetailer implements ActionListener{
         Object source = e.getSource();
         if (source==openProviderView){
             new ViewProvider(frame);
+        }
+        if (source==openArticleView){
+            System.out.println("hahahahah");
+            new ViewArticles();
         }
     }
 

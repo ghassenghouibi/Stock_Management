@@ -1,33 +1,16 @@
 package view;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
-import com.sun.org.apache.xml.internal.dtm.Axis;
+import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
-
-import java.awt.*;
-import java.awt.event.*;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
+import controller.BarChart;
 
 
 public class ViewArticles{
 
-	private JTextField identity;
-    private JPasswordField password;
-    private JLabel identityLabel,passwordLabel;
-    private JRadioButton choiceRetailer,choiceCashier;
-    private JButton add,edit,order,delete;
-    private JPanel panel;
-    private JFrame myFrame;
 
 
     public ViewArticles(){
@@ -35,19 +18,31 @@ public class ViewArticles{
     }
 
     public void createGUI(){
-        myFrame =new JFrame();
-        //myFrame.setPreferredSize(new Dimension(800,620));
-        panel = new JPanel();
-       
+       System.out.println("Try'in");
+        JFrame frame = new JFrame("Bar Chart");
+        BarChart chart = new BarChart();
+        chart.addBar(Color.red, 100);
+        chart.addBar(Color.green, 8);
+        chart.addBar(Color.blue, 54);
+        chart.addBar(Color.white, 60);
+        chart.addBar(Color.yellow, 24);
+        chart.addBar(Color.cyan, 70);
+        chart.addBar(Color.gray, 6);
+        chart.addBar(Color.lightGray, 77);
+        chart.addBar(Color.magenta, 90);
+        chart.addBar(Color.pink, 12);
+        chart.addBar(Color.orange, 65);
 
-        myFrame.addWindowListener(new WindowAdapter() {
+        frame.getContentPane().add(chart);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setSize(800,620);
+        frame.setVisible(true);
+        frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				System.exit(0);
+				frame.dispose();
 			}
 		});
-        myFrame.add(panel);
-        myFrame.setDefaultCloseOperation(3);
-        myFrame.setSize(800,620);
-        myFrame.setVisible(true);
+
     }
 }

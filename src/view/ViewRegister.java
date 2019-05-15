@@ -64,8 +64,8 @@ public class ViewRegister implements ActionListener{
 
         myFrame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				System.exit(0);
-			}
+                myFrame.dispose();
+            }
 		});
         myFrame.add(panel);
         myFrame.setDefaultCloseOperation(3);

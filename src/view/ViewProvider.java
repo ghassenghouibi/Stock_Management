@@ -1,15 +1,7 @@
 package view;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-
-import java.awt.*;
 import java.awt.event.*;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -55,6 +47,7 @@ public class ViewProvider implements ActionListener{
         panel = new JPanel();
 
         panel.setLayout(null);
+        //TODO call controller
         Object[][] data = {
             {"Apple", "Cristiano", "Madera","2045","0784745184"},
             {"Kiwi", "Thomas", "Paris","75001","0784515184"},
@@ -163,7 +156,7 @@ public class ViewProvider implements ActionListener{
 
         myFrame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-				System.exit(0);
+				myFrame.dispose();
 			}
 		});
         myFrame.add(panel);
@@ -188,7 +181,6 @@ public class ViewProvider implements ActionListener{
         if(source == add){
             System.out.println("Adding ...");
             new Provider("Add Provider",null,null,null,null,null);
-
         }
         if(source==delete){
             if(table.getSelectedRow()==-1){
@@ -200,7 +192,6 @@ public class ViewProvider implements ActionListener{
             if(table.getSelectedRow()==-1){
                 msgbox("Please select a row");
             }else{
-                int column = 0;
                 int row = table.getSelectedRow();
                 ArrayList<String> x =new ArrayList<String>();
                 for(int i=0;i<5;i++){
