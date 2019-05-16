@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import java.awt.event.*;
 
+import javax.swing.table.DefaultTableModel;
 
 
 public class Provider implements ActionListener{
@@ -13,13 +14,13 @@ public class Provider implements ActionListener{
     private JButton save,cancel;
     private JPanel panel;
     private JFrame myFrame;
+    private Object[] obj;
 
-
-    public Provider(String title,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone){
-        createGUI(title,modifyproduit,modifynom,modifyadresse,modifycodePostale,modifytelephone);
+    public Provider(String title,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone,JTable table){
+        createGUI(title,modifyproduit,modifynom,modifyadresse,modifycodePostale,modifytelephone,table);
     }
 
-    public void createGUI(String title,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone){
+    public void createGUI(String title,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone,JTable table){
         myFrame =new JFrame(title);
         panel = new JPanel();
         
@@ -82,7 +83,7 @@ public class Provider implements ActionListener{
         myFrame.setSize(400,320);
         myFrame.setVisible(true);
     }
-
+  
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source == cancel){
@@ -103,17 +104,15 @@ public class Provider implements ActionListener{
                     //TODO add to JTable
                     JOptionPane.showMessageDialog(null, "Provider added with success ! ", "Added", JOptionPane.PLAIN_MESSAGE);
                     myFrame.setVisible(false);
-                    myFrame.dispose();        
+                    myFrame.dispose();
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Please fill all fileds", "Error", JOptionPane.ERROR_MESSAGE);
                 }
                          
-            } catch (NumberFormatException e2) {
-                JOptionPane.showMessageDialog(null, "You have to fill correctly fields below", "Attention", JOptionPane.WARNING_MESSAGE);
+                } catch (NumberFormatException e2) {
+                    JOptionPane.showMessageDialog(null, "You have to fill correctly fields below", "Attention", JOptionPane.WARNING_MESSAGE);
             }
-            
-
         }
         
     }

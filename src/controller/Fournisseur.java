@@ -46,9 +46,6 @@ public class Fournisseur {
         this.product = product;
     }
 
-    public Fournisseur() {
-        this.commande           =new ArrayList <Article>();
-    }
     
     public void receptionDuneCommande(Article article,int quantite,String fournisseur,String adresse){
         commande.add(article);

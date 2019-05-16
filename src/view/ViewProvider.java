@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 import controller.Fournisseur;
 import model.BaseDeDonnes;
@@ -37,10 +38,14 @@ public class ViewProvider implements ActionListener{
     private JMenu     provider;
     private JMenuItem providerView;
     
-    
-
+    private ArrayList<Fournisseur> listOfProvider;
+    private DefaultTableModel tableModel;
+    private BaseDeDonnes dataBase;
 
     public ViewProvider(JFrame Frame){
+        listOfProvider=new ArrayList<Fournisseur>();
+        dataBase=new BaseDeDonnes();
+        listOfProvider=dataBase.loadProvider();
         createGUI(Frame);
     }
 
@@ -53,20 +58,17 @@ public class ViewProvider implements ActionListener{
 
         panel.setLayout(null);
 
-       
-        
-        Object[][] data = {
-            {"Apple", "Cristiano", "Madera","2045","0784745184"},
-            {"Kiwi", "Thomas", "Paris","75001","0784515184"},
-            {"Banane", "Andrea", "new mexcio","9100","0784556184"},
-            {"Tomate", "Pirlo", "San paulo","2074","0784517894"},
-            {"Orange", "Ali", "Tunis","1001","0775315184"}
-        };
-        
-        //Les titres des colonnes
+    
+        //title
         String  title[] = {"Produit", "Nom", "Adresse","code postale","téléphone"};
+        tableModel= new DefaultTableModel(title, 0);
 
-        table= new JTable(data, title);
+        for(Fournisseur x :listOfProvider){
+            Object[] obj={x.getProduct(),x.getNomFournisseur(),x.getAdresse(),x.getCodePostal(),x.getNumeroDeTelephone()};
+
+            tableModel.addRow(obj);
+        }
+        table = new JTable(tableModel);
         
 		JScrollPane listScroller = new JScrollPane(table);
 		listScroller.setBounds(0, 100, 800, 600);
@@ -74,7 +76,7 @@ public class ViewProvider implements ActionListener{
         add = new JButton("");
         String iconfilePath = this.getClass().getClassLoader().getResource("images/add.png").getFile();
         add.setIcon(new ImageIcon(iconfilePath));
-        add.setBounds(550, 0, 100, 50);
+        add.setBounds(0, 0, 100, 50);
         add.setBorder(BorderFactory.createEmptyBorder());
         add.setContentAreaFilled(false);
         add.setFocusable(false);
@@ -84,7 +86,7 @@ public class ViewProvider implements ActionListener{
         
         String iconfilePathedit = this.getClass().getClassLoader().getResource("images/edit.png").getFile();
         edit.setIcon(new ImageIcon(iconfilePathedit));
-        edit.setBounds(600, 0, 100, 50);
+        edit.setBounds(230, 0, 100, 50);
         edit.setBorder(BorderFactory.createEmptyBorder());
         edit.setContentAreaFilled(false);
         edit.setFocusable(false);
@@ -94,7 +96,7 @@ public class ViewProvider implements ActionListener{
         
         String iconfilePathdelete = this.getClass().getClassLoader().getResource("images/delete.png").getFile();
         delete.setIcon(new ImageIcon(iconfilePathdelete));
-        delete.setBounds(650, 0, 100, 50);
+        delete.setBounds(460, 0, 100, 50);
         delete.setBorder(BorderFactory.createEmptyBorder());
         delete.setContentAreaFilled(false);
         delete.setFocusable(false);
@@ -104,7 +106,7 @@ public class ViewProvider implements ActionListener{
         
         String iconfilePathorder = this.getClass().getClassLoader().getResource("images/order.png").getFile();
         order.setIcon(new ImageIcon(iconfilePathorder));
-        order.setBounds(700, 0, 100, 50);
+        order.setBounds(690, 0, 100, 50);
         order.setBorder(BorderFactory.createEmptyBorder());
         order.setContentAreaFilled(false);
         order.setFocusable(false);
@@ -196,13 +198,17 @@ public class ViewProvider implements ActionListener{
         Object source = e.getSource();
         if(source == add){
             System.out.println("Adding ...");
-            new Provider("Add Provider",null,null,null,null,null);
+            Provider newProvider=new Provider("Add Provider",null,null,null,null,null,table);
+            
+
         }
         if(source==delete){
             if(table.getSelectedRow()==-1){
                 msgbox("Please select a row");
             }
-
+            int selectedRow=table.getSelectedRow();
+            dataBase.deleteProvider(String.valueOf(table.getValueAt(selectedRow,0)),String.valueOf(table.getValueAt(selectedRow,1)),String.valueOf(table.getValueAt(selectedRow,2)),(int)(table.getValueAt(selectedRow,3)),(int)(table.getValueAt(selectedRow,4)) );
+            tableModel.removeRow(selectedRow);
         }
         if(source== edit){
             if(table.getSelectedRow()==-1){
@@ -215,7 +221,7 @@ public class ViewProvider implements ActionListener{
                     System.out.println(value);
                     x.add(value);
                 }
-                new Provider("Modify Provider",x.get(0),x.get(1),x.get(2),x.get(3),x.get(4));
+                new Provider("Modify Provider",x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),table);
             }
         }
         if(source == order){

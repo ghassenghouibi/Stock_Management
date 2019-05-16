@@ -74,6 +74,19 @@ public class BaseDeDonnes  {
         }
     }
 
+    public void deleteProvider(String name,String product,String adresse,int codePostal,int numeroDeTelephone){
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion-de-stock","root","");
+            Statement stmt=con.createStatement();         
+            String sql = "DELETE FROM Provider WHERE  `name` = '"+name +"' AND `product` = '"+product +"' AND  `adress`= '"+adresse + "' AND `codePostal`  ='"+ codePostal + "' AND `telephone` = '"+numeroDeTelephone+"'";
+            stmt.executeUpdate(sql);
+           
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+
 
     public ArrayList<Article> loadArticles(){
         ArrayList<Article> articles=new ArrayList<Article>();

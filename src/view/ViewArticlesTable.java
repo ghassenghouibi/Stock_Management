@@ -180,7 +180,7 @@ public class ViewArticlesTable implements ActionListener{
         Object source = e.getSource();
         if(source == add){
             System.out.println("Adding ...");
-            new Provider("Add Provider",null,null,null,null,null);
+            //new Provider("Add Provider",null,null,null,null,null);
         }
         if(source==delete){
             if(table.getSelectedRow()==-1){
@@ -199,7 +199,7 @@ public class ViewArticlesTable implements ActionListener{
                     System.out.println(value);
                     x.add(value);
                 }
-                new Provider("Modify Provider",x.get(0),x.get(1),x.get(2),x.get(3),x.get(4));
+                //new Provider("Modify Provider",x.get(0),x.get(1),x.get(2),x.get(3),x.get(4));
             }
         }
      
