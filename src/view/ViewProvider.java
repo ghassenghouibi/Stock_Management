@@ -50,8 +50,10 @@ public class ViewProvider implements ActionListener{
         listOfProvider=new ArrayList<Fournisseur>();
         dataBase=new BaseDeDonnes();
         listOfProvider=dataBase.loadProvider();
-        createGUI(Frame);
         viewController=new ViewController();
+        this.frame=Frame;
+        createGUI(Frame);
+        
     }
 
     public void createGUI(JFrame myFrame){
@@ -207,7 +209,7 @@ public class ViewProvider implements ActionListener{
                 JOptionPane.showMessageDialog(null, "Please select a row", "Error", JOptionPane.ERROR_MESSAGE);
             }
             int selectedRow=table.getSelectedRow();
-            dataBase.deleteProvider(String.valueOf(table.getValueAt(selectedRow,0)),String.valueOf(table.getValueAt(selectedRow,1)),String.valueOf(table.getValueAt(selectedRow,2)),(int)(table.getValueAt(selectedRow,3)),(int)(table.getValueAt(selectedRow,4)) );
+            viewController.deleteProvider(frame,String.valueOf(table.getValueAt(selectedRow,0)),String.valueOf(table.getValueAt(selectedRow,1)),String.valueOf(table.getValueAt(selectedRow,2)),(int)(table.getValueAt(selectedRow,3)),(int)(table.getValueAt(selectedRow,4)) );
             tableModel.removeRow(selectedRow);
         }
         if(source== edit){

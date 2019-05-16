@@ -1,21 +1,12 @@
 package controller;
 
-import java.awt.Dialog;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import model.BaseDeDonnes;
 import view.*;
 
-public class ViewController {
+public class ViewController{
 
     private BaseDeDonnes dataBase;
 
@@ -69,71 +60,28 @@ public class ViewController {
         }
     }
 
-    public int getProviderValue(JFrame myFrame, Fournisseur fournisseur) {
-        if (fournisseur == null)
-            return 0;
-        
+    public void addNewProvider(JFrame myFrame,Fournisseur fournisseur) {
+       
         dataBase.insertProvider(fournisseur);
         JOptionPane.showMessageDialog(null, "Provider added with success ! ", "Added", JOptionPane.PLAIN_MESSAGE);
-        myFrame.setVisible(false);
-        myFrame.dispose();
-        
-        return 1;
+        new ViewProvider(myFrame);
     }
 
-    public void addProvider(String title,JFrame myFrame){
-        //new ProviderDialog(title);
-        JTextField xField = new JTextField(5);
-        JTextField yField = new JTextField(5);
-  
-        JPanel myPanel = new JPanel();
-        myPanel.add(new JLabel("x:"));
-        myPanel.add(xField);
-        myPanel.add(Box.createHorizontalStrut(15)); // a spacer
-        myPanel.add(new JLabel("y:"));
-        myPanel.add(yField);
-        
-
-       JPanel panel = new JPanel();
-                
-
-        JTextField produit,nom,adresse,codePostale,telephone;
-        JLabel textNom,textAdresse,textCodePostale,textTelephone,textProduit;
-        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        textNom=new JLabel("Nom");
-        panel.add(textNom);
-        nom=new JTextField(10);
-        panel.add(nom);
-        panel.add(Box.createHorizontalStrut(15)); // a spacer
-        textProduit=new JLabel("Produit");
-        panel.add(textProduit);
-        produit=new JTextField("");
-        panel.add(produit);
-
-        textAdresse=new JLabel("Adresse");
-        textAdresse.setBounds(20,60,200,50);
-        panel.add(textAdresse);
-        adresse=new JTextField("");
-        adresse.setBounds(200,80,100,20);
-        panel.add(adresse);
-
-        textCodePostale=new JLabel("Code postale");
-        textCodePostale.setBounds(20,90,200,50);
-        panel.add(textCodePostale);
-        codePostale=new JTextField("");
-        codePostale.setBounds(200,110,100,20);
-        panel.add(codePostale);
-
-        textTelephone=new JLabel("Téléphone");
-        textTelephone.setBounds(20,120,200,50);
-        panel.add(textTelephone);
-        telephone=new JTextField("");
-        telephone.setBounds(200,140,100,20);
-        panel.add(telephone);
-
-        int result = JOptionPane.showConfirmDialog(null, panel,"Add Article", JOptionPane.OK_CANCEL_OPTION);
-
+    public void addProvider(String title, JFrame myFrame) {
+        new ProviderDialog(myFrame);
     }
+
+    public void modifyProvider(JFrame myFrame,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone){
+        new ProviderDialog(myFrame,modifyproduit,modifynom,modifyadresse,modifycodePostale,modifytelephone);
+    }
+
+
+    public void deleteProvider(JFrame myFrame,String product,String name,String adress,int postalCode,int phoneNumber){
+        dataBase.deleteProvider(name,product,adress,postalCode,phoneNumber);
+        JOptionPane.showMessageDialog(null, "Provider Deleted with success ! ", "Deleted", JOptionPane.PLAIN_MESSAGE);
+        myFrame.repaint();
+    }
+
 
 
 }
