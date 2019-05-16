@@ -1,22 +1,24 @@
 package view;
 
 import javax.swing.*;
-import model.BaseDeDonnes;
+
+import controller.ViewController;
 import java.awt.event.*;
 
 
 public class ViewRegister implements ActionListener{
 
-    private JTextField identity;
+    private JTextField     identity;
     private JPasswordField password;
-    private JLabel identityLabel,passwordLabel;
-    private JButton login,cancel,register;
-    private JPanel panel;
-    private JFrame frame;
-
+    private JLabel         identityLabel,passwordLabel;
+    private JButton        login,cancel,register;
+    private JPanel         panel;
+    private JFrame         frame;
+    private ViewController viewController;
 
     public ViewRegister(JFrame frame){
         createGUI(frame);
+        viewController=new ViewController();
     }
 
     public void createGUI(JFrame myFrame){
@@ -77,14 +79,10 @@ public class ViewRegister implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source==register){
-            System.out.println("Register");
-            BaseDeDonnes data=new BaseDeDonnes();
-            data.registerNewRetailer(identity.getText(),String.valueOf(password.getPassword()));
-            new ViewEngine(frame);
+            viewController.registerNewRetailer(frame, identity.getText(),String.valueOf(password.getPassword()));
         }
         if(source==cancel){
-            System.out.println("Cancel");
-            new ViewEngine(frame);
+            viewController.registerCancel(frame);
         }
     }
 

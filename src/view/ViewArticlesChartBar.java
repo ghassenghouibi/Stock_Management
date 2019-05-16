@@ -5,7 +5,7 @@ import java.awt.event.*;
 
 import java.awt.Color;
 
-import controller.BarChart;
+import controller.*;
 
 public class ViewArticlesChartBar implements ActionListener {
 
@@ -30,9 +30,11 @@ public class ViewArticlesChartBar implements ActionListener {
 
     private JMenu     provider;
     private JMenuItem providerView;
+    private ViewController viewController;
 
     public ViewArticlesChartBar(JFrame frame){
         createGUI(frame);
+        viewController=new ViewController();
     }
 
     public void createGUI(JFrame myFrame){
@@ -127,16 +129,16 @@ public class ViewArticlesChartBar implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source==homeView){
-            new ViewRetailer(frame);
+            viewController.menuEngine(1, frame);
         }
         if (source==providerView){
-            new ViewProvider(frame);
+            viewController.menuEngine(2, frame);
         }
         if (source==articleViewTable){
-            new ViewArticlesTable(frame);
+            viewController.menuEngine(3, frame);
         }
         if (source==articleViewChartBar){
-            new ViewArticlesChartBar(frame);
+            viewController.menuEngine(4, frame);
         }
         if (source==checkAlert || source==checkDocument){
             //TODO send mail

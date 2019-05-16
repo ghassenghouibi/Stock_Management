@@ -1,6 +1,9 @@
 package view;
 
 import javax.swing.*;
+
+import controller.ViewController;
+
 import java.awt.event.*;
 
 
@@ -30,6 +33,7 @@ public class ViewRetailer implements ActionListener{
     private JMenu     provider;
     private JMenuItem providerView;
     
+    private ViewController viewController;
     
 
     private JButton money,cashier,alert,document;
@@ -38,6 +42,7 @@ public class ViewRetailer implements ActionListener{
 
     public ViewRetailer(JFrame frame){
         createGUI(frame);
+        viewController=new ViewController();
     }
 
     
@@ -171,18 +176,20 @@ public class ViewRetailer implements ActionListener{
 
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
+        
         if (source==homeView){
-            new ViewRetailer(frame);
+            viewController.menuEngine(1, frame);
         }
         if (source==providerView){
-            new ViewProvider(frame);
+            viewController.menuEngine(2, frame);
         }
         if (source==articleViewTable){
-            new ViewArticlesTable(frame);
+            viewController.menuEngine(3, frame);
         }
         if (source==articleViewChartBar){
-            new ViewArticlesChartBar(frame);
+            viewController.menuEngine(4, frame);
         }
+
         if (source==checkAlert || source==checkDocument){
             //TODO send mail
         }

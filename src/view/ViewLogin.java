@@ -2,10 +2,11 @@
 package view;
 
 import javax.swing.*;
-import model.BaseDeDonnes;
+
+import controller.ViewController;
 import java.awt.event.*;
 
-public class ViewEngine implements ActionListener{
+public class ViewLogin implements ActionListener{
 
     private JFrame frame;
 	private JTextField identity;
@@ -14,9 +15,11 @@ public class ViewEngine implements ActionListener{
     private JRadioButton choiceRetailer,choiceCashier;
     private JButton login,signin,register;
     private JPanel panel;
+    private ViewController viewController;
 
-    public ViewEngine(JFrame myFrame){
+    public ViewLogin(JFrame myFrame){
         createGUI(myFrame);
+        viewController=new ViewController();
     }
 
     public void createGUI(JFrame myFrame){
@@ -83,14 +86,6 @@ public class ViewEngine implements ActionListener{
         frame=myFrame;
     }
 
-    private void msgbox(String chaine){
-        JOptionPane optionPane = new JOptionPane(chaine,JOptionPane.WARNING_MESSAGE);
-        JDialog dialog = optionPane.createDialog("Warning!");
-        dialog.setAlwaysOnTop(true); // to show top of all other application
-        dialog.setVisible(true); // to visible the dialog
-
-    }
-
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source==choiceCashier){
@@ -100,23 +95,14 @@ public class ViewEngine implements ActionListener{
             choiceCashier.setSelected(false);
         }
         if(source == register){
-            System.out.println("Register this fuck'n user");
-            new ViewRegister(frame);
+            viewController.loadRegisterFrame(frame);
         }
         if(source == signin){
             if(identity.getText()!="" && String.valueOf(password.getPassword())!="" && (choiceCashier.isSelected()|| choiceRetailer.isSelected())){
-                BaseDeDonnes x=new BaseDeDonnes();
-                int res=x.checkLogin(identity.getText(),String.valueOf(password.getPassword()));
-                if(res==1){
-                System.out.println("Wait for check please");
-                    new ViewRetailer(frame);
-                }
-                else{
-                    msgbox("Login or password incorrect");
-                }
+                viewController.checkLogin(frame,identity.getText(),String.valueOf(password.getPassword()));
             }
             else{
-                msgbox("Please fill all fields");
+                JOptionPane.showMessageDialog(null, "Please fill all fields", "Error", JOptionPane.WARNING_MESSAGE);
             }
         }
     }

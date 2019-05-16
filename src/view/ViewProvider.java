@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import controller.Fournisseur;
+import controller.ViewController;
 import model.BaseDeDonnes;
 
 import java.awt.event.*;
@@ -42,11 +43,14 @@ public class ViewProvider implements ActionListener{
     private DefaultTableModel tableModel;
     private BaseDeDonnes dataBase;
 
+    private ViewController viewController;
+
     public ViewProvider(JFrame Frame){
         listOfProvider=new ArrayList<Fournisseur>();
         dataBase=new BaseDeDonnes();
         listOfProvider=dataBase.loadProvider();
         createGUI(Frame);
+        viewController=new ViewController();
     }
 
     public void createGUI(JFrame myFrame){
@@ -192,9 +196,8 @@ public class ViewProvider implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source == add){
-            System.out.println("Adding ...");
             Provider newProvider=new Provider("Add Provider",null,null,null,null,null,tableModel);
-            
+            //newProvider.get
 
         }
         if(source==delete){
@@ -227,17 +230,18 @@ public class ViewProvider implements ActionListener{
         }
 
         if (source==homeView){
-            new ViewRetailer(frame);
+            viewController.menuEngine(1, frame);
         }
         if (source==providerView){
-            new ViewProvider(frame);
+            viewController.menuEngine(2, frame);
         }
         if (source==articleViewTable){
-            new ViewArticlesTable(frame);
+            viewController.menuEngine(3, frame);
         }
         if (source==articleViewChartBar){
-            new ViewArticlesChartBar(frame);
+            viewController.menuEngine(4, frame);
         }
+
     }
 
 }
