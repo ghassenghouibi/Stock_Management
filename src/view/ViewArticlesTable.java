@@ -28,7 +28,8 @@ public class ViewArticlesTable implements ActionListener{
     private JMenuItem addCashier;
     private JMenuItem checkDocument;
     private JMenuItem checkAlert;
-    
+    private JMenuItem deconnexion;
+
     private JMenu     article;
     private JMenuItem articleViewChartBar;
     private JMenuItem articleViewTable;
@@ -140,15 +141,18 @@ public class ViewArticlesTable implements ActionListener{
         addCashier=new JMenuItem("add cashier");
         checkDocument=new JMenuItem("check document");
         checkAlert=new JMenuItem("check alert");
+        deconnexion=new JMenuItem("deconnexion");
         homeView.addActionListener(this);
         addCashier.addActionListener(this);
         checkDocument.addActionListener(this);
         checkAlert.addActionListener(this);
+        deconnexion.addActionListener(this);
 
         home.add(homeView);
         home.add(addCashier);
         home.add(checkDocument);
         home.add(checkAlert);
+        home.add(deconnexion);
 
         //Article
         article=new JMenu("article");
@@ -220,6 +224,9 @@ public class ViewArticlesTable implements ActionListener{
         }
         if (source==articleViewChartBar){
             viewController.menuEngine(4, frame);
+        }
+        if (source==deconnexion){
+            viewController.menuEngine(5, frame);
         }
 
     }

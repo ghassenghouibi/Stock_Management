@@ -57,6 +57,9 @@ public class ViewController {
             case 4:
                 new ViewArticlesChartBar(frame);
                 break;
+            case 5:
+                new ViewLogin(frame);
+                break;
         }
     }
 
