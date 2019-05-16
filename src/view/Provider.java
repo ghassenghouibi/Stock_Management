@@ -2,11 +2,7 @@ package view;
 
 import javax.swing.*;
 
-import controller.Fournisseur;
-import model.BaseDeDonnes;
-
 import java.awt.event.*;
-import java.util.ArrayList;
 
 
 
@@ -94,20 +90,29 @@ public class Provider implements ActionListener{
             myFrame.dispose();
         }
         if(source == save){
-            Fournisseur x=new Fournisseur(nom.getText(),produit.getText(),adresse.getText(),Integer.parseInt(codePostale.getText()),Integer.parseInt(telephone.getText()));
-            System.out.println("Save ..");
-            ArrayList<Fournisseur> list=new ArrayList<Fournisseur>();
-            list.add(x);
-            list.add(x);
-            list.add(x);
-            list.add(x);
-            list.add(x);
-            list.add(x);
+            String newTabNom,newTabProduit,newTabAdresse;
+            int newTabCodePostale,newTabTelephone;
+            try {
+                
+                newTabNom =nom.getText();
+                newTabProduit=produit.getText();
+                newTabAdresse=adresse.getText();
+                newTabCodePostale=Integer.parseInt(codePostale.getText());
+                newTabTelephone=Integer.parseInt(telephone.getText());
+                if(newTabNom !="" && newTabProduit !="" && newTabAdresse!=""){
+                    //TODO add to JTable
+                    JOptionPane.showMessageDialog(null, "Provider added with success ! ", "Added", JOptionPane.PLAIN_MESSAGE);
+                    myFrame.setVisible(false);
+                    myFrame.dispose();        
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Please fill all fileds", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                         
+            } catch (NumberFormatException e2) {
+                JOptionPane.showMessageDialog(null, "You have to fill correctly fields below", "Attention", JOptionPane.WARNING_MESSAGE);
+            }
             
-            BaseDeDonnes a=new BaseDeDonnes();
-            a.insertProvider(list);
-            myFrame.setVisible(false);
-            myFrame.dispose();
 
         }
         
