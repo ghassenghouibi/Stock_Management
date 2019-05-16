@@ -1,24 +1,10 @@
 package controller;
 
-<<<<<<< HEAD
-=======
-import java.awt.Dialog;
 import java.util.ArrayList;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JDialog;
->>>>>>> cf4498a1e395b2b457f035ead3954b766abf0f25
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-<<<<<<< HEAD
-=======
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
->>>>>>> cf4498a1e395b2b457f035ead3954b766abf0f25
-
 import model.BaseDeDonnes;
 import view.*;
 
