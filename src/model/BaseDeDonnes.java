@@ -59,15 +59,14 @@ public class BaseDeDonnes  {
         return  providers;
     }
 
-    public void insertProvider(ArrayList<Fournisseur> providers){
+    public void insertProvider(Fournisseur providers){
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion-de-stock","root","");
             Statement stmt=con.createStatement();           
-            for(Fournisseur x:providers){
-                String sql = "INSERT INTO Provider " + "VALUES ("+1 +",'"+x.getNomFournisseur()+"','"+x.getProduct()+"','"+x.getAdresse()+"',"+x.getCodePostal()+","+x.getNumeroDeTelephone()+")";
-                stmt.executeUpdate(sql);
-            }
+            String sql = "INSERT INTO Provider " + "VALUES ("+1 +",'"+providers.getNomFournisseur()+"','"+providers.getProduct()+"','"+providers.getAdresse()+"',"+providers.getCodePostal()+","+providers.getNumeroDeTelephone()+")";
+            stmt.executeUpdate(sql);
+            
 
         }catch(Exception e){
             System.out.println(e);

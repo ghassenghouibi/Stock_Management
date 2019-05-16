@@ -200,9 +200,7 @@ public class ViewProvider implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source == add){
-            Provider newProvider=new Provider("Add Provider",null,null,null,null,null,tableModel);
-            //newProvider.get
-
+            viewController.addProvider("Add Provider",frame);
         }
         if(source==delete){
             if(table.getSelectedRow()==-1){
@@ -223,7 +221,7 @@ public class ViewProvider implements ActionListener{
                     System.out.println(value);
                     x.add(value);
                 }
-                new Provider("Modify Provider",x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),tableModel);
+                //new Provider("Modify Provider",x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),tableModel);
             }
         }
         if(source == order){

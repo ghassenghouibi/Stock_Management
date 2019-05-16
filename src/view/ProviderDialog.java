@@ -3,27 +3,26 @@ package view;
 import javax.swing.*;
 
 import java.awt.event.*;
-
-import javax.swing.table.DefaultTableModel;
-
-import model.*;
 import controller.*;
-import java.util.ArrayList;
 
-public class Provider implements ActionListener{
+public class ProviderDialog implements ActionListener{
 
     private JTextField produit,nom,adresse,codePostale,telephone;
     private JLabel textNom,textAdresse,textCodePostale,textTelephone,textProduit;
     private JButton save,cancel;
     private JPanel panel;
     private JFrame myFrame;
-    private DefaultTableModel actualTable;
+    private ViewController viewController;  
 
-    public Provider(String title,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone,DefaultTableModel table){
+    public ProviderDialog(String title,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone){
         createGUI(title,modifyproduit,modifynom,modifyadresse,modifycodePostale,modifytelephone);
-        actualTable=table;
+        viewController=new ViewController();
     }
+    public ProviderDialog(String title){
+        createGUI(title,null,null,null,null,null);
+        viewController=new ViewController();
 
+    }
     public void createGUI(String title,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone){
         myFrame =new JFrame(title);
         panel = new JPanel();
@@ -92,6 +91,7 @@ public class Provider implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source == cancel){
+            //viewController.getProviderValue(myFrame,null);
             myFrame.setVisible(false);
             myFrame.dispose();
         }
@@ -106,15 +106,7 @@ public class Provider implements ActionListener{
                 newTabCodePostale=Integer.parseInt(codePostale.getText());
                 newTabTelephone=Integer.parseInt(telephone.getText());
                 if(newTabNom !="" && newTabProduit !="" && newTabAdresse!=""){
-                    //TODO check
-                    BaseDeDonnes dataBase=new BaseDeDonnes();
-                    ArrayList<Fournisseur> x=new ArrayList<Fournisseur>();
-                    x.add(new Fournisseur(newTabNom,newTabProduit,newTabAdresse,newTabCodePostale,newTabTelephone));
-                    dataBase.insertProvider(x);
-                    JOptionPane.showMessageDialog(null, "Provider added with success ! ", "Added", JOptionPane.PLAIN_MESSAGE);
-                    actualTable.fireTableDataChanged();
-                    myFrame.setVisible(false);
-                    myFrame.dispose();
+                    viewController.getProviderValue(myFrame,new Fournisseur(newTabNom,newTabProduit,newTabAdresse,newTabCodePostale,newTabTelephone));
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Please fill all fileds", "Error", JOptionPane.ERROR_MESSAGE);
