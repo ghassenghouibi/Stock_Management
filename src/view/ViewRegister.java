@@ -1,8 +1,8 @@
 package view;
 
 import javax.swing.*;
+import model.BaseDeDonnes;
 import java.awt.event.*;
-
 
 
 public class ViewRegister implements ActionListener{
@@ -74,11 +74,13 @@ public class ViewRegister implements ActionListener{
         frame=myFrame;
     }
 
-
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source==register){
             System.out.println("Register");
+            BaseDeDonnes data=new BaseDeDonnes();
+            data.registerNewRetailer(identity.getText(),String.valueOf(password.getPassword()));
+            new ViewEngine(frame);
         }
         if(source==cancel){
             System.out.println("Cancel");

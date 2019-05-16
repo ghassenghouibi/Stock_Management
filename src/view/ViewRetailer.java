@@ -7,11 +7,11 @@ import java.awt.event.*;
 
 public class ViewRetailer implements ActionListener{
 
-    private JPanel panel;
-    private JFrame frame;
+    private JPanel    panel;
+    private JFrame    frame;
     
-    private JMenuBar menuBar;
-    private JMenu    file;
+    private JMenuBar  menuBar;
+    private JMenu     file;
     private JMenuItem open;
     private JMenuItem print;
     private JMenuItem saveAs;

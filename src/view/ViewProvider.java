@@ -53,10 +53,7 @@ public class ViewProvider implements ActionListener{
 
         panel.setLayout(null);
 
-        //TODO call controller
-        BaseDeDonnes x=new BaseDeDonnes();
-        ArrayList<Fournisseur> a=new ArrayList<Fournisseur>();
-        a=x.loadProvider();
+       
         
         Object[][] data = {
             {"Apple", "Cristiano", "Madera","2045","0784745184"},
