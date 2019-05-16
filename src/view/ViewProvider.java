@@ -3,7 +3,7 @@ package view;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import controller.Fournisseur;
+import controller.ProviderInfo;
 import controller.ViewController;
 import model.BaseDeDonnes;
 
@@ -40,14 +40,14 @@ public class ViewProvider implements ActionListener{
     private JMenu     provider;
     private JMenuItem providerView;
     
-    private ArrayList<Fournisseur> listOfProvider;
+    private ArrayList<ProviderInfo> listOfProvider;
     private DefaultTableModel tableModel;
     private BaseDeDonnes dataBase;
 
     private ViewController viewController;
 
     public ViewProvider(JFrame Frame){
-        listOfProvider=new ArrayList<Fournisseur>();
+        listOfProvider=new ArrayList<ProviderInfo>();
         dataBase=new BaseDeDonnes();
         listOfProvider=dataBase.loadProvider();
         viewController=new ViewController();
@@ -68,11 +68,11 @@ public class ViewProvider implements ActionListener{
 
 
         //title
-        String  title[] = {"Produit", "Nom", "Adresse","code postale","téléphone"};
+        String  title[] = {"id","Produit", "Nom", "Adresse","code postale","téléphone"};
         tableModel= new DefaultTableModel(title, 0);
 
-        for(Fournisseur x :listOfProvider){
-            Object[] obj={x.getProduct(),x.getNomFournisseur(),x.getAdresse(),x.getCodePostal(),x.getNumeroDeTelephone()};
+        for(ProviderInfo x :listOfProvider){
+            Object[] obj={x.getId(),x.getProduct(),x.getNomProvider(),x.getAdresse(),x.getCodePostal(),x.getNumeroDeTelephone()};
 
             tableModel.addRow(obj);
         }
@@ -209,7 +209,9 @@ public class ViewProvider implements ActionListener{
                 JOptionPane.showMessageDialog(null, "Please select a row", "Error", JOptionPane.ERROR_MESSAGE);
             }
             int selectedRow=table.getSelectedRow();
-            viewController.deleteProvider(frame,String.valueOf(table.getValueAt(selectedRow,0)),String.valueOf(table.getValueAt(selectedRow,1)),String.valueOf(table.getValueAt(selectedRow,2)),(int)(table.getValueAt(selectedRow,3)),(int)(table.getValueAt(selectedRow,4)) );
+            int idOfProvider= (int) table.getValueAt(selectedRow, 0);
+
+            viewController.deleteProvider(frame,idOfProvider);
             tableModel.removeRow(selectedRow);
         }
         if(source== edit){
@@ -217,19 +219,12 @@ public class ViewProvider implements ActionListener{
                 JOptionPane.showMessageDialog(null, "Please select a row", "Error", JOptionPane.ERROR_MESSAGE);
             }else{
                 int row = table.getSelectedRow();
-                ArrayList<String> x =new ArrayList<String>();
-                for(int i=0;i<5;i++){
-                    String value = table.getModel().getValueAt(row, i).toString();
-                    System.out.println(value);
-                    x.add(value);
-                }
-                //new Provider("Modify Provider",x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),tableModel);
+                viewController.modifyProvider(frame,listOfProvider.get(table.getSelectedRow()).getId(),table.getModel().getValueAt(row, 1).toString(), table.getModel().getValueAt(row, 2).toString(), table.getModel().getValueAt(row, 3).toString(), table.getModel().getValueAt(row, 4).toString(),table.getModel().getValueAt(row, 5).toString());
             }
         }
         if(source == order){
             if(table.getSelectedRow()==-1){
                 JOptionPane.showMessageDialog(null, "Please select a row", "Error", JOptionPane.ERROR_MESSAGE);
-
             }
         }
 

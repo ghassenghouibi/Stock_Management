@@ -7,25 +7,31 @@ import controller.*;
 
 public class ProviderDialog implements ActionListener{
 
-    private JTextField produit,nom,adresse,codePostale,telephone;
-    private JLabel textNom,textAdresse,textCodePostale,textTelephone,textProduit;
-    private JButton save,cancel;
-    private JPanel panel;
-    private JDialog dialog;
-    private ViewController viewController;
-    private JFrame      myFrame;  
+    private JTextField      produit,nom,adresse,codePostale,telephone;
+    private JLabel          textNom,textAdresse,textCodePostale,textTelephone,textProduit;
+    private JButton         save,cancel;
+    private JPanel          panel;
+    private JDialog         dialog;
+    private ViewController  viewController;
+    private JFrame          myFrame;
+    private boolean         option;
+    private int             id;
 
-    public ProviderDialog(JFrame myFrame,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone){
-        createGUI(myFrame,modifyproduit,modifynom,modifyadresse,modifycodePostale,modifytelephone);
+    public ProviderDialog(JFrame myFrame,int id,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone){
+        createGUI(myFrame,modifynom,modifyproduit,modifyadresse,modifycodePostale,modifytelephone);
         viewController=new ViewController();
+        this.myFrame=myFrame;
+        this.option=false;
+        this.id=id;
     }
     public ProviderDialog(JFrame myFrame){
         createGUI(myFrame,null,null,null,null,null);
         viewController=new ViewController();
         this.myFrame=myFrame;
+        this.option=true;
 
     }
-    public void createGUI(JFrame myFrame,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone){
+    public void createGUI(JFrame myFrame,String modifynom,String modifyproduit,String modifyadresse,String modifycodePostale,String modifytelephone){
         
         panel = new JPanel();
         panel.setLayout(null);
@@ -92,7 +98,6 @@ public class ProviderDialog implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source == cancel){
-            //viewController.getProviderValue(myFrame,null);
             dialog.setVisible(false);
         }
         if(source == save){
@@ -106,8 +111,14 @@ public class ProviderDialog implements ActionListener{
                 newTabCodePostale=Integer.parseInt(codePostale.getText());
                 newTabTelephone=Integer.parseInt(telephone.getText());
                 if(newTabNom !="" && newTabProduit !="" && newTabAdresse!=""){
-                    viewController.addNewProvider(myFrame,new Fournisseur(newTabNom,newTabProduit,newTabAdresse,newTabCodePostale,newTabTelephone));
-                    dialog.setVisible(false);
+                    if(option){
+                        viewController.addNewProvider(myFrame,new ProviderInfo(0,newTabNom,newTabProduit,newTabAdresse,newTabCodePostale,newTabTelephone));
+                        dialog.setVisible(false);
+                    }
+                    else{
+                        viewController.modifyThisProvider(myFrame,new ProviderInfo(id,newTabNom,newTabProduit,newTabAdresse,newTabCodePostale,newTabTelephone));
+                        dialog.setVisible(false);
+                    }
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Please fill all fileds", "Error", JOptionPane.ERROR_MESSAGE);

@@ -5,4 +5,3 @@ src/view/*.class
 src/model/*.class
 src/controller/*.class
 src/*.class
-/bin/

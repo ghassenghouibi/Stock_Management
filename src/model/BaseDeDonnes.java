@@ -40,16 +40,17 @@ public class BaseDeDonnes  {
         }  
     }
 
-    public ArrayList<Fournisseur> loadProvider(){
-        ArrayList<Fournisseur> providers=new ArrayList<Fournisseur>();
+    public ArrayList<ProviderInfo> loadProvider(){
+        ArrayList<ProviderInfo> providers=new ArrayList<ProviderInfo>();
         try{  
             Class.forName("com.mysql.jdbc.Driver");  
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion-de-stock","root","");  
             Statement stmt=con.createStatement();  
-            ResultSet rs=stmt.executeQuery("SELECT `name`,`product`,`adress`,`codePostal`,`telephone` FROM `Provider`");  
+            ResultSet rs=stmt.executeQuery("SELECT `id_provider`,`name`,`product`,`adress`,`codePostal`,`telephone` FROM `Provider`");  
             while(rs.next()){
-                Fournisseur newFournisseur=new Fournisseur(rs.getString(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getInt(5) );  
-                providers.add(newFournisseur);
+                System.out.println(rs.getInt(1)+rs.getString(2)+rs.getString(3)+rs.getString(4)+rs.getInt(5)+rs.getInt(6));
+                ProviderInfo newProvider=new ProviderInfo(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getInt(6) );  
+                providers.add(newProvider);
             }
             con.close();     
         }catch(Exception e){ 
@@ -59,12 +60,12 @@ public class BaseDeDonnes  {
         return  providers;
     }
 
-    public void insertProvider(Fournisseur providers){
+    public void insertProvider(ProviderInfo providers){
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion-de-stock","root","");
             Statement stmt=con.createStatement();           
-            String sql = "INSERT INTO Provider " + "VALUES ("+1 +",'"+providers.getNomFournisseur()+"','"+providers.getProduct()+"','"+providers.getAdresse()+"',"+providers.getCodePostal()+","+providers.getNumeroDeTelephone()+")";
+            String sql = "INSERT INTO Provider " + "VALUES ("+1 +",'"+providers.getId()+"','"+providers.getNomProvider()+"','"+providers.getProduct()+"','"+providers.getAdresse()+"','"+providers.getCodePostal()+"','"+providers.getNumeroDeTelephone()+"')";
             stmt.executeUpdate(sql);
             
 
@@ -73,18 +74,32 @@ public class BaseDeDonnes  {
         }
     }
 
-    public void deleteProvider(String name,String product,String adresse,int codePostal,int numeroDeTelephone){
+    public void deleteProvider(int id){
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion-de-stock","root","");
             Statement stmt=con.createStatement();         
-            String sql = "DELETE FROM Provider WHERE  `name` = '"+name +"' AND `product` = '"+product +"' AND  `adress`= '"+adresse + "' AND `codePostal`  ='"+ codePostal + "' AND `telephone` = '"+numeroDeTelephone+"'";
+            String sql = "DELETE FROM Provider WHERE  `id_provider` = '"+id+"'";
             stmt.executeUpdate(sql);
            
         }catch(Exception e){
             System.out.println(e);
         }
     }
+
+    public void modifyProvider(int id,String modifyproduit,String modifynom,String modifyadresse,int modifycodePostale,int modifytelephone){
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion-de-stock","root","");
+            Statement stmt=con.createStatement();
+            String sql = "UPDATE Provider SET  `name` = '"+modifynom+"' ,  `product`= '"+modifyproduit+"'  ,  `adress`= '"+modifyadresse+"'  ,  `codePostal`= '"+modifycodePostale+"'  ,  `telephone`='"+modifytelephone+ "' WHERE `id_provider` ='"+id+"'";
+            stmt.executeUpdate(sql);
+           
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+    
 
 
     public ArrayList<Article> loadArticles(){
