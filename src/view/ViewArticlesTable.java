@@ -1,6 +1,11 @@
 package view;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+import controller.Article;
+import model.BaseDeDonnes;
+
 import java.awt.event.*;
 import java.util.ArrayList;
 
@@ -9,7 +14,7 @@ public class ViewArticlesTable implements ActionListener{
 
     private JButton add,edit,delete;
 
-    private JPanel   panel;
+    private JPanel panel;
     private JFrame frame;
 
     private JMenuBar menuBar;
@@ -33,11 +38,14 @@ public class ViewArticlesTable implements ActionListener{
     private JMenu     provider;
     private JMenuItem providerView;
     
+    private ArrayList<Article> articlesList;
     
-
+    private BaseDeDonnes bdd;
 
     public ViewArticlesTable(JFrame Frame){
         createGUI(Frame);
+        this.articlesList = new ArrayList<Article>();
+        this.bdd = new BaseDeDonnes();
     }
 
     public void createGUI(JFrame myFrame){
@@ -50,14 +58,18 @@ public class ViewArticlesTable implements ActionListener{
 
         panel.setLayout(null);
         //TODO call controller
-        Object[][] data = {
-            {"Apple", "0784745184", "12","150","20$","piece"},
-            {"Banane", "0784745184", "12","150","20$","piece"}
-          };
+        this.bdd = new BaseDeDonnes();
+        this.articlesList = bdd.loadArticles();
+        
+        Object[][] data = tabArticle(articlesList);
+//        	{
+//            {"Apple", "0784745184", "12","150","20$","piece"},
+//            {"Banane", "0784745184", "12","150","20$","piece"}
+//          };
 
         //Les titres des colonnes
-        String  title[] = {"nom", "code à barre", "quantite en stock","seuil de reassortiment","prix de vente","type de vente"};
-        table= new JTable(data, title);
+        String  title[] = {"nom", "code barre", "quantite en stock","seuil de reassortiment","prix de vente","type de vente"};
+        table = new JTable(new DefaultTableModel(data, title));
         
         
 		JScrollPane listScroller = new JScrollPane(table);
@@ -175,12 +187,41 @@ public class ViewArticlesTable implements ActionListener{
         dialog.setVisible(true); // to visible the dialog
 
     }
+    
+    public Object[][] tabArticle(ArrayList<Article> articles){
+    	Object[][] tabArticles;
+		int i = 0;
+		if(!articles.isEmpty()) {
+			tabArticles = new Object[articles.size()][7];
+			for(Article a : articles) {
+				//tabArticles[i][0] = new Integer(i);
+				tabArticles[i][0] = new String(a.getNom());
+				tabArticles[i][1] = new Integer(a.getCodeBarre());
+				tabArticles[i][2] = new Integer(a.getQuantiteEnStock());
+				tabArticles[i][3] = new Integer(a.getSeuilDeReassortiment());
+				tabArticles[i][4] = new Integer(a.getPrixDeVente());
+				tabArticles[i][5] = new Boolean(a.getTypeDeVente());
+				i++;
+			}
+		}else {
+			tabArticles = new Object[1][7];
+		}
+		return tabArticles;
+    }
+    
+    public void addArticle(String nom, int codeBarre, int quantiteEnStock, int seuilDeReassortiment, int prixDevente, boolean typeDeVente) {
+		Object[] article = {nom, codeBarre, quantiteEnStock, seuilDeReassortiment, prixDevente, typeDeVente};
+		ArrayList<Article> articles = new ArrayList<Article>();
+		articles.add(new Article(nom, codeBarre, quantiteEnStock, seuilDeReassortiment, prixDevente, typeDeVente));
+		this.bdd.insertArticles(articles);
+		((DefaultTableModel)this.table.getModel()).addRow(article);
+	}
 
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source == add){
             System.out.println("Adding ...");
-            new Provider("Add Provider",null,null,null,null,null);
+            new Articles(this);
         }
         if(source==delete){
             if(table.getSelectedRow()==-1){

@@ -18,7 +18,6 @@ public class Provider implements ActionListener{
     private JPanel panel;
     private JFrame myFrame;
 
-
     public Provider(String title,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone){
         createGUI(title,modifyproduit,modifynom,modifyadresse,modifycodePostale,modifytelephone);
     }
