@@ -94,6 +94,7 @@ public class BaseDeDonnes  {
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion-de-stock","root","");  
             Statement stmt=con.createStatement();  
             ResultSet rs=stmt.executeQuery("SELECT `name`, `barcode`, `quantity_in_stock`, `seuil_of_stock`, `price`, `type_of_sell` FROM `Article`");  
+
             while(rs.next()){
                 Article newArticle=new Article(rs.getString(1),rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getInt(5),rs.getBoolean(6));  
                 articles.add(newArticle);
@@ -113,6 +114,7 @@ public class BaseDeDonnes  {
             Statement stmt=con.createStatement();           
             for(Article x:articles){
                 String sql = "INSERT INTO Article " + "VALUES ("+1 +",'"+x.getNom()+"','"+x.getCodeBarre()+"','"+x.getQuantiteEnStock()+"','"+x.getSeuilDeReassortiment()+"','"+x.getPrixDeVente()+"','"+x.getTypeDeVente()+"')";
+
                 stmt.executeUpdate(sql);
             }
 

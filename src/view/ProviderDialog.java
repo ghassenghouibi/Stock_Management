@@ -15,8 +15,15 @@ public class ProviderDialog implements ActionListener{
     private ViewController viewController;
     private JFrame      myFrame;  
 
+<<<<<<< HEAD
     public ProviderDialog(JFrame myFrame,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone){
         createGUI(myFrame,modifyproduit,modifynom,modifyadresse,modifycodePostale,modifytelephone);
+=======
+
+    public ProviderDialog(String title,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone){
+
+        createGUI(title,modifyproduit,modifynom,modifyadresse,modifycodePostale,modifytelephone);
+>>>>>>> cf4498a1e395b2b457f035ead3954b766abf0f25
         viewController=new ViewController();
     }
     public ProviderDialog(JFrame myFrame){
