@@ -6,6 +6,9 @@ import java.awt.event.*;
 
 import javax.swing.table.DefaultTableModel;
 
+import model.*;
+import controller.*;
+import java.util.ArrayList;
 
 public class Provider implements ActionListener{
 
@@ -14,13 +17,14 @@ public class Provider implements ActionListener{
     private JButton save,cancel;
     private JPanel panel;
     private JFrame myFrame;
-    private Object[] obj;
+    private DefaultTableModel actualTable;
 
-    public Provider(String title,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone,JTable table){
-        createGUI(title,modifyproduit,modifynom,modifyadresse,modifycodePostale,modifytelephone,table);
+    public Provider(String title,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone,DefaultTableModel table){
+        createGUI(title,modifyproduit,modifynom,modifyadresse,modifycodePostale,modifytelephone);
+        actualTable=table;
     }
 
-    public void createGUI(String title,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone,JTable table){
+    public void createGUI(String title,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone){
         myFrame =new JFrame(title);
         panel = new JPanel();
         
@@ -82,6 +86,7 @@ public class Provider implements ActionListener{
         myFrame.setDefaultCloseOperation(3);
         myFrame.setSize(400,320);
         myFrame.setVisible(true);
+        
     }
   
     public void actionPerformed(ActionEvent e) {
@@ -101,8 +106,13 @@ public class Provider implements ActionListener{
                 newTabCodePostale=Integer.parseInt(codePostale.getText());
                 newTabTelephone=Integer.parseInt(telephone.getText());
                 if(newTabNom !="" && newTabProduit !="" && newTabAdresse!=""){
-                    //TODO add to JTable
+                    //TODO check
+                    BaseDeDonnes dataBase=new BaseDeDonnes();
+                    ArrayList<Fournisseur> x=new ArrayList<Fournisseur>();
+                    x.add(new Fournisseur(newTabNom,newTabProduit,newTabAdresse,newTabCodePostale,newTabTelephone));
+                    dataBase.insertProvider(x);
                     JOptionPane.showMessageDialog(null, "Provider added with success ! ", "Added", JOptionPane.PLAIN_MESSAGE);
+                    actualTable.fireTableDataChanged();
                     myFrame.setVisible(false);
                     myFrame.dispose();
                 }

@@ -58,7 +58,8 @@ public class ViewProvider implements ActionListener{
 
         panel.setLayout(null);
 
-    
+
+
         //title
         String  title[] = {"Produit", "Nom", "Adresse","code postale","téléphone"};
         tableModel= new DefaultTableModel(title, 0);
@@ -186,25 +187,19 @@ public class ViewProvider implements ActionListener{
         myFrame.setJMenuBar(menuBar);
     }
 
-    private void msgbox(String text){
-        JOptionPane optionPane = new JOptionPane(text,JOptionPane.WARNING_MESSAGE);
-        JDialog dialog = optionPane.createDialog("Warning!");
-        dialog.setAlwaysOnTop(true); // to show top of all other application
-        dialog.setVisible(true); // to visible the dialog
-
-    }
+    
 
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source == add){
             System.out.println("Adding ...");
-            Provider newProvider=new Provider("Add Provider",null,null,null,null,null,table);
+            Provider newProvider=new Provider("Add Provider",null,null,null,null,null,tableModel);
             
 
         }
         if(source==delete){
             if(table.getSelectedRow()==-1){
-                msgbox("Please select a row");
+                JOptionPane.showMessageDialog(null, "Please select a row", "Error", JOptionPane.ERROR_MESSAGE);
             }
             int selectedRow=table.getSelectedRow();
             dataBase.deleteProvider(String.valueOf(table.getValueAt(selectedRow,0)),String.valueOf(table.getValueAt(selectedRow,1)),String.valueOf(table.getValueAt(selectedRow,2)),(int)(table.getValueAt(selectedRow,3)),(int)(table.getValueAt(selectedRow,4)) );
@@ -212,7 +207,7 @@ public class ViewProvider implements ActionListener{
         }
         if(source== edit){
             if(table.getSelectedRow()==-1){
-                msgbox("Please select a row");
+                JOptionPane.showMessageDialog(null, "Please select a row", "Error", JOptionPane.ERROR_MESSAGE);
             }else{
                 int row = table.getSelectedRow();
                 ArrayList<String> x =new ArrayList<String>();
@@ -221,12 +216,13 @@ public class ViewProvider implements ActionListener{
                     System.out.println(value);
                     x.add(value);
                 }
-                new Provider("Modify Provider",x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),table);
+                new Provider("Modify Provider",x.get(0),x.get(1),x.get(2),x.get(3),x.get(4),tableModel);
             }
         }
         if(source == order){
             if(table.getSelectedRow()==-1){
-                msgbox("Please select a row");
+                JOptionPane.showMessageDialog(null, "Please select a row", "Error", JOptionPane.ERROR_MESSAGE);
+
             }
         }
 
