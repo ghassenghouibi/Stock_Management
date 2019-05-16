@@ -2,9 +2,6 @@ package model;
 
 import java.sql.*;
 import controller.*;
-/**
-* 
-*/
 import java.util.ArrayList;
 
 public class BaseDeDonnes  { 
@@ -62,16 +59,28 @@ public class BaseDeDonnes  {
         return  providers;
     }
 
-    public void insertProvider(ArrayList<Fournisseur> providers){
+    public void insertProvider(Fournisseur providers){
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion-de-stock","root","");
             Statement stmt=con.createStatement();           
-            for(Fournisseur x:providers){
-                String sql = "INSERT INTO Provider " + "VALUES ("+1 +",'"+x.getNomFournisseur()+"','"+x.getProduct()+"','"+x.getAdresse()+"',"+x.getCodePostal()+","+x.getNumeroDeTelephone()+")";
-                stmt.executeUpdate(sql);
-            }
+            String sql = "INSERT INTO Provider " + "VALUES ("+1 +",'"+providers.getNomFournisseur()+"','"+providers.getProduct()+"','"+providers.getAdresse()+"',"+providers.getCodePostal()+","+providers.getNumeroDeTelephone()+")";
+            stmt.executeUpdate(sql);
+            
 
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void deleteProvider(String name,String product,String adresse,int codePostal,int numeroDeTelephone){
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion-de-stock","root","");
+            Statement stmt=con.createStatement();         
+            String sql = "DELETE FROM Provider WHERE  `name` = '"+name +"' AND `product` = '"+product +"' AND  `adress`= '"+adresse + "' AND `codePostal`  ='"+ codePostal + "' AND `telephone` = '"+numeroDeTelephone+"'";
+            stmt.executeUpdate(sql);
+           
         }catch(Exception e){
             System.out.println(e);
         }
@@ -84,7 +93,8 @@ public class BaseDeDonnes  {
             Class.forName("com.mysql.jdbc.Driver");  
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion-de-stock","root","");  
             Statement stmt=con.createStatement();  
-            ResultSet rs=stmt.executeQuery("SELECT `name`, `barcode`, `quantity_in_stock`, `seuil_of_stock`, `price`, `type_of_sell` FROM `Articles`");  
+            ResultSet rs=stmt.executeQuery("SELECT `name`, `barcode`, `quantity_in_stock`, `seuil_of_stock`, `price`, `type_of_sell` FROM `Article`");  
+
             while(rs.next()){
                 Article newArticle=new Article(rs.getString(1),rs.getInt(2),rs.getInt(3),rs.getInt(4),rs.getInt(5),rs.getBoolean(6));  
                 articles.add(newArticle);
@@ -103,7 +113,8 @@ public class BaseDeDonnes  {
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion-de-stock","root","");
             Statement stmt=con.createStatement();           
             for(Article x:articles){
-                String sql = "INSERT INTO Articles " + "VALUES ("+1 +",'"+x.getNom()+"','"+x.getCodeBarre()+"','"+x.getQuantiteEnStock()+"','"+x.getSeuilDeReassortiment()+"','"+x.getPrixDeVente()+"','"+x.getTypeDeVente()+"')";
+                String sql = "INSERT INTO Article " + "VALUES ("+1 +",'"+x.getNom()+"','"+x.getCodeBarre()+"','"+x.getQuantiteEnStock()+"','"+x.getSeuilDeReassortiment()+"','"+x.getPrixDeVente()+"','"+x.getTypeDeVente()+"')";
+
                 stmt.executeUpdate(sql);
             }
 

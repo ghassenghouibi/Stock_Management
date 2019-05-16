@@ -1,11 +1,11 @@
 
 import javax.swing.JFrame;
 
-import view.ViewEngine;
+import view.ViewLogin;
 
 class Main{
     public static void main(String arg[]){
         JFrame myFrame = new JFrame("Stock-management");
-        new ViewEngine(myFrame);
+        new ViewLogin(myFrame);
     } 
 }

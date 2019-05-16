@@ -5,7 +5,7 @@ import java.awt.event.*;
 
 import java.awt.Color;
 
-import controller.BarChart;
+import controller.*;
 
 public class ViewArticlesChartBar implements ActionListener {
 
@@ -23,16 +23,19 @@ public class ViewArticlesChartBar implements ActionListener {
     private JMenuItem addCashier;
     private JMenuItem checkDocument;
     private JMenuItem checkAlert;
-    
+    private JMenuItem deconnexion;
+
     private JMenu     article;
     private JMenuItem articleViewChartBar;
     private JMenuItem articleViewTable;
 
     private JMenu     provider;
     private JMenuItem providerView;
+    private ViewController viewController;
 
     public ViewArticlesChartBar(JFrame frame){
         createGUI(frame);
+        viewController=new ViewController();
     }
 
     public void createGUI(JFrame myFrame){
@@ -90,15 +93,18 @@ public class ViewArticlesChartBar implements ActionListener {
         addCashier=new JMenuItem("add cashier");
         checkDocument=new JMenuItem("check document");
         checkAlert=new JMenuItem("check alert");
+        deconnexion=new JMenuItem("deconnexion");
         homeView.addActionListener(this);
         addCashier.addActionListener(this);
         checkDocument.addActionListener(this);
         checkAlert.addActionListener(this);
+        deconnexion.addActionListener(this);
 
         home.add(homeView);
         home.add(addCashier);
         home.add(checkDocument);
         home.add(checkAlert);
+        home.add(deconnexion);
 
         //Article
         article=new JMenu("article");
@@ -127,16 +133,19 @@ public class ViewArticlesChartBar implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source==homeView){
-            new ViewRetailer(frame);
+            viewController.menuEngine(1, frame);
         }
         if (source==providerView){
-            new ViewProvider(frame);
+            viewController.menuEngine(2, frame);
         }
         if (source==articleViewTable){
-            new ViewArticlesTable(frame);
+            viewController.menuEngine(3, frame);
         }
         if (source==articleViewChartBar){
-            new ViewArticlesChartBar(frame);
+            viewController.menuEngine(4, frame);
+        }
+        if (source==deconnexion){
+            viewController.menuEngine(5, frame);
         }
         if (source==checkAlert || source==checkDocument){
             //TODO send mail

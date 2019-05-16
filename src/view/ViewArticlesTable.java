@@ -1,9 +1,14 @@
 package view;
 
 import javax.swing.*;
+
 import javax.swing.table.DefaultTableModel;
 
 import controller.Article;
+//import model.BaseDeDonnes;
+
+
+import controller.ViewController;
 import model.BaseDeDonnes;
 
 import java.awt.event.*;
@@ -30,7 +35,8 @@ public class ViewArticlesTable implements ActionListener{
     private JMenuItem addCashier;
     private JMenuItem checkDocument;
     private JMenuItem checkAlert;
-    
+    private JMenuItem deconnexion;
+
     private JMenu     article;
     private JMenuItem articleViewChartBar;
     private JMenuItem articleViewTable;
@@ -38,14 +44,23 @@ public class ViewArticlesTable implements ActionListener{
     private JMenu     provider;
     private JMenuItem providerView;
     
-    private ArrayList<Article> articlesList;
+    
+
+    private ViewController viewController;
+
     
     private BaseDeDonnes bdd;
 
+	private ArrayList<Article> articlesList;
+
     public ViewArticlesTable(JFrame Frame){
         createGUI(Frame);
+        
         this.articlesList = new ArrayList<Article>();
-        this.bdd = new BaseDeDonnes();
+//        this.bdd = new BaseDeDonnes();
+
+        viewController=new ViewController();
+
     }
 
     public void createGUI(JFrame myFrame){
@@ -58,9 +73,10 @@ public class ViewArticlesTable implements ActionListener{
 
         panel.setLayout(null);
         //TODO call controller
+        
         this.bdd = new BaseDeDonnes();
         this.articlesList = bdd.loadArticles();
-        
+
         Object[][] data = tabArticle(articlesList);
 //        	{
 //            {"Apple", "0784745184", "12","150","20$","piece"},
@@ -126,7 +142,23 @@ public class ViewArticlesTable implements ActionListener{
     }
 
 
-    public void createMenu(JFrame myFrame){
+    public ArrayList<Article> getArticlesList() {
+		return articlesList;
+	}
+
+	public void setArticlesList(ArrayList<Article> articlesList) {
+		this.articlesList = articlesList;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+
+	public void createMenu(JFrame myFrame){
         menuBar=new JMenuBar();
 
         //file
@@ -147,15 +179,18 @@ public class ViewArticlesTable implements ActionListener{
         addCashier=new JMenuItem("add cashier");
         checkDocument=new JMenuItem("check document");
         checkAlert=new JMenuItem("check alert");
+        deconnexion=new JMenuItem("deconnexion");
         homeView.addActionListener(this);
         addCashier.addActionListener(this);
         checkDocument.addActionListener(this);
         checkAlert.addActionListener(this);
+        deconnexion.addActionListener(this);
 
         home.add(homeView);
         home.add(addCashier);
         home.add(checkDocument);
         home.add(checkAlert);
+        home.add(deconnexion);
 
         //Article
         article=new JMenu("article");
@@ -209,19 +244,20 @@ public class ViewArticlesTable implements ActionListener{
 		return tabArticles;
     }
     
-    public void addArticle(String nom, int codeBarre, int quantiteEnStock, int seuilDeReassortiment, int prixDevente, boolean typeDeVente) {
-		Object[] article = {nom, codeBarre, quantiteEnStock, seuilDeReassortiment, prixDevente, typeDeVente};
-		ArrayList<Article> articles = new ArrayList<Article>();
-		articles.add(new Article(nom, codeBarre, quantiteEnStock, seuilDeReassortiment, prixDevente, typeDeVente));
-		this.bdd.insertArticles(articles);
-		((DefaultTableModel)this.table.getModel()).addRow(article);
-	}
+//    public void addArticle(String nom, int codeBarre, int quantiteEnStock, int seuilDeReassortiment, int prixDevente, boolean typeDeVente) {
+//		Object[] article = {nom, codeBarre, quantiteEnStock, seuilDeReassortiment, prixDevente, typeDeVente};
+//		ArrayList<Article> articles = new ArrayList<Article>();
+//		articles.add(new Article(nom, codeBarre, quantiteEnStock, seuilDeReassortiment, prixDevente, typeDeVente));
+//		this.bdd.insertArticles(articles);
+//		((DefaultTableModel)this.table.getModel()).addRow(article);
+//	}
 
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source == add){
             System.out.println("Adding ...");
             new Articles(this);
+
         }
         if(source==delete){
             if(table.getSelectedRow()==-1){
@@ -240,23 +276,27 @@ public class ViewArticlesTable implements ActionListener{
                     System.out.println(value);
                     x.add(value);
                 }
-                new Provider("Modify Provider",x.get(0),x.get(1),x.get(2),x.get(3),x.get(4));
+                //new Provider("Modify Provider",x.get(0),x.get(1),x.get(2),x.get(3),x.get(4));
             }
         }
      
 
         if (source==homeView){
-            new ViewRetailer(frame);
+            viewController.menuEngine(1, frame);
         }
         if (source==providerView){
-            new ViewProvider(frame);
+            viewController.menuEngine(2, frame);
         }
         if (source==articleViewTable){
-            new ViewArticlesTable(frame);
+            viewController.menuEngine(3, frame);
         }
         if (source==articleViewChartBar){
-            new ViewArticlesChartBar(frame);
+            viewController.menuEngine(4, frame);
         }
+        if (source==deconnexion){
+            viewController.menuEngine(5, frame);
+        }
+
     }
 
 }

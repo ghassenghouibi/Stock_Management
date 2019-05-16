@@ -1,6 +1,9 @@
 package view;
 
 import javax.swing.*;
+
+import controller.ViewController;
+
 import java.awt.event.*;
 
 /**
@@ -16,10 +19,12 @@ public class Articles implements ActionListener{
     private JPanel panel;
     private JFrame myFrame;
     private ViewArticlesTable parent;
-
+    private ViewController viewController;
+    
     public Articles(ViewArticlesTable parent){
         createGUI();
         this.parent = parent;
+        this.viewController = new ViewController();
     }
 
     public void createGUI(){
@@ -138,7 +143,8 @@ public class Articles implements ActionListener{
     						}
     						if(prixDeVenteInt > 0) {
     							if(oui.isSelected()) {
-    								this.parent.addArticle(nom.getText(), codeBarreInt, quantiteEnStockInt, seuilDeReassortimentInt, prixDeVenteInt, true);
+    								this.viewController.addArticle(parent, nom.getText(), codeBarreInt, quantiteEnStockInt, seuilDeReassortimentInt, prixDeVenteInt, true);
+    								myFrame.setVisible(false);
 //    								Article article = new Article(nom, codeBarreInt, quantiteEnStockInt, seuilDeReassortimentInt, prixDeVenteInt, typeDeVente);
 //    								this.detaillant.ajouterUnNouveauArticle(article);
 //    								this.articles = updateListeArticles();
@@ -146,7 +152,7 @@ public class Articles implements ActionListener{
 //    								gs.addArticle(nom, codeBarreInt, quantiteEnStockInt, seuilDeReassortimentInt, prixDeVenteInt, typeDeVente);
 //    								source.articleOk();
     							}else {
-    								this.parent.addArticle(nom.getText(), codeBarreInt, quantiteEnStockInt, seuilDeReassortimentInt, prixDeVenteInt, false);
+    								this.viewController.addArticle(parent, nom.getText(), codeBarreInt, quantiteEnStockInt, seuilDeReassortimentInt, prixDeVenteInt, false);
     							}
     						}else {
     							JOptionPane.showMessageDialog(null, "Vous devez saisir un prix de vente correct et > à 0", "Attention", JOptionPane.WARNING_MESSAGE);

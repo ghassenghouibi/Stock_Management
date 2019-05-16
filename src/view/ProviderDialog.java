@@ -2,26 +2,29 @@ package view;
 
 import javax.swing.*;
 
-import controller.Fournisseur;
-import model.BaseDeDonnes;
-
 import java.awt.event.*;
-import java.util.ArrayList;
+import controller.*;
 
-
-
-public class Provider implements ActionListener{
+public class ProviderDialog implements ActionListener{
 
     private JTextField produit,nom,adresse,codePostale,telephone;
     private JLabel textNom,textAdresse,textCodePostale,textTelephone,textProduit;
     private JButton save,cancel;
     private JPanel panel;
     private JFrame myFrame;
+    private ViewController viewController;  
 
-    public Provider(String title,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone){
+
+    public ProviderDialog(String title,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone){
+
         createGUI(title,modifyproduit,modifynom,modifyadresse,modifycodePostale,modifytelephone);
+        viewController=new ViewController();
     }
+    public ProviderDialog(String title){
+        createGUI(title,null,null,null,null,null);
+        viewController=new ViewController();
 
+    }
     public void createGUI(String title,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone){
         myFrame =new JFrame(title);
         panel = new JPanel();
@@ -84,30 +87,36 @@ public class Provider implements ActionListener{
         myFrame.setDefaultCloseOperation(3);
         myFrame.setSize(400,320);
         myFrame.setVisible(true);
+        
     }
-
+  
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source == cancel){
+            //viewController.getProviderValue(myFrame,null);
             myFrame.setVisible(false);
             myFrame.dispose();
         }
         if(source == save){
-            Fournisseur x=new Fournisseur(nom.getText(),produit.getText(),adresse.getText(),Integer.parseInt(codePostale.getText()),Integer.parseInt(telephone.getText()));
-            System.out.println("Save ..");
-            ArrayList<Fournisseur> list=new ArrayList<Fournisseur>();
-            list.add(x);
-            list.add(x);
-            list.add(x);
-            list.add(x);
-            list.add(x);
-            list.add(x);
-            
-            BaseDeDonnes a=new BaseDeDonnes();
-            a.insertProvider(list);
-            myFrame.setVisible(false);
-            myFrame.dispose();
-
+            String newTabNom,newTabProduit,newTabAdresse;
+            int newTabCodePostale,newTabTelephone;
+            try {
+                
+                newTabNom =nom.getText();
+                newTabProduit=produit.getText();
+                newTabAdresse=adresse.getText();
+                newTabCodePostale=Integer.parseInt(codePostale.getText());
+                newTabTelephone=Integer.parseInt(telephone.getText());
+                if(newTabNom !="" && newTabProduit !="" && newTabAdresse!=""){
+                    viewController.getProviderValue(myFrame,new Fournisseur(newTabNom,newTabProduit,newTabAdresse,newTabCodePostale,newTabTelephone));
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Please fill all fileds", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                         
+                } catch (NumberFormatException e2) {
+                    JOptionPane.showMessageDialog(null, "You have to fill correctly fields below", "Attention", JOptionPane.WARNING_MESSAGE);
+            }
         }
         
     }
