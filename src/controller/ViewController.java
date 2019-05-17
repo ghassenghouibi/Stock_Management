@@ -77,7 +77,7 @@ public class ViewController{
         }
     }
 
-    public void addNewProvider(JFrame myFrame,Fournisseur fournisseur) {
+    public void addNewProvider(JFrame myFrame,ProviderInfo fournisseur) {
        
         dataBase.insertProvider(fournisseur);
         JOptionPane.showMessageDialog(null, "Provider added with success ! ", "Added", JOptionPane.PLAIN_MESSAGE);
@@ -88,13 +88,19 @@ public class ViewController{
         new ProviderDialog(myFrame);
     }
 
-    public void modifyProvider(JFrame myFrame,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone){
-        new ProviderDialog(myFrame,modifyproduit,modifynom,modifyadresse,modifycodePostale,modifytelephone);
+
+    public void modifyThisProvider(JFrame myFrame,ProviderInfo provider){
+        dataBase.modifyProvider(provider.getId(),provider.getProduct(),provider.getNomProvider(),provider.getAdresse(),provider.getCodePostal(),provider.getNumeroDeTelephone());
+        JOptionPane.showMessageDialog(null, "Provider modification done with success ! ", "Modification", JOptionPane.PLAIN_MESSAGE);
+        new ViewProvider(myFrame);
+    }
+    public void modifyProvider(JFrame myFrame,int id,String modifyproduit,String modifynom,String modifyadresse,String modifycodePostale,String modifytelephone){
+        new ProviderDialog(myFrame,id,modifyproduit,modifynom,modifyadresse,modifycodePostale,modifytelephone);
     }
 
 
-    public void deleteProvider(JFrame myFrame,String product,String name,String adress,int postalCode,int phoneNumber){
-        dataBase.deleteProvider(name,product,adress,postalCode,phoneNumber);
+    public void deleteProvider(JFrame myFrame,int id){
+        dataBase.deleteProvider(id);
         JOptionPane.showMessageDialog(null, "Provider Deleted with success ! ", "Deleted", JOptionPane.PLAIN_MESSAGE);
         myFrame.repaint();
     }
