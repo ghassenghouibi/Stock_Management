@@ -20,51 +20,73 @@ public class Articles implements ActionListener{
     private JFrame myFrame;
     private ViewArticlesTable parent;
     private ViewController viewController;
+    private int modify;
+    private String modifyNomL;
+    private String modifyCodeBarreL;
+    private String modifyQuantiteEnStockL;
+    private String modifySeuilDeReassortimentL;
+    private String modifyPrixDeVenteL;
+    private String modifyTypeDeVenteL;
     
     public Articles(ViewArticlesTable parent){
-        createGUI();
+        createGUI(null, null, null, null, null, null);
         this.parent = parent;
         this.viewController = new ViewController();
+        this.modify = -1;
+    }
+    
+    public Articles(ViewArticlesTable parent, String modifyNom, String modifyCodeBarre, String modifyQuantiteEnStock, String modifySeuilDeReassortiment, String modifyPrixDeVente, String modifyTypeDeVente, int row){
+        createGUI(modifyNom, modifyCodeBarre, modifyQuantiteEnStock, modifySeuilDeReassortiment, modifyPrixDeVente, modifyTypeDeVente);
+        this.parent = parent;
+        this.viewController = new ViewController();
+        this.modify = row;
+        this.modifyNomL = modifyNom;
+        this.modifyCodeBarreL = modifyCodeBarre;
+        this.modifyQuantiteEnStockL = modifyQuantiteEnStock;
+        this.modifySeuilDeReassortimentL = modifySeuilDeReassortiment;
+        this.modifyPrixDeVenteL = modifyPrixDeVente;
+        this.modifyTypeDeVenteL = modifyTypeDeVente;
     }
 
-    public void createGUI(){
+    public void createGUI(String modifyNom,String modifyCodeBarre,String modifyQuantiteEnStock,String modifySeuilDeReassortiment, String modifyPrixDeVente, String modifyTypeDeVente){
         myFrame =new JFrame("Add Article");
         panel = new JPanel();
+        
         
         panel.setLayout(null);
 
         textNom=new JLabel("Nom");
         textNom.setBounds(20,0,200,50);
         panel.add(textNom);
-        nom=new JTextField();
+        nom=new JTextField(modifyNom);
         nom.setBounds(200,20,100,20);
         panel.add(nom);
 
         textCodeBarre=new JLabel("Code barre");
         textCodeBarre.setBounds(20,30,200,50);
         panel.add(textCodeBarre);
-        codeBarre=new JTextField();
+        codeBarre=new JTextField(modifyCodeBarre);
         codeBarre.setBounds(200,50,100,20);
         panel.add(codeBarre);
 
         textQuantiteEnStock=new JLabel("QuantitÃ© en stock");
         textQuantiteEnStock.setBounds(20,60,200,50);
         panel.add(textQuantiteEnStock);
-        quantiteEnStock=new JTextField();
+        quantiteEnStock=new JTextField(modifyQuantiteEnStock);
         quantiteEnStock.setBounds(200,80,100,20);
         panel.add(quantiteEnStock);
 
         textSeuilDeReassortiment=new JLabel("Seuil de reassortiment");
         textSeuilDeReassortiment.setBounds(20,90,200,50);
         panel.add(textSeuilDeReassortiment);
-        seuilDeReassortiment=new JTextField();
+        seuilDeReassortiment=new JTextField(modifySeuilDeReassortiment);
         seuilDeReassortiment.setBounds(200,110,100,20);
         panel.add(seuilDeReassortiment);
 
         textPrixDeVente=new JLabel("Prix de vente");
         textPrixDeVente.setBounds(20,120,200,50);
         panel.add(textPrixDeVente);
-        prixDeVente=new JTextField();
+        prixDeVente=new JTextField(modifyPrixDeVente);
         prixDeVente.setBounds(200,140,100,20);
         panel.add(prixDeVente);
 
@@ -73,16 +95,20 @@ public class Articles implements ActionListener{
         panel.add(textTypeDeVente);
         
         ButtonGroup choice = new ButtonGroup();
-        oui = new JRadioButton("Oui");
-	    oui.setSelected(true);
+        oui = new JRadioButton("KG");
+//	    oui.setSelected(true);
 	    oui.setBounds(200, 180, 60, 20);
 	    choice.add(oui);
 	    panel.add(oui);
 	    
-	    non = new JRadioButton("Non");
+	    non = new JRadioButton("DD");
 	    non.setBounds(280, 180, 60, 20);
 	    choice.add(non);
 	    panel.add(non);
+	    if(modifyTypeDeVente == null || modifyTypeDeVente.equals("true")) {
+	    	oui.setSelected(true);
+	    }else
+	    	non.setSelected(true);
         
         save=new JButton("Save");
         save.setBounds(210,250,100,20);
@@ -143,16 +169,21 @@ public class Articles implements ActionListener{
     						}
     						if(prixDeVenteInt > 0) {
     							if(oui.isSelected()) {
-    								this.viewController.addArticle(parent, nom.getText(), codeBarreInt, quantiteEnStockInt, seuilDeReassortimentInt, prixDeVenteInt, true);
+    								if(this.modify == -1) {
+    									this.viewController.addArticle(parent, nom.getText(), codeBarreInt, quantiteEnStockInt, seuilDeReassortimentInt, prixDeVenteInt, true);
+    								}else {
+    									this.viewController.removeArticle(parent, modify, modifyNomL, modifyCodeBarreL, modifyQuantiteEnStockL, modifySeuilDeReassortimentL, modifyPrixDeVenteL, modifyTypeDeVenteL);
+    									this.viewController.addArticle(parent, nom.getText(), codeBarreInt, quantiteEnStockInt, seuilDeReassortimentInt, prixDeVenteInt, true);
+    								}
     								myFrame.setVisible(false);
-//    								Article article = new Article(nom, codeBarreInt, quantiteEnStockInt, seuilDeReassortimentInt, prixDeVenteInt, typeDeVente);
-//    								this.detaillant.ajouterUnNouveauArticle(article);
-//    								this.articles = updateListeArticles();
-//    								gs.setArticles(this.articles);
-//    								gs.addArticle(nom, codeBarreInt, quantiteEnStockInt, seuilDeReassortimentInt, prixDeVenteInt, typeDeVente);
-//    								source.articleOk();
     							}else {
-    								this.viewController.addArticle(parent, nom.getText(), codeBarreInt, quantiteEnStockInt, seuilDeReassortimentInt, prixDeVenteInt, false);
+    								if(this.modify == -1) {
+    									this.viewController.addArticle(parent, nom.getText(), codeBarreInt, quantiteEnStockInt, seuilDeReassortimentInt, prixDeVenteInt, false);
+    								}else {
+    									this.viewController.removeArticle(parent, modify, modifyNomL, modifyCodeBarreL, modifyQuantiteEnStockL, modifySeuilDeReassortimentL, modifyPrixDeVenteL, modifyTypeDeVenteL);
+    									this.viewController.addArticle(parent, nom.getText(), codeBarreInt, quantiteEnStockInt, seuilDeReassortimentInt, prixDeVenteInt, false);
+    								}
+    								myFrame.setVisible(false);
     							}
     						}else {
     							JOptionPane.showMessageDialog(null, "Vous devez saisir un prix de vente correct et > à 0", "Attention", JOptionPane.WARNING_MESSAGE);

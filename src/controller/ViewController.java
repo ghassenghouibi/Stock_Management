@@ -27,19 +27,16 @@ public class ViewController{
     
     public void addArticle(ViewArticlesTable parent, String nom, int codeBarre, int quantiteEnStock, int seuilDeReassortiment, int prixDevente, boolean typeDeVente) {
 		Object[] articleObj = {nom, codeBarre, quantiteEnStock, seuilDeReassortiment, prixDevente, typeDeVente};
-		ArrayList<Article> articles = new ArrayList<Article>();
 		Article article = new Article(nom, codeBarre, quantiteEnStock, seuilDeReassortiment, prixDevente, typeDeVente);
-		articles.add(article);
-		dataBase.insertArticles(articles);
-		if(parent.getArticlesList().isEmpty()) {
-			((DefaultTableModel)parent.getTable().getModel()).removeRow(0);
-			parent.getArticlesList().add(article);
-			((DefaultTableModel)parent.getTable().getModel()).addRow(articleObj);
-		}else {
-			parent.getArticlesList().add(article);
-			((DefaultTableModel)parent.getTable().getModel()).addRow(articleObj);
-		}
+		dataBase.insertArticles(article);
+		((DefaultTableModel)parent.getTable().getModel()).addRow(articleObj);
+
 	}
+    
+    public void removeArticle(ViewArticlesTable parent, int row, String nom, String codeBarre, String quantiteEnStock, String seuilDeReassortiment, String prixDevente, String typeDeVente) {
+    	dataBase.deleteArticle(nom, codeBarre, quantiteEnStock, seuilDeReassortiment, prixDevente, typeDeVente);
+    	((DefaultTableModel)parent.getTable().getModel()).removeRow(row);
+    }
     
    
 

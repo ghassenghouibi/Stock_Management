@@ -107,16 +107,18 @@ public class BaseDeDonnes  {
         return  articles;
     }
 
-    public void insertArticles(ArrayList<Article> articles){
+    public void insertArticles(Article article){
+    	String sql;
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion-de-stock","root","");
-            Statement stmt=con.createStatement();           
-            for(Article x:articles){
-                String sql = "INSERT INTO Article " + "VALUES ("+1 +",'"+x.getNom()+"','"+x.getCodeBarre()+"','"+x.getQuantiteEnStock()+"','"+x.getSeuilDeReassortiment()+"','"+x.getPrixDeVente()+"','"+x.getTypeDeVente()+"')";
-
-                stmt.executeUpdate(sql);
-            }
+            Statement stmt=con.createStatement();
+            if(article.getTypeDeVente())
+            	sql = "INSERT INTO Article " + "VALUES (" + 1 + ",'" + article.getNom() + "','" + article.getCodeBarre() + "','" + article.getQuantiteEnStock() + "','" + article.getSeuilDeReassortiment() + "','" + article.getPrixDeVente() + "','" + 1 + "')";
+            else
+            	sql = "INSERT INTO Article " + "VALUES (" + 1 + ",'" + article.getNom() + "','" + article.getCodeBarre() + "','" + article.getQuantiteEnStock() + "','" + article.getSeuilDeReassortiment() + "','" + article.getPrixDeVente() + "','" + 0 + "')";
+            stmt.executeUpdate(sql);
+            
 
         }catch(Exception e){
             System.out.println(e);
