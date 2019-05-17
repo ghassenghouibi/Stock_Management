@@ -139,4 +139,16 @@ public class BaseDeDonnes  {
             System.out.println(e);
         }
     }
+    
+    public void deleteArticle(String nom, String codeBarre/*, String quantiteEnStock, String seuilDeReassortiment, String prixDevente, String typeDeVente*/){
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gestion-de-stock","root","");
+            Statement stmt = con.createStatement();         
+            String sql = "DELETE FROM Article WHERE  `name` = '" + nom + "' AND `barcode` = '" + codeBarre + "'"; //+ "' AND `quantity_in_stock` = '" + quantiteEnStock + "' AND `seuil_of_stock` = '" + seuilDeReassortiment + "' AND `price` = '" + prixDevente + "' AND `type_of_sell` = '" + typeDeVente + "'";
+            stmt.executeUpdate(sql);
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
 }  

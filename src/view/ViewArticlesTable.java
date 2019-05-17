@@ -266,7 +266,7 @@ public class ViewArticlesTable implements ActionListener{
                 int row = table.getSelectedRow();
                 ((DefaultTableModel)this.table.getModel()).removeRow(row);
                 ArrayList<String> x =new ArrayList<String>();
-                for(int i=0;i<6;i++){
+                for(int i = 0 ; i < 6 ; i++){
                     String value = table.getModel().getValueAt(row, i).toString();
                     System.out.println(value);
                     x.add(value);
@@ -281,7 +281,7 @@ public class ViewArticlesTable implements ActionListener{
             }else{
                 int row = table.getSelectedRow();
                 ArrayList<String> x =new ArrayList<String>();
-                for(int i=0;i<6;i++){
+                for(int i = 0 ; i < 6 ; i++){
                     String value = table.getModel().getValueAt(row, i).toString();
                     System.out.println(value);
                     x.add(value);

@@ -34,7 +34,7 @@ public class ViewController{
 	}
     
     public void removeArticle(ViewArticlesTable parent, int row, String nom, String codeBarre, String quantiteEnStock, String seuilDeReassortiment, String prixDevente, String typeDeVente) {
-    	dataBase.deleteArticle(nom, codeBarre, quantiteEnStock, seuilDeReassortiment, prixDevente, typeDeVente);
+    	dataBase.deleteArticle(nom, codeBarre/*, quantiteEnStock, seuilDeReassortiment, prixDevente, typeDeVente*/);
     	((DefaultTableModel)parent.getTable().getModel()).removeRow(row);
     }
     
