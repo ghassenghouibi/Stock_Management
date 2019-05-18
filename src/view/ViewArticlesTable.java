@@ -5,9 +5,6 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 import controller.Article;
-//import model.BaseDeDonnes;
-
-
 import controller.ViewController;
 import model.BaseDeDonnes;
 
@@ -42,50 +39,46 @@ public class ViewArticlesTable implements ActionListener{
     private JMenuItem articleViewTable;
 
     private JMenu     provider;
-    private JMenuItem providerView;
-    
-    
+    private JMenuItem providerView;   
 
     private ViewController viewController;
-
-    
     private BaseDeDonnes bdd;
 
 	private ArrayList<Article> articlesList;
 
     public ViewArticlesTable(JFrame Frame){
-        createGUI(Frame);
-        
+        createGUI(Frame);        
         this.articlesList = new ArrayList<Article>();
-//        this.bdd = new BaseDeDonnes();
-
         viewController=new ViewController();
-
     }
 
+    /**
+     * this method configure the frame according to the menu article view table
+     * 
+     * @param myFrame 
+     */
     public void createGUI(JFrame myFrame){
-        
+    	//empty the frame
         myFrame.getContentPane().removeAll();
-        myFrame.getContentPane().repaint();    
-         
-
-        panel = new JPanel();
-
-        panel.setLayout(null);
-        //TODO call controller
+        myFrame.getContentPane().repaint();
         
+        //retrieve the article table from the database
         this.bdd = new BaseDeDonnes();
         this.articlesList = bdd.loadArticles();
 
-        //Les titres des colonnes
+        //Creation of the provider array model
         String  title[] = {"nom", "code barre", "quantite en stock","seuil de reassortiment","prix de vente","type de vente"};
         table = new JTable(new DefaultTableModel(title, 0));
         
+        //Fill it out
         for(Article a : this.articlesList) {
         	 Object[] obj = { a.getNom(), a.getCodeBarre(), a.getQuantiteEnStock(), a.getSeuilDeReassortiment(), a.getPrixDeVente(), a.getTypeDeVente() };
         	 ((DefaultTableModel)this.table.getModel()).addRow(obj);
         }
         
+        //Here we create the panel and we add and configure it in one needs (JScrollPane, JButton, ...)
+        panel = new JPanel();
+        panel.setLayout(null);
         
 		JScrollPane listScroller = new JScrollPane(table);
 		listScroller.setBounds(0, 100, 800, 600);
@@ -118,9 +111,7 @@ public class ViewArticlesTable implements ActionListener{
         delete.setBorder(BorderFactory.createEmptyBorder());
         delete.setContentAreaFilled(false);
         delete.setFocusable(false);
-        delete.addActionListener(this);
-
-     
+        delete.addActionListener(this);  
 
         panel.add(listScroller);
 		
@@ -128,7 +119,8 @@ public class ViewArticlesTable implements ActionListener{
         panel.add(edit);
         panel.add(delete);
 
-        frame=myFrame;
+        
+        //setting up the frame and adding him to the panel
         myFrame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				myFrame.dispose();
@@ -138,32 +130,8 @@ public class ViewArticlesTable implements ActionListener{
         myFrame.setDefaultCloseOperation(3);
         myFrame.setSize(800,620);
         myFrame.setVisible(true);
+        frame=myFrame;
     }
-    
-    
-    public BaseDeDonnes getBdd() {
-		return bdd;
-	}
-
-	public void setBdd(BaseDeDonnes bdd) {
-		this.bdd = bdd;
-	}
-
-    public ArrayList<Article> getArticlesList() {
-		return articlesList;
-	}
-
-	public void setArticlesList(ArrayList<Article> articlesList) {
-		this.articlesList = articlesList;
-	}
-
-	public JTable getTable() {
-		return table;
-	}
-
-	public void setTable(JTable table) {
-		this.table = table;
-	}
 
 	public void createMenu(JFrame myFrame){
         menuBar=new JMenuBar();
@@ -221,37 +189,23 @@ public class ViewArticlesTable implements ActionListener{
 
         myFrame.setJMenuBar(menuBar);
     }
-
+	
+	/**
+	 * This method opens a warning dialog with a custom message
+	 * 
+	 * @param text message
+	 */
     private void msgbox(String text){
         JOptionPane optionPane = new JOptionPane(text,JOptionPane.WARNING_MESSAGE);
         JDialog dialog = optionPane.createDialog("Warning!");
         dialog.setAlwaysOnTop(true); // to show top of all other application
         dialog.setVisible(true); // to visible the dialog
 
-    }
-    
-//    public Object[][] tabArticle(ArrayList<Article> articles){
-//    	Object[][] tabArticles;
-//		int i = 0;
-//		if(!articles.isEmpty()) {
-//			tabArticles = new Object[articles.size()][7];
-//			for(Article a : articles) {
-//				//tabArticles[i][0] = new Integer(i);
-//				tabArticles[i][0] = new String(a.getNom());
-//				tabArticles[i][1] = new Integer(a.getCodeBarre());
-//				tabArticles[i][2] = new Integer(a.getQuantiteEnStock());
-//				tabArticles[i][3] = new Integer(a.getSeuilDeReassortiment());
-//				tabArticles[i][4] = new Integer(a.getPrixDeVente());
-//				tabArticles[i][5] = new Boolean(a.getTypeDeVente());
-//				i++;
-//			}
-//		}else {
-//			tabArticles = new Object[1][7];
-//		}
-//		return tabArticles;
-//    }
-    
+    }    
 
+    /**
+     * This method responds to the call of the addActionListener and dicide method of the action to be done
+     */
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source == add){
@@ -307,5 +261,29 @@ public class ViewArticlesTable implements ActionListener{
         }
 
     }
+    
+    public BaseDeDonnes getBdd() {
+		return bdd;
+	}
+
+	public void setBdd(BaseDeDonnes bdd) {
+		this.bdd = bdd;
+	}
+
+    public ArrayList<Article> getArticlesList() {
+		return articlesList;
+	}
+
+	public void setArticlesList(ArrayList<Article> articlesList) {
+		this.articlesList = articlesList;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
 
 }

@@ -56,27 +56,30 @@ public class ViewProvider implements ActionListener{
         
     }
 
+    /**
+     * this method configure the frame according to the menu provider view
+     * 
+     * @param myFrame 
+     */
     public void createGUI(JFrame myFrame){
-        
+        //empty the frame
         myFrame.getContentPane().removeAll();
         myFrame.getContentPane().repaint();    
         
-        panel = new JPanel();
-
-        panel.setLayout(null);
-
-
-
-        //title
+        //Creation of the provider array model
         String  title[] = {"id","Produit", "Nom", "Adresse","code postale","téléphone"};
         tableModel= new DefaultTableModel(title, 0);
-
+        
+        //Fill it out
         for(ProviderInfo x :listOfProvider){
             Object[] obj={x.getId(),x.getProduct(),x.getNomProvider(),x.getAdresse(),x.getCodePostal(),x.getNumeroDeTelephone()};
-
             tableModel.addRow(obj);
         }
         table = new JTable(tableModel);
+        
+        //Here we create the panel and we add and configure it in one needs (JScrollPane, JButton, ...)
+        panel = new JPanel();
+        panel.setLayout(null);
         
 		JScrollPane listScroller = new JScrollPane(table);
 		listScroller.setBounds(0, 100, 800, 600);
@@ -127,7 +130,7 @@ public class ViewProvider implements ActionListener{
         panel.add(delete);
         panel.add(order);
 
-        frame=myFrame;
+        //setting up the frame and adding him to the panel
         myFrame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				myFrame.dispose();
@@ -137,9 +140,14 @@ public class ViewProvider implements ActionListener{
         myFrame.setDefaultCloseOperation(3);
         myFrame.setSize(800,620);
         myFrame.setVisible(true);
+        frame=myFrame;
     }
 
-
+    /**
+     * This method create and initialize the menu and then add it to the frame
+     * 
+     * @param myFrame
+     */
     public void createMenu(JFrame myFrame){
         menuBar=new JMenuBar();
 
@@ -198,7 +206,9 @@ public class ViewProvider implements ActionListener{
     }
 
     
-
+    /**
+     * This method responds to the call of the addActionListener and dicide method of the action to be done
+     */
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source == add){
