@@ -1,7 +1,8 @@
 package controller;
 
 /**
-* 
+* This class contains article present in the store 
+* where we find attribut who define this
 */
 public class Article {
 
@@ -11,6 +12,7 @@ public class Article {
     protected int     seuilDeReassortiment;
     protected int     prixDevente;
     protected boolean typeDeVente;
+    
     /**
     * Default constructor
     */
@@ -22,9 +24,7 @@ public class Article {
         this.prixDevente = prixDevente;
         this.typeDeVente = typeDeVente;
     }
-    
-    public Article() {
-    }
+
     
     /*---------------------GETTER-----------------*/
     public String   getNom(){

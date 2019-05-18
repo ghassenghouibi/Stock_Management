@@ -2,8 +2,8 @@ package controller;
 
 import java.util.*;
 /**
- * 
- */
+* 
+*/
 public class Client {
     public double               solde;
     public String               identifiant;

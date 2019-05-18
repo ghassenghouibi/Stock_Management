@@ -15,7 +15,6 @@ public class Caisse {
     /**
     * Default constructor
     */
-    
     public Caisse(){
         this.ticketDeCaisse	    =new HashMap<String,Article>();
         this.historiqueDeCaisse =new ArrayList<Double>();
@@ -24,7 +23,6 @@ public class Caisse {
     /**
     * 
     */
-    
     protected void solder(Double montant) {
         Double somme = 0.0;
     	for(Double x:historiqueDeCaisse) {
@@ -39,8 +37,8 @@ public class Caisse {
     	
     }
     /**
-     * 
-     */
+    * 
+    */
     protected boolean connexion(int cleId){
     	for(int x : cleIds) {
     		if(x==cleId)
@@ -78,14 +76,10 @@ public class Caisse {
         double encaisser=calculerLeTotal();
         if( montant>encaisser){
             historiqueDeCaisse.add(encaisser);
-            miseAjourDuStock();
+            //TODO update stock
         }
         return (montant-encaisser);
     }
-    protected void miseAjourDuStock() {
-        //for(Article i:ticketDeCaisse){
-        //    i.quantiteEnStock--;
-        //}
-    }
+  
 
 }

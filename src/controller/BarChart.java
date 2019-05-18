@@ -1,3 +1,7 @@
+/***
+* This class alow to create a chart bar that will be used for article views
+*/
+
 package controller;
 
 import java.awt.Color;
@@ -20,11 +24,12 @@ public class BarChart extends JPanel{
 		bars.put(color, value);
 		repaint();
 	}
+
+	//Adapted from stackoverflow
 	@Override
 	protected void paintComponent(Graphics g){
 	
 		// determine longest bar
-		 
 		int max = Integer.MIN_VALUE;
 		for (Integer value : bars.values()){
 			max = Math.max(max, value);
