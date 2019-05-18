@@ -1,6 +1,6 @@
 package controller;
 
-import java.util.ArrayList;
+
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -33,8 +33,8 @@ public class ViewController{
 
 	}
     
-    public void removeArticle(ViewArticlesTable parent, int row, String nom, String codeBarre, String quantiteEnStock, String seuilDeReassortiment, String prixDevente, String typeDeVente) {
-    	dataBase.deleteArticle(nom, codeBarre/*, quantiteEnStock, seuilDeReassortiment, prixDevente, typeDeVente*/);
+    public void removeArticle(ViewArticlesTable parent, int row, String nom, String codeBarre) {
+    	dataBase.deleteArticle(nom, codeBarre);
     	((DefaultTableModel)parent.getTable().getModel()).removeRow(row);
     }
     

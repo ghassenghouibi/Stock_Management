@@ -12,7 +12,7 @@ import java.awt.event.*;
 
 public class Articles implements ActionListener{
 
-    private JTextField nom,codeBarre,quantiteEnStock,seuilDeReassortiment,prixDeVente,typeDeVente;
+    private JTextField nom,codeBarre,quantiteEnStock,seuilDeReassortiment,prixDeVente;
     private JLabel textNom,textCodeBarre,textQuantiteEnStock,textSeuilDeReassortiment,textPrixDeVente,textTypeDeVente;
     private JRadioButton oui, non;
     private JButton save,cancel;
@@ -23,10 +23,10 @@ public class Articles implements ActionListener{
     private int modify;
     private String modifyNomL;
     private String modifyCodeBarreL;
-    private String modifyQuantiteEnStockL;
-    private String modifySeuilDeReassortimentL;
-    private String modifyPrixDeVenteL;
-    private String modifyTypeDeVenteL;
+//    private String modifyQuantiteEnStockL;
+//    private String modifySeuilDeReassortimentL;
+//    private String modifyPrixDeVenteL;
+//    private String modifyTypeDeVenteL;
     
     public Articles(ViewArticlesTable parent){
         createGUI(null, null, null, null, null, null);
@@ -42,10 +42,10 @@ public class Articles implements ActionListener{
         this.modify = row;
         this.modifyNomL = modifyNom;
         this.modifyCodeBarreL = modifyCodeBarre;
-        this.modifyQuantiteEnStockL = modifyQuantiteEnStock;
-        this.modifySeuilDeReassortimentL = modifySeuilDeReassortiment;
-        this.modifyPrixDeVenteL = modifyPrixDeVente;
-        this.modifyTypeDeVenteL = modifyTypeDeVente;
+//        this.modifyQuantiteEnStockL = modifyQuantiteEnStock;
+//        this.modifySeuilDeReassortimentL = modifySeuilDeReassortiment;
+//        this.modifyPrixDeVenteL = modifyPrixDeVente;
+//        this.modifyTypeDeVenteL = modifyTypeDeVente;
     }
 
     public void createGUI(String modifyNom,String modifyCodeBarre,String modifyQuantiteEnStock,String modifySeuilDeReassortiment, String modifyPrixDeVente, String modifyTypeDeVente){
@@ -96,7 +96,6 @@ public class Articles implements ActionListener{
         
         ButtonGroup choice = new ButtonGroup();
         oui = new JRadioButton("KG");
-//	    oui.setSelected(true);
 	    oui.setBounds(200, 180, 60, 20);
 	    choice.add(oui);
 	    panel.add(oui);
@@ -172,7 +171,7 @@ public class Articles implements ActionListener{
     								if(this.modify == -1) {
     									this.viewController.addArticle(parent, nom.getText(), codeBarreInt, quantiteEnStockInt, seuilDeReassortimentInt, prixDeVenteInt, true);
     								}else {
-    									this.viewController.removeArticle(parent, modify, modifyNomL, modifyCodeBarreL, modifyQuantiteEnStockL, modifySeuilDeReassortimentL, modifyPrixDeVenteL, modifyTypeDeVenteL);
+    									this.viewController.removeArticle(parent, modify, modifyNomL, modifyCodeBarreL);
     									this.viewController.addArticle(parent, nom.getText(), codeBarreInt, quantiteEnStockInt, seuilDeReassortimentInt, prixDeVenteInt, true);
     								}
     								myFrame.setVisible(false);
@@ -180,7 +179,7 @@ public class Articles implements ActionListener{
     								if(this.modify == -1) {
     									this.viewController.addArticle(parent, nom.getText(), codeBarreInt, quantiteEnStockInt, seuilDeReassortimentInt, prixDeVenteInt, false);
     								}else {
-    									this.viewController.removeArticle(parent, modify, modifyNomL, modifyCodeBarreL, modifyQuantiteEnStockL, modifySeuilDeReassortimentL, modifyPrixDeVenteL, modifyTypeDeVenteL);
+    									this.viewController.removeArticle(parent, modify, modifyNomL, modifyCodeBarreL);
     									this.viewController.addArticle(parent, nom.getText(), codeBarreInt, quantiteEnStockInt, seuilDeReassortimentInt, prixDeVenteInt, false);
     								}
     								myFrame.setVisible(false);

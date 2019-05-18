@@ -264,14 +264,13 @@ public class ViewArticlesTable implements ActionListener{
                 msgbox("Please select a row");
             }else{
                 int row = table.getSelectedRow();
-                ((DefaultTableModel)this.table.getModel()).removeRow(row);
                 ArrayList<String> x =new ArrayList<String>();
-                for(int i = 0 ; i < 6 ; i++){
+                for(int i = 0 ; i < 2 ; i++){
                     String value = table.getModel().getValueAt(row, i).toString();
                     System.out.println(value);
                     x.add(value);
                 }
-                this.viewController.removeArticle(this, row, x.get(0), x.get(1), x.get(2), x.get(3), x.get(4), x.get(5));
+                this.viewController.removeArticle(this, row, x.get(0), x.get(1));
             }
 
         }
@@ -286,7 +285,6 @@ public class ViewArticlesTable implements ActionListener{
                     System.out.println(value);
                     x.add(value);
                 }
-                //new Provider("Modify Provider",x.get(0),x.get(1),x.get(2),x.get(3),x.get(4));
                 new Articles(this, x.get(0), x.get(1), x.get(2), x.get(3), x.get(4), x.get(5), row);
             }
         }
