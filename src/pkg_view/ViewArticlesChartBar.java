@@ -1,11 +1,13 @@
-package view;
+package pkg_view;
 
 import javax.swing.*;
 import java.awt.event.*;
 
 import java.awt.Color;
 
-import controller.*;
+import pkg_controller.*;
+import pkg_controller.ViewController;
+import pkg_utils.BarChart;
 
 public class ViewArticlesChartBar implements ActionListener {
 

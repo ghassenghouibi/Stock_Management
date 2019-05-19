@@ -1,7 +1,7 @@
 
 import javax.swing.JFrame;
 
-import view.ViewLogin;
+import pkg_view.ViewLogin;
 
 class Main{
     public static void main(String arg[]){

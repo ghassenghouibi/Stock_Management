@@ -1,7 +1,10 @@
-package model;
+package pkg_model;
 
 import java.sql.*;
-import controller.*;
+import pkg_controller.*;
+import pkg_utils.Article;
+import pkg_utils.ProviderInfo;
+
 import java.util.ArrayList;
 
 public class BaseDeDonnes  { 

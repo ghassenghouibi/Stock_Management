@@ -1,4 +1,4 @@
-package controller;
+package pkg_utils;
 
 /**
 * This class contains article present in the store 

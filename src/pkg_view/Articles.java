@@ -1,8 +1,8 @@
-package view;
+package pkg_view;
 
 import javax.swing.*;
 
-import controller.ViewController;
+import pkg_controller.ViewController;
 
 import java.awt.event.*;
 
@@ -185,10 +185,10 @@ public class Articles implements ActionListener{
     								myFrame.setVisible(false);
     							}
     						}else {
-    							JOptionPane.showMessageDialog(null, "Vous devez saisir un prix de vente correct et > à 0", "Attention", JOptionPane.WARNING_MESSAGE);
+    							JOptionPane.showMessageDialog(null, "Vous devez saisir un prix de vente correct et > ï¿½ 0", "Attention", JOptionPane.WARNING_MESSAGE);
     						}
     					}else {
-    						JOptionPane.showMessageDialog(null, "Vous devez saisir un seuil de reassortiment correct et > à 0", "Attention", JOptionPane.WARNING_MESSAGE);
+    						JOptionPane.showMessageDialog(null, "Vous devez saisir un seuil de reassortiment correct et > ï¿½ 0", "Attention", JOptionPane.WARNING_MESSAGE);
     					}
     				}
     			}

@@ -1,12 +1,22 @@
-package controller;
+package pkg_controller;
 
 
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.BaseDeDonnes;
-import view.*;
+
+import pkg_model.BaseDeDonnes;
+import pkg_utils.Article;
+import pkg_utils.ProviderInfo;
+import pkg_view.ProviderDialog;
+import pkg_view.ViewArticlesChartBar;
+import pkg_view.ViewArticlesTable;
+import pkg_view.ViewLogin;
+import pkg_view.ViewProvider;
+import pkg_view.ViewRegister;
+import pkg_view.ViewRetailer;
+import pkg_view.*;
 
 public class ViewController{
 

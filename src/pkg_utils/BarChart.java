@@ -2,7 +2,7 @@
 * This class alow to create a chart bar that will be used for article views
 */
 
-package controller;
+package pkg_utils;
 
 import java.awt.Color;
 import java.awt.Graphics;

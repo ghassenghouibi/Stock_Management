@@ -1,4 +1,4 @@
-package controller;
+package pkg_utils;
 
 /**
 * This class contains cashier informations this class we be used to sell and use Caisse class

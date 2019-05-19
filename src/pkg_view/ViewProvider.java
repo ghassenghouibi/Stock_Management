@@ -1,11 +1,11 @@
-package view;
+package pkg_view;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import controller.ProviderInfo;
-import controller.ViewController;
-import model.BaseDeDonnes;
+import pkg_controller.ViewController;
+import pkg_model.BaseDeDonnes;
+import pkg_utils.ProviderInfo;
 
 import java.awt.event.*;
 import java.util.ArrayList;
