@@ -87,7 +87,7 @@ public class ViewArticlesTable implements ActionListener{
         add = new JButton("");
         String iconfilePath = this.getClass().getClassLoader().getResource("images/add.png").getFile();
         add.setIcon(new ImageIcon(iconfilePath));
-        add.setBounds(550, 0, 100, 50);
+        add.setBounds(0, 0, 100, 50);
         add.setBorder(BorderFactory.createEmptyBorder());
         add.setContentAreaFilled(false);
         add.setFocusable(false);
@@ -97,7 +97,7 @@ public class ViewArticlesTable implements ActionListener{
         
         String iconfilePathedit = this.getClass().getClassLoader().getResource("images/edit.png").getFile();
         edit.setIcon(new ImageIcon(iconfilePathedit));
-        edit.setBounds(600, 0, 100, 50);
+        edit.setBounds(300, 0, 100, 50);
         edit.setBorder(BorderFactory.createEmptyBorder());
         edit.setContentAreaFilled(false);
         edit.setFocusable(false);
@@ -107,7 +107,7 @@ public class ViewArticlesTable implements ActionListener{
         
         String iconfilePathdelete = this.getClass().getClassLoader().getResource("images/delete.png").getFile();
         delete.setIcon(new ImageIcon(iconfilePathdelete));
-        delete.setBounds(650, 0, 100, 50);
+        delete.setBounds(600, 0, 100, 50);
         delete.setBorder(BorderFactory.createEmptyBorder());
         delete.setContentAreaFilled(false);
         delete.setFocusable(false);
