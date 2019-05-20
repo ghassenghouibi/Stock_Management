@@ -50,6 +50,7 @@ public class Articles implements ActionListener{
 
     public void createGUI(String modifyNom,String modifyCodeBarre,String modifyQuantiteEnStock,String modifySeuilDeReassortiment, String modifyPrixDeVente, String modifyTypeDeVente){
         myFrame =new JFrame("Add Article");
+        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new JPanel();
         
         
