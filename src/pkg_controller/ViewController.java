@@ -1,3 +1,11 @@
+/**
+* This class contain the controller of views in application, controller function 
+* access to data base and allow modification done by the user also this class assures
+* connection of users  
+* @author:groupe 5
+* @version:0.2
+*/
+
 package pkg_controller;
 
 
@@ -16,7 +24,6 @@ import pkg_view.ViewLogin;
 import pkg_view.ViewProvider;
 import pkg_view.ViewRegister;
 import pkg_view.ViewRetailer;
-import pkg_view.*;
 
 public class ViewController{
 
@@ -41,7 +48,8 @@ public class ViewController{
 		dataBase.insertArticles(article);
 		((DefaultTableModel)parent.getTable().getModel()).addRow(articleObj);
 
-	}
+    }
+    
     
     public void removeArticle(ViewArticlesTable parent, int row, String nom, String codeBarre) {
     	dataBase.deleteArticle(nom, codeBarre);
@@ -49,7 +57,6 @@ public class ViewController{
     }
     
    
-
     public void loadRegisterFrame(JFrame frame) {
         new ViewRegister(frame);
     }
@@ -115,6 +122,10 @@ public class ViewController{
         myFrame.repaint();
     }
 
-
+    public void orderFromProvider(JFrame myFrame,String product) {
+    	JOptionPane.showInputDialog(null, "Quantité ?");
+        myFrame.repaint();
+    	
+    }
 
 }

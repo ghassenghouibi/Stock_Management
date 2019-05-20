@@ -3,7 +3,6 @@ package pkg_view;
 import javax.swing.*;
 
 import java.awt.event.*;
-import pkg_controller.*;
 import pkg_controller.ViewController;
 import pkg_utils.ProviderInfo;
 

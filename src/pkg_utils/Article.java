@@ -1,9 +1,12 @@
-package pkg_utils;
-
 /**
 * This class contains article present in the store 
 * where we find attribut who define this
+* @author : groupe 5
+* @version: 0.0.1
 */
+
+package pkg_utils;
+
 public class Article {
 
     protected String  nom;

@@ -1,9 +1,11 @@
 package pkg_utils;
-
-import java.util.*;
 /**
-* 
+* This class contain Retailer information this class is used for Textual version
+* @author : groupe 5
+* @version: 0.0.1
 */
+import java.util.*;
+
 public class Detaillant {
 	
 	private String nom;

@@ -1,5 +1,7 @@
 /***
 * This class alow to create a chart bar that will be used for article views
+* @author: Groupe 5
+* @version: 0.0.1
 */
 
 package pkg_utils;

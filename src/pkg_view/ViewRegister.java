@@ -1,9 +1,12 @@
+/**
+* This class contain the register view of the application with two button to choose register or cancel
+* which allow to create a new account
+* @author:groupe 5
+* @version : 0.2 
+*/
 package pkg_view;
-
 import javax.swing.*;
-
 import pkg_controller.ViewController;
-
 import java.awt.event.*;
 
 

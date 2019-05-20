@@ -1,9 +1,7 @@
 package pkg_view;
 
 import javax.swing.*;
-
 import pkg_controller.ViewController;
-
 import java.awt.event.*;
 
 

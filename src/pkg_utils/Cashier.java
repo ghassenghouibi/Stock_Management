@@ -1,8 +1,10 @@
-package pkg_utils;
-
 /**
 * This class contains cashier informations this class we be used to sell and use Caisse class
+* @author:groupe 5
+* @version: 0.0.1
 */
+package pkg_utils;
+
 public class Cashier {
 
     private String name;

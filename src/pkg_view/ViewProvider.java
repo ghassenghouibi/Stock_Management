@@ -235,6 +235,10 @@ public class ViewProvider implements ActionListener{
         if(source == order){
             if(table.getSelectedRow()==-1){
                 JOptionPane.showMessageDialog(null, "Please select a row", "Error", JOptionPane.ERROR_MESSAGE);
+            }else {
+            	int row=table.getSelectedRow();
+            	viewController.orderFromProvider(frame,table.getModel().getValueAt(row, 1).toString());
+            	
             }
         }
 

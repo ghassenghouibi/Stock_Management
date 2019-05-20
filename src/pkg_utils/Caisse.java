@@ -1,3 +1,9 @@
+/**
+* This class is contains Caisse but this functionnalty is not implemeted yet
+* @author: Groupe 5  
+* @version: 0.0.1
+*/
+
 package pkg_utils;
 
 import java.util.*;

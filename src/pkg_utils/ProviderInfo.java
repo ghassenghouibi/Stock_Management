@@ -1,10 +1,12 @@
-package pkg_utils;
-
-
 /**
 * This class contains informations about Provider will be use by the retailer 
 * To command or add or remove or modify some informations about provider
+* @author : groupe 5
+* @version: 0.0.1
 */
+
+package pkg_utils;
+
 public class ProviderInfo {
 
     private  int         idProvider;
