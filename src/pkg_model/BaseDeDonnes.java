@@ -1,7 +1,16 @@
-package model;
+/**
+* This class contain access to dataBase to checkLogin for example or other access to data
+* It's a part of model package will be charged in the start of application and changes all over connected time
+* @author:groupe5
+* @author:version 0.2 
+*/
+
+package pkg_model;
 
 import java.sql.*;
-import controller.*;
+import pkg_utils.Article;
+import pkg_utils.ProviderInfo;
+
 import java.util.ArrayList;
 
 public class BaseDeDonnes  { 

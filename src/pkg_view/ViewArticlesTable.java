@@ -1,25 +1,26 @@
-package view;
+package pkg_view;
 
 import javax.swing.*;
+
 import javax.swing.table.DefaultTableModel;
 
-import controller.ProviderInfo;
-import controller.ViewController;
-import model.BaseDeDonnes;
+import pkg_controller.ViewController;
+import pkg_model.BaseDeDonnes;
+import pkg_utils.Article;
 
 import java.awt.event.*;
 import java.util.ArrayList;
 
 
-public class ViewProvider implements ActionListener{
+public class ViewArticlesTable implements ActionListener{
 
-    private JButton add,edit,order,delete;
+    private JButton add,edit,delete;
 
-    private JPanel    panel;
-    private JFrame    frame;
+    private JPanel panel;
+    private JFrame frame;
 
-    private JMenuBar  menuBar;
-    private JMenu     file;
+    private JMenuBar menuBar;
+    private JMenu    file;
     private JTable    table;
     private JMenuItem open;
     private JMenuItem print;
@@ -38,44 +39,42 @@ public class ViewProvider implements ActionListener{
     private JMenuItem articleViewTable;
 
     private JMenu     provider;
-    private JMenuItem providerView;
-    
-    private ArrayList<ProviderInfo> listOfProvider;
-    private DefaultTableModel tableModel;
-    private BaseDeDonnes dataBase;
+    private JMenuItem providerView;   
 
     private ViewController viewController;
+    private BaseDeDonnes bdd;
 
-    public ViewProvider(JFrame Frame){
-        listOfProvider=new ArrayList<ProviderInfo>();
-        dataBase=new BaseDeDonnes();
-        listOfProvider=dataBase.loadProvider();
+	private ArrayList<Article> articlesList;
+
+    public ViewArticlesTable(JFrame Frame){
+        createGUI(Frame);        
+        this.articlesList = new ArrayList<Article>();
         viewController=new ViewController();
-        this.frame=Frame;
-        createGUI(Frame);
-        
     }
 
     /**
-     * this method configure the frame according to the menu provider view
+     * this method configure the frame according to the menu article view table
      * 
      * @param myFrame 
      */
     public void createGUI(JFrame myFrame){
-        //empty the frame
+    	//empty the frame
         myFrame.getContentPane().removeAll();
-        myFrame.getContentPane().repaint();    
+        myFrame.getContentPane().repaint();
         
+        //retrieve the article table from the database
+        this.bdd = new BaseDeDonnes();
+        this.articlesList = bdd.loadArticles();
+
         //Creation of the provider array model
-        String  title[] = {"id","Produit", "Nom", "Adresse","code postale","téléphone"};
-        tableModel= new DefaultTableModel(title, 0);
+        String  title[] = {"nom", "code barre", "quantite en stock","seuil de reassortiment","prix de vente","type de vente"};
+        table = new JTable(new DefaultTableModel(title, 0));
         
         //Fill it out
-        for(ProviderInfo x :listOfProvider){
-            Object[] obj={x.getId(),x.getProduct(),x.getNomProvider(),x.getAdresse(),x.getCodePostal(),x.getNumeroDeTelephone()};
-            tableModel.addRow(obj);
+        for(Article a : this.articlesList) {
+        	 Object[] obj = { a.getNom(), a.getCodeBarre(), a.getQuantiteEnStock(), a.getSeuilDeReassortiment(), a.getPrixDeVente(), a.getTypeDeVente() };
+        	 ((DefaultTableModel)this.table.getModel()).addRow(obj);
         }
-        table = new JTable(tableModel);
         
         //Here we create the panel and we add and configure it in one needs (JScrollPane, JButton, ...)
         panel = new JPanel();
@@ -83,6 +82,7 @@ public class ViewProvider implements ActionListener{
         
 		JScrollPane listScroller = new JScrollPane(table);
 		listScroller.setBounds(0, 100, 800, 600);
+		
         
         add = new JButton("");
         String iconfilePath = this.getClass().getClassLoader().getResource("images/add.png").getFile();
@@ -97,7 +97,7 @@ public class ViewProvider implements ActionListener{
         
         String iconfilePathedit = this.getClass().getClassLoader().getResource("images/edit.png").getFile();
         edit.setIcon(new ImageIcon(iconfilePathedit));
-        edit.setBounds(230, 0, 100, 50);
+        edit.setBounds(300, 0, 100, 50);
         edit.setBorder(BorderFactory.createEmptyBorder());
         edit.setContentAreaFilled(false);
         edit.setFocusable(false);
@@ -107,29 +107,19 @@ public class ViewProvider implements ActionListener{
         
         String iconfilePathdelete = this.getClass().getClassLoader().getResource("images/delete.png").getFile();
         delete.setIcon(new ImageIcon(iconfilePathdelete));
-        delete.setBounds(460, 0, 100, 50);
+        delete.setBounds(600, 0, 100, 50);
         delete.setBorder(BorderFactory.createEmptyBorder());
         delete.setContentAreaFilled(false);
         delete.setFocusable(false);
-        delete.addActionListener(this);
-
-        order = new JButton("");
-        
-        String iconfilePathorder = this.getClass().getClassLoader().getResource("images/order.png").getFile();
-        order.setIcon(new ImageIcon(iconfilePathorder));
-        order.setBounds(690, 0, 100, 50);
-        order.setBorder(BorderFactory.createEmptyBorder());
-        order.setContentAreaFilled(false);
-        order.setFocusable(false);
-        order.addActionListener(this);
+        delete.addActionListener(this);  
 
         panel.add(listScroller);
 		
         panel.add(add);
         panel.add(edit);
         panel.add(delete);
-        panel.add(order);
 
+        
         //setting up the frame and adding him to the panel
         myFrame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -143,12 +133,7 @@ public class ViewProvider implements ActionListener{
         frame=myFrame;
     }
 
-    /**
-     * This method create and initialize the menu and then add it to the frame
-     * 
-     * @param myFrame
-     */
-    public void createMenu(JFrame myFrame){
+	public void createMenu(JFrame myFrame){
         menuBar=new JMenuBar();
 
         //file
@@ -204,39 +189,60 @@ public class ViewProvider implements ActionListener{
 
         myFrame.setJMenuBar(menuBar);
     }
+	
+	/**
+	 * This method opens a warning dialog with a custom message
+	 * 
+	 * @param text message
+	 */
+    private void msgbox(String text){
+        JOptionPane optionPane = new JOptionPane(text,JOptionPane.WARNING_MESSAGE);
+        JDialog dialog = optionPane.createDialog("Warning!");
+        dialog.setAlwaysOnTop(true); // to show top of all other application
+        dialog.setVisible(true); // to visible the dialog
 
-    
+    }    
+
     /**
      * This method responds to the call of the addActionListener and dicide method of the action to be done
      */
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source == add){
-            viewController.addProvider("Add Provider",frame);
+            System.out.println("Adding ...");
+            new Articles(this);
+
         }
         if(source==delete){
             if(table.getSelectedRow()==-1){
-                JOptionPane.showMessageDialog(null, "Please select a row", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            int selectedRow=table.getSelectedRow();
-            int idOfProvider= (int) table.getValueAt(selectedRow, 0);
-
-            viewController.deleteProvider(frame,idOfProvider);
-            tableModel.removeRow(selectedRow);
-        }
-        if(source== edit){
-            if(table.getSelectedRow()==-1){
-                JOptionPane.showMessageDialog(null, "Please select a row", "Error", JOptionPane.ERROR_MESSAGE);
+                msgbox("Please select a row");
             }else{
                 int row = table.getSelectedRow();
-                viewController.modifyProvider(frame,listOfProvider.get(table.getSelectedRow()).getId(),table.getModel().getValueAt(row, 1).toString(), table.getModel().getValueAt(row, 2).toString(), table.getModel().getValueAt(row, 3).toString(), table.getModel().getValueAt(row, 4).toString(),table.getModel().getValueAt(row, 5).toString());
+                ArrayList<String> x =new ArrayList<String>();
+                for(int i = 0 ; i < 2 ; i++){
+                    String value = table.getModel().getValueAt(row, i).toString();
+                    System.out.println(value);
+                    x.add(value);
+                }
+                this.viewController.removeArticle(this, row, x.get(0), x.get(1));
             }
+
         }
-        if(source == order){
+        if(source == edit){
             if(table.getSelectedRow()==-1){
-                JOptionPane.showMessageDialog(null, "Please select a row", "Error", JOptionPane.ERROR_MESSAGE);
+                msgbox("Please select a row");
+            }else{
+                int row = table.getSelectedRow();
+                ArrayList<String> x =new ArrayList<String>();
+                for(int i = 0 ; i < 6 ; i++){
+                    String value = table.getModel().getValueAt(row, i).toString();
+                    System.out.println(value);
+                    x.add(value);
+                }
+                new Articles(this, x.get(0), x.get(1), x.get(2), x.get(3), x.get(4), x.get(5), row);
             }
         }
+     
 
         if (source==homeView){
             viewController.menuEngine(1, frame);
@@ -255,5 +261,29 @@ public class ViewProvider implements ActionListener{
         }
 
     }
+    
+    public BaseDeDonnes getBdd() {
+		return bdd;
+	}
+
+	public void setBdd(BaseDeDonnes bdd) {
+		this.bdd = bdd;
+	}
+
+    public ArrayList<Article> getArticlesList() {
+		return articlesList;
+	}
+
+	public void setArticlesList(ArrayList<Article> articlesList) {
+		this.articlesList = articlesList;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
 
 }

@@ -1,11 +1,12 @@
-package view;
+package pkg_view;
 
 import javax.swing.*;
 import java.awt.event.*;
 
 import java.awt.Color;
 
-import controller.*;
+import pkg_controller.ViewController;
+import pkg_utils.BarChart;
 
 public class ViewArticlesChartBar implements ActionListener {
 
@@ -33,9 +34,12 @@ public class ViewArticlesChartBar implements ActionListener {
     private JMenuItem providerView;
     private ViewController viewController;
 
+    private BarChart chart;
+
     public ViewArticlesChartBar(JFrame frame){
         createGUI(frame);
         viewController=new ViewController();
+        chart= new BarChart();
     }
 
     public void createGUI(JFrame myFrame){
@@ -43,8 +47,7 @@ public class ViewArticlesChartBar implements ActionListener {
         myFrame.getContentPane().removeAll();
         myFrame.getContentPane().repaint();    
          
-
-        BarChart chart = new BarChart();
+        /*
         chart.addBar(Color.red, 100);
         chart.addBar(Color.green, 8);
         chart.addBar(Color.blue, 54);
@@ -55,7 +58,7 @@ public class ViewArticlesChartBar implements ActionListener {
         chart.addBar(Color.lightGray, 77);
         chart.addBar(Color.magenta, 90);
         chart.addBar(Color.pink, 12);
-        chart.addBar(Color.orange, 65);
+        chart.addBar(Color.orange, 65);*/
 
         myFrame.getContentPane().add(chart);
         myFrame.pack();
@@ -70,6 +73,10 @@ public class ViewArticlesChartBar implements ActionListener {
 			}
 		});
 
+    }
+
+    public void addBar(Color color,int number){
+        chart.addBar(color, number);
     }
 
     public void createMenu(JFrame myFrame){

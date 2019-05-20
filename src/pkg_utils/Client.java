@@ -1,9 +1,12 @@
-package controller;
+package pkg_utils;
+/**
+* This class contain client but the client is not implemented yet for this version
+* @author : groupe5
+* @version: 0.0.1
+*/
 
 import java.util.*;
-/**
- * 
- */
+
 public class Client {
     public double               solde;
     public String               identifiant;

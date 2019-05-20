@@ -1,9 +1,13 @@
+/**
+* This class contain the login view of the application with two button to choose login or register 
+* if we don't have and account which allow to create a new account
+* @author:groupe 5
+* @version : 0.2 
+*/
 
-package view;
-
+package pkg_view;
 import javax.swing.*;
-
-import controller.ViewController;
+import pkg_controller.ViewController;
 import java.awt.event.*;
 
 public class ViewLogin implements ActionListener{
