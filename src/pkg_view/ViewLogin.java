@@ -80,7 +80,7 @@ public class ViewLogin implements ActionListener{
 
         myFrame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-                System.out.println("LALALALA");
+                System.out.println("Thank you for using our application");
 			}
 		});
         myFrame.add(panel);

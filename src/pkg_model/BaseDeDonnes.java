@@ -57,7 +57,6 @@ public class BaseDeDonnes  {
             Statement stmt=con.createStatement();  
             ResultSet rs=stmt.executeQuery("SELECT `id_provider`,`name`,`product`,`adress`,`codePostal`,`telephone` FROM `Provider`");  
             while(rs.next()){
-                System.out.println(rs.getInt(1)+rs.getString(2)+rs.getString(3)+rs.getString(4)+rs.getInt(5)+rs.getInt(6));
                 ProviderInfo newProvider=new ProviderInfo(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getInt(6) );  
                 providers.add(newProvider);
             }

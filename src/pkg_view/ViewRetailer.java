@@ -112,7 +112,7 @@ public class ViewRetailer implements ActionListener{
         frame=myFrame;
         myFrame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
-                System.out.println("Herre");
+                System.out.println("Thank for using our application ");
 			}
 		});
     }

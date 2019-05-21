@@ -204,12 +204,11 @@ public class ViewArticlesTable implements ActionListener{
     }    
 
     /**
-     * This method responds to the call of the addActionListener and dicide method of the action to be done
+     * This method responds to the call of the addActionListener and decide method of the action to be done
      */
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if(source == add){
-            System.out.println("Adding ...");
             new Articles(this);
 
         }
@@ -221,7 +220,6 @@ public class ViewArticlesTable implements ActionListener{
                 ArrayList<String> x =new ArrayList<String>();
                 for(int i = 0 ; i < 2 ; i++){
                     String value = table.getModel().getValueAt(row, i).toString();
-                    System.out.println(value);
                     x.add(value);
                 }
                 this.viewController.removeArticle(this, row, x.get(0), x.get(1));
@@ -236,7 +234,6 @@ public class ViewArticlesTable implements ActionListener{
                 ArrayList<String> x =new ArrayList<String>();
                 for(int i = 0 ; i < 6 ; i++){
                     String value = table.getModel().getValueAt(row, i).toString();
-                    System.out.println(value);
                     x.add(value);
                 }
                 new Articles(this, x.get(0), x.get(1), x.get(2), x.get(3), x.get(4), x.get(5), row);

@@ -39,15 +39,14 @@ public class ViewArticlesChartBar implements ActionListener {
     public ViewArticlesChartBar(JFrame frame){
         createGUI(frame);
         viewController=new ViewController();
-        chart= new BarChart();
     }
 
     public void createGUI(JFrame myFrame){
 
         myFrame.getContentPane().removeAll();
         myFrame.getContentPane().repaint();    
-         
-        /*
+        chart= new BarChart();
+
         chart.addBar(Color.red, 100);
         chart.addBar(Color.green, 8);
         chart.addBar(Color.blue, 54);
@@ -58,8 +57,7 @@ public class ViewArticlesChartBar implements ActionListener {
         chart.addBar(Color.lightGray, 77);
         chart.addBar(Color.magenta, 90);
         chart.addBar(Color.pink, 12);
-        chart.addBar(Color.orange, 65);*/
-
+        chart.addBar(Color.orange, 65);
         myFrame.getContentPane().add(chart);
         myFrame.pack();
         myFrame.setSize(800,620);
