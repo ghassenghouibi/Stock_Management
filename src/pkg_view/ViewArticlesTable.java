@@ -19,7 +19,7 @@ public class ViewArticlesTable implements ActionListener{
     private JPanel panel;
     private JFrame frame;
 
-    private JMenuBar menuBar;
+	private JMenuBar menuBar;
     private JMenu    file;
     private JTable    table;
     private JMenuItem open;
@@ -259,6 +259,13 @@ public class ViewArticlesTable implements ActionListener{
 
     }
     
+    public JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
     public BaseDeDonnes getBdd() {
 		return bdd;
 	}

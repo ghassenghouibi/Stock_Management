@@ -7,8 +7,8 @@ import pkg_controller.ViewController;
 import java.awt.event.*;
 
 /**
-* Add Article is a small Frame allow the user to add new articles 
-*/
+ * Add Article is a small Frame allow the user to add new articles 
+ */
 
 public class Articles implements ActionListener{
 
@@ -23,34 +23,29 @@ public class Articles implements ActionListener{
     private int modify;
     private String modifyNomL;
     private String modifyCodeBarreL;
-//    private String modifyQuantiteEnStockL;
-//    private String modifySeuilDeReassortimentL;
-//    private String modifyPrixDeVenteL;
-//    private String modifyTypeDeVenteL;
+
     
     public Articles(ViewArticlesTable parent){
-        createGUI(null, null, null, null, null, null);
+    	this.myFrame = new JFrame("Add Article");
+    	createGUI(null, null, null, null, null, null);
         this.parent = parent;
         this.viewController = new ViewController();
         this.modify = -1;
     }
     
     public Articles(ViewArticlesTable parent, String modifyNom, String modifyCodeBarre, String modifyQuantiteEnStock, String modifySeuilDeReassortiment, String modifyPrixDeVente, String modifyTypeDeVente, int row){
-        createGUI(modifyNom, modifyCodeBarre, modifyQuantiteEnStock, modifySeuilDeReassortiment, modifyPrixDeVente, modifyTypeDeVente);
+    	this.myFrame = new JFrame("Modify Article");
+    	createGUI(modifyNom, modifyCodeBarre, modifyQuantiteEnStock, modifySeuilDeReassortiment, modifyPrixDeVente, modifyTypeDeVente);
         this.parent = parent;
         this.viewController = new ViewController();
         this.modify = row;
         this.modifyNomL = modifyNom;
         this.modifyCodeBarreL = modifyCodeBarre;
-//        this.modifyQuantiteEnStockL = modifyQuantiteEnStock;
-//        this.modifySeuilDeReassortimentL = modifySeuilDeReassortiment;
-//        this.modifyPrixDeVenteL = modifyPrixDeVente;
-//        this.modifyTypeDeVenteL = modifyTypeDeVente;
     }
 
     public void createGUI(String modifyNom,String modifyCodeBarre,String modifyQuantiteEnStock,String modifySeuilDeReassortiment, String modifyPrixDeVente, String modifyTypeDeVente){
-        myFrame =new JFrame("Add Article");
-        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        myFrame =new JFrame("Add Article");
+//        this.myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new JPanel();
         
         
@@ -120,7 +115,7 @@ public class Articles implements ActionListener{
         cancel.addActionListener(this);
         panel.add(cancel);
         myFrame.add(panel);
-        myFrame.setDefaultCloseOperation(3);
+        myFrame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         myFrame.setSize(400,320);
         myFrame.setVisible(true);
     }

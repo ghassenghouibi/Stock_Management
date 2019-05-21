@@ -30,7 +30,6 @@ public class ProviderDialog implements ActionListener{
         viewController=new ViewController();
         this.myFrame=myFrame;
         this.option=true;
-
     }
     public void createGUI(JFrame myFrame,String modifynom,String modifyproduit,String modifyadresse,String modifycodePostale,String modifytelephone){
         
